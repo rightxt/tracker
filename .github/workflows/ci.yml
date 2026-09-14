@@ -52,6 +52,9 @@ jobs:
       - name: Build packages
         run: pnpm packages:build
 
+      - name: Install Playwright browsers for distribution smoke
+        run: pnpm exec playwright install --with-deps chromium firefox webkit
+
       - name: Check distribution contracts
         run: pnpm packages:verify:dist
 
