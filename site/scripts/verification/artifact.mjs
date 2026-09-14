@@ -19,13 +19,18 @@ import { verifyPublishedProjectSource } from './source.mjs';
  * JavaScript bundle contents are not inspected.
  *
  * @param {string} artifactRoot Generated site root.
+ * @param {{ excludeSourceSnapshots?: boolean }} [options] Verification options.
  * @returns {Promise<void>} Resolves when references remain self-contained.
  */
-async function verifyReferences(artifactRoot) {
+async function verifyReferences(artifactRoot, { excludeSourceSnapshots = false } = {}) {
   const files = await listFiles(artifactRoot);
   const referencePattern = /(?:href|src)=["']([^"']+)["']|url\(\s*["']?([^"')]+)["']?\s*\)/gu;
 
   for (const file of files) {
+    const relativeFile = relative(artifactRoot, file);
+    if (excludeSourceSnapshots && relativeFile.split(/[\\/]/u)[0] === 'sources') {
+      continue;
+    }
     if (!['.css', '.html'].includes(extname(file))) {
       continue;
     }
@@ -135,7 +140,9 @@ async function verifyArtifact(
       throw new Error(`Generated landing page does not link to the configured source for ${entry.route}.`);
     }
   }
-  await verifyReferences(artifactRoot);
+  await verifyReferences(artifactRoot, {
+    excludeSourceSnapshots: siteMode === 'production',
+  });
   await verifyGlobalNavigation(artifactRoot, trackerVersion);
   await verifyDocumentationArtifact(artifactRoot, trackerVersion);
   return buildInfo;
