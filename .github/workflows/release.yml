@@ -204,7 +204,11 @@ jobs:
     needs:
       - validate
       - prepare
-    if: inputs.stage == 'packages'
+    if: >-
+      always() &&
+      inputs.stage == 'packages' &&
+      needs.validate.result == 'success' &&
+      needs.prepare.result == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     environment: npm-release
@@ -241,7 +245,11 @@ jobs:
     needs:
       - validate
       - prepare
-    if: inputs.stage == 'finalize'
+    if: >-
+      always() &&
+      inputs.stage == 'finalize' &&
+      needs.validate.result == 'success' &&
+      needs.prepare.result == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:
