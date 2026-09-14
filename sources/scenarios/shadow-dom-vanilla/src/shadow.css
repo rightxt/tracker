@@ -1,0 +1,53 @@
+:host {
+  display: block;
+  margin-block: 2rem;
+  color: #212529;
+  font-family: system-ui, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.shadow-shell {
+  position: relative;
+  border: 1px solid rgb(25 135 84 / 0.45);
+  border-inline-start: 0.35rem solid rgb(25 135 84);
+  border-radius: 0.5rem;
+  background: rgb(25 135 84 / 0.06);
+}
+
+.shadow-content {
+  padding-block: 1.25rem;
+  padding-inline: 3.5rem 1.25rem;
+}
+
+.shadow-content > h2 {
+  margin-top: 0;
+}
+
+.shadow-target {
+  min-height: 15rem;
+  padding-block: 1.25rem;
+  border-bottom: 1px solid rgb(33 37 41 / 0.18);
+}
+
+.shadow-target + .shadow-target {
+  margin-block-start: 4rem;
+}
+
+.shadow-target:last-child {
+  border-bottom: 0;
+}
+
+.tracker-render-host {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.tracker-render-host .rxtt {
+  pointer-events: auto;
+}

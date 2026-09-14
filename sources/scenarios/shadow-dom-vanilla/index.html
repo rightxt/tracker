@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Vanilla RXT Tracker rendered and observed inside an open ShadowRoot." />
+    <title>Vanilla in Shadow DOM · RXT Tracker</title>
+    <script type="module" src="./src/main.js"></script>
+  </head>
+  <body>
+    <main class="demo-page shadow-demo">
+      <header class="demo-page__intro">
+        <h1>Vanilla in Shadow DOM</h1>
+        <p><code>sourceRoot</code> determines where Tracker looks for source elements. Rendering location is a separate concern.</p>
+        <p>Here, an actual open <code>ShadowRoot</code> is the source/query scope, while a separate element inside it owns the rendered rail. Shadow DOM boundaries remain explicit: Tracker does not pierce nested ShadowRoots that were not supplied as <code>sourceRoot</code>.</p>
+        <p>Compare with the <a href="../shadow-dom-element/">Element scenario</a>, where assigning a ShadowRoot changes the source/query scope but does not move the Element-owned renderer.</p>
+      </header>
+
+      <section class="demo-panel boundary-model" aria-labelledby="boundary-model-heading">
+        <h2 id="boundary-model-heading">Boundary model</h2>
+        <pre aria-label="Document and ShadowRoot ownership diagram"><code>Document
+└── #shadow-host
+    └── open ShadowRoot  ← sourceRoot
+        ├── tracked sources
+        └── renderHost
+            └── Tracker rail</code></pre>
+        <dl class="context-list">
+          <div>
+            <dt>Source/query context</dt>
+            <dd>open ShadowRoot</dd>
+          </div>
+          <div>
+            <dt>Renderer owner</dt>
+            <dd>consumer-provided renderHost</dd>
+          </div>
+          <div>
+            <dt>Rail location</dt>
+            <dd>inside the same user-managed ShadowRoot</dd>
+          </div>
+          <div>
+            <dt>Tracker stylesheet</dt>
+            <dd>inside the ShadowRoot styling context</dd>
+          </div>
+        </dl>
+      </section>
+
+      <div class="demo-panel shadow-demo__controls">
+        <button id="add-shadow-target" type="button">Add target inside ShadowRoot</button>
+        <p id="shadow-vanilla-status" class="demo-status" role="status">Preparing the open ShadowRoot.</p>
+      </div>
+      <div id="shadow-host" class="shadow-demo__host"></div>
+      <template id="shadow-source-template">
+        <h2>Sources inside the open ShadowRoot</h2>
+        <article class="shadow-target">
+          <h3>Shadow target 1</h3>
+          <p>This matching element belongs to the source/query scope of the user-managed ShadowRoot.</p>
+        </article>
+        <article class="shadow-target">
+          <h3>Shadow target 2</h3>
+          <p>This matching element belongs to the source/query scope of the user-managed ShadowRoot.</p>
+        </article>
+        <article class="shadow-target">
+          <h3>Shadow target 3</h3>
+          <p>This matching element belongs to the source/query scope of the user-managed ShadowRoot.</p>
+        </article>
+      </template>
+    </main>
+  </body>
+</html>

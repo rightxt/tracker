@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta name="description" content="A bounded live engineering activity stream with an unresolved-work Tracker overview." />
+    <title>Activity stream · RXT Tracker</title>
+    <script type="module" src="./src/main.js"></script>
+  </head>
+  <body>
+    <header class="page-header">
+      <div class="page-header__inner">
+        <p class="eyebrow">Recipe · Vanilla</p>
+        <h1>Activity stream</h1>
+        <p>Tracker gives engineering operators a sparse, global overview of unresolved attention and critical work across a live retained history.</p>
+      </div>
+    </header>
+    <main class="page-main">
+      <section class="activity-card" aria-labelledby="activity-title">
+        <header class="activity-card__header">
+          <div>
+            <p class="eyebrow">Workspace activity</p>
+            <h2 id="activity-title">Engineering operations</h2>
+            <p class="activity-card__description">Synthetic product, CI, deployment, and collaboration events.</p>
+          </div>
+          <div class="activity-summary" aria-label="Activity summary">
+            <span><strong id="retained-count">0</strong> retained</span>
+            <span><strong id="unread-count">0</strong> unread</span>
+            <span><strong id="attention-count">0</strong> need attention</span>
+          </div>
+        </header>
+        <div class="activity-toolbar" aria-label="Activity stream controls">
+          <p class="activity-live-state"><span id="live-dot" class="activity-live-state__dot" aria-hidden="true"></span><span id="live-label">Live updates on</span><span class="activity-live-state__note">1–5 events every 5 seconds</span></p>
+          <div class="activity-toolbar__actions">
+            <button id="pause-button" type="button">Pause live updates</button>
+            <button id="burst-button" type="button">Simulate burst (+40)</button>
+            <button id="mark-all-read-button" type="button">Mark all read</button>
+          </div>
+        </div>
+        <div class="stream-stage">
+          <div id="activity-scroller" class="activity-scroller" tabindex="0" aria-label="Live engineering activity history">
+            <ol id="activity-list" class="activity-list"></ol>
+            <div id="new-events-dock" class="new-events-dock" hidden><button id="new-events-button" type="button">↓ 0 new events</button></div>
+          </div>
+          <aside id="tracker-host" class="tracker-host" aria-label="Unresolved activity overview"></aside>
+        </div>
+        <footer class="activity-card__footer">
+          <p id="retention-status">Retention target: keep about 450 events after crossing 600.</p>
+          <p>Tracker shows only unacknowledged Attention and Critical events, plus the current viewport. Unread activity remains application state.</p>
+        </footer>
+      </section>
+    </main>
+  </body>
+</html>

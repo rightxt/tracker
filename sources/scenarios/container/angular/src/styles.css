@@ -1,0 +1,216 @@
+@import url('@rightxt/tracker-angular/style.css');
+@import url('./shared/base.css');
+
+.demo-concept {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 1rem;
+  align-items: center;
+  margin-block: 1.25rem;
+  padding: 1rem;
+  border: 1px solid var(--demo-border);
+  border-radius: 0.5rem;
+  background: var(--demo-surface);
+}
+
+.demo-concept > div {
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.75rem;
+  border-inline-start: 0.2rem solid var(--demo-accent);
+  background: rgb(13 110 253 / 0.06);
+}
+
+.demo-concept span {
+  color: var(--demo-muted);
+  font-size: 0.875rem;
+}
+
+.container-controls,
+.container-context,
+.container-sources,
+.container-renderer,
+.container-support-note {
+  margin-block-start: 1.5rem;
+}
+
+.container-controls fieldset {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  margin: 0;
+  padding: 1rem;
+  border: 1px solid var(--demo-border);
+  border-radius: 0.5rem;
+}
+
+.container-controls legend {
+  padding-inline: 0.35rem;
+  font-weight: 700;
+}
+
+.container-controls label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.container-context,
+.container-renderer,
+.container-support-note {
+  padding: 1rem;
+  border: 1px solid var(--demo-border);
+  border-radius: 0.5rem;
+  background: var(--demo-surface);
+}
+
+.container-context h2,
+.container-sources > h2,
+.container-renderer h2,
+.container-support-note h2,
+.container-source h2 {
+  margin-block-start: 0;
+}
+
+.container-context dl {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-block: 0;
+}
+
+.container-context dl div {
+  min-width: 0;
+  padding: 0.75rem;
+  border-inline-start: 0.2rem solid var(--demo-accent);
+  background: rgb(13 110 253 / 0.06);
+}
+
+.container-context dt {
+  color: var(--demo-muted);
+  font-size: 0.8rem;
+}
+
+.container-context dd {
+  margin: 0.2rem 0 0;
+  font-weight: 700;
+}
+
+[role='status'] {
+  margin-block: 1rem 0;
+  color: var(--demo-muted);
+}
+
+.container-experiment {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 10rem;
+  gap: 1.5rem;
+  align-items: end;
+}
+
+.container-sources__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.container-source {
+  min-width: 0;
+}
+
+.container-source h2 {
+  font-size: 1rem;
+}
+
+.container-scroller {
+  height: 22rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border: 1px solid var(--demo-border);
+  border-radius: 0.5rem;
+  background: var(--demo-surface);
+  scrollbar-gutter: stable;
+}
+
+.container-scroller:focus-visible {
+  outline: 0.2rem solid var(--demo-accent);
+  outline-offset: 0.15rem;
+}
+
+.container-target {
+  min-height: 10rem;
+  padding: 1rem;
+  border-block-end: 1px solid var(--demo-border);
+  background: linear-gradient(135deg, rgb(13 110 253 / 0.08), transparent 70%);
+}
+
+.container-target + .container-target {
+  margin-block-start: 3rem;
+}
+
+.container-target:last-child {
+  border-block-end: 0;
+}
+
+.container-target strong {
+  display: block;
+  color: var(--demo-accent);
+}
+
+.container-target p {
+  margin-block-end: 0;
+}
+
+.container-renderer {
+  min-width: 0;
+}
+
+.container-renderer > p {
+  color: var(--demo-muted);
+  font-size: 0.8rem;
+}
+
+.container-tracker-view {
+  position: relative;
+  width: 100%;
+  height: 22rem;
+  overflow: hidden;
+  border: 1px dashed var(--demo-border);
+  border-radius: 0.5rem;
+  background: rgb(13 110 253 / 0.04);
+}
+
+.container-track {
+  position: absolute;
+}
+
+.container-support-note ul {
+  margin-block-end: 0;
+  padding-inline-start: 1.25rem;
+}
+
+@media (width <= 52rem) {
+  .demo-concept {
+    grid-template-columns: 1fr;
+  }
+
+  .container-context dl {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .container-experiment {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .container-tracker-view {
+    width: 8rem;
+  }
+}
+
+@media (width <= 38rem) {
+  .container-context dl,
+  .container-sources__grid {
+    grid-template-columns: 1fr;
+  }
+}

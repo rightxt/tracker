@@ -1,0 +1,211 @@
+.writing-mode-demo {
+  width: min(54rem, calc(100% - 3rem));
+}
+
+.axis-model h2,
+.comparison-section__intro h2,
+.wm-runtime h2 {
+  margin-top: 0;
+}
+
+.axis-model__tables {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.axis-model table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.axis-model caption {
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  text-align: left;
+}
+
+.axis-model th,
+.axis-model td {
+  padding: 0.55rem;
+  border: 1px solid var(--demo-border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.axis-control {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+}
+
+.axis-control legend,
+.wm-runtime__control-label {
+  font-weight: 700;
+}
+
+.axis-control label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.axis-control .demo-status {
+  flex-basis: 100%;
+  margin: 0;
+}
+
+.comparison-section,
+.wm-runtime {
+  margin-top: 3rem;
+}
+
+.wm-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 25rem));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.wm-panel {
+  min-width: 0;
+}
+
+.wm-panel__header h3 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.wm-panel__header > p {
+  min-height: 3rem;
+  margin-block: 0.5rem 1rem;
+}
+
+.wm-state {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem 1rem;
+  margin: 0;
+}
+
+.wm-state div {
+  min-width: 0;
+}
+
+.wm-state dt {
+  color: var(--demo-muted);
+  font-size: 0.8rem;
+}
+
+.wm-state dd {
+  margin: 0.15rem 0 0;
+  font-weight: 700;
+}
+
+.wm-host {
+  position: relative;
+  width: 352px;
+  max-width: 100%;
+  height: 256px;
+  margin-top: 1rem;
+}
+
+.wm-scroller {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  border: 1px solid #adb5bd;
+  background: #fff;
+}
+
+.wm-content {
+  box-sizing: border-box;
+  width: 736px;
+  height: 608px;
+  padding: 1rem;
+  background-image: linear-gradient(rgb(33 37 41 / 0.05) 1px, transparent 1px), linear-gradient(90deg, rgb(33 37 41 / 0.05) 1px, transparent 1px);
+  background-size: 2rem 2rem;
+}
+
+.wm-target {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 136px;
+  height: 96px;
+  margin: 1.5rem;
+  border: 1px solid rgb(33 37 41 / 0.2);
+  border-radius: 0.35rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.wm-target:nth-child(1) {
+  background: rgb(220 53 69 / 0.18);
+}
+
+.wm-target:nth-child(2) {
+  background: rgb(13 110 253 / 0.18);
+}
+
+.wm-target:nth-child(3) {
+  background: rgb(25 135 84 / 0.18);
+}
+
+.wm-runtime {
+  padding-top: 1.5rem;
+  border-top: 2px solid var(--demo-border);
+}
+
+.wm-runtime__controls {
+  margin-top: 1rem;
+}
+
+.wm-runtime__control-label {
+  margin-top: 0;
+}
+
+.wm-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.wm-toolbar button[aria-pressed='true'] {
+  box-shadow: inset 0 0 0 2px currentcolor;
+}
+
+.wm-runtime__controls .demo-status {
+  margin-bottom: 0;
+  white-space: pre-line;
+}
+
+.wm-runtime__experiment {
+  margin-top: 1.25rem;
+}
+
+@media (width <= 50rem) {
+  .axis-model__tables,
+  .wm-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .wm-panel__header > p {
+    min-height: 0;
+  }
+}
+
+@media (width <= 36rem) {
+  .writing-mode-demo {
+    width: min(100% - 2rem, 54rem);
+  }
+
+  .axis-model__tables {
+    overflow-x: auto;
+  }
+
+  .axis-control {
+    flex-direction: column;
+  }
+}

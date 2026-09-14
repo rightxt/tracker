@@ -1,0 +1,38 @@
+:host {
+  display: block;
+  margin-block: 2rem;
+  color: #212529;
+  font-family: system-ui, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.source-region {
+  padding: 1.25rem;
+  border: 1px solid rgb(25 135 84 / 0.45);
+  border-inline-start: 0.35rem solid rgb(25 135 84);
+  border-radius: 0.5rem;
+  background: rgb(25 135 84 / 0.06);
+}
+
+.source-region > h2 {
+  margin-top: 0;
+}
+
+.source-target {
+  min-height: 14rem;
+  padding-block: 1.25rem;
+  border-bottom: 1px solid rgb(33 37 41 / 0.18);
+}
+
+.source-target + .source-target {
+  margin-block-start: 4rem;
+}
+
+.source-target:last-child {
+  border-bottom: 0;
+}

@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "@rightxt/tracker-element": "1.0.0"
+  },
+  "devDependencies": {
+    "vite": "8.2.2"
+  },
+  "name": "@rxt-tracker-demo/events-element",
+  "private": true,
+  "scripts": {
+    "build": "vite build --base=./"
+  },
+  "type": "module",
+  "version": "0.1.0"
+}

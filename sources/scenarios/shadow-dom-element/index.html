@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="RXT Tracker Element querying an explicit open ShadowRoot from Light DOM." />
+    <title>Element tracking Shadow DOM · RXT Tracker</title>
+    <script type="module" src="./src/main.js"></script>
+  </head>
+  <body>
+    <main class="demo-page shadow-demo">
+      <header class="demo-page__intro">
+        <h1>Element tracking Shadow DOM</h1>
+        <p><code>sourceRoot</code> determines where Tracker looks for source elements. Rendering location is a separate concern.</p>
+        <p>A detached <code>&lt;rxt-tracker&gt;</code> is configured from JavaScript before its first connection. Its source/query scope is the user-managed ShadowRoot, but its rail remains in the element's Light DOM. Tracker only queries the explicit <code>sourceRoot</code>; it does not magically pierce further Shadow DOM boundaries.</p>
+        <p>Compare with the <a href="../shadow-dom-vanilla/">Vanilla scenario</a>, where the consumer independently places a <code>renderHost</code> inside the ShadowRoot.</p>
+      </header>
+
+      <section class="demo-panel boundary-model" aria-labelledby="boundary-model-heading">
+        <h2 id="boundary-model-heading">Boundary model</h2>
+        <pre aria-label="Source and renderer ownership diagram"><code>User component                     Document Light DOM
+└── open ShadowRoot ← sourceRoot   └── &lt;rxt-tracker&gt;
+    └── tracked sources                └── .rxtt ← rail</code></pre>
+        <dl class="context-list">
+          <div>
+            <dt>Source/query context</dt>
+            <dd id="active-source-context">open ShadowRoot</dd>
+          </div>
+          <div>
+            <dt>Renderer owner</dt>
+            <dd>&lt;rxt-tracker&gt; in document Light DOM</dd>
+          </div>
+          <div>
+            <dt>tracker.shadowRoot</dt>
+            <dd><code>null</code></dd>
+          </div>
+          <div>
+            <dt>Rail location</dt>
+            <dd>Light DOM child of &lt;rxt-tracker&gt;</dd>
+          </div>
+          <div>
+            <dt>Tracker stylesheet</dt>
+            <dd>document styling context</dd>
+          </div>
+        </dl>
+        <p class="boundary-model__note">If <code>&lt;rxt-tracker&gt;</code> itself were placed inside a user-managed ShadowRoot, its package stylesheet would need to be available in that ShadowRoot's styling context.</p>
+      </section>
+
+      <div class="demo-panel shadow-controls">
+        <fieldset class="shadow-controls__sources">
+          <legend>Source/query context</legend>
+          <label><input type="radio" name="shadow-source" value="shadow" checked /> ShadowRoot</label>
+          <label><input type="radio" name="shadow-source" value="light" /> Light DOM region</label>
+        </fieldset>
+        <button type="button" id="add-shadow-target">Add target inside active ShadowRoot</button>
+        <p id="shadow-status" class="demo-status" role="status">Preparing the configured tracker.</p>
+      </div>
+
+      <section id="light-region" class="source-region source-region--light" aria-labelledby="light-region-heading">
+        <h2 id="light-region-heading">Light DOM source</h2>
+        <article class="source-target">
+          <h3>Light target 1</h3>
+          <p>The same selector and rule are used regardless of which source/query context is active.</p>
+        </article>
+        <article class="source-target">
+          <h3>Light target 2</h3>
+          <p>The same selector and rule are used regardless of which source/query context is active.</p>
+        </article>
+      </section>
+      <div id="source-shadow-host" class="shadow-demo__host"></div>
+      <div id="tracker-mount-point" data-initial-source="shadow-root"></div>
+      <template id="shadow-source-template">
+        <article class="source-target">
+          <h3>Shadow target 1</h3>
+          <p>The same selector and rule are used regardless of which source/query context is active.</p>
+        </article>
+        <article class="source-target">
+          <h3>Shadow target 2</h3>
+          <p>The same selector and rule are used regardless of which source/query context is active.</p>
+        </article>
+        <article class="source-target">
+          <h3>Shadow target 3</h3>
+          <p>The same selector and rule are used regardless of which source/query context is active.</p>
+        </article>
+      </template>
+    </main>
+  </body>
+</html>

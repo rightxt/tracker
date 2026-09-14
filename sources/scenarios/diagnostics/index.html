@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Explore RXT Tracker diagnostics, retained statistics, and public failure boundaries." />
+    <title>Diagnostics and failure boundaries · RXT Tracker demos</title>
+  </head>
+  <body>
+    <main id="diagnostics-scenario" class="demo-page diagnostics-demo">
+      <header class="demo-page__intro">
+        <p>Core diagnostics contract</p>
+        <h1>Diagnostics and failure boundaries</h1>
+        <p>Compare recoverable warnings, Tracker-managed failures, and synchronous public exceptions without conflating them with consumer callback failures.</p>
+      </header>
+
+      <section class="diagnostics-panel diagnostics-panel--lesson" aria-labelledby="warning-title">
+        <p class="diagnostics-panel__number">1</p>
+        <div>
+          <h2 id="warning-title">Recoverable warning</h2>
+          <p>A warning runtime event, a diagnostics sink call, and retained warning statistics are three independent observations.</p>
+        </div>
+        <div class="diagnostics-actions"><button type="button" data-action="warning">Trigger warning</button><button type="button" data-action="warning-muted">Trigger warning with output disabled</button></div>
+        <div class="diagnostics-results">
+          <div>
+            <h3>Warning event</h3>
+            <pre id="warning-event" class="diagnostics-output" aria-live="polite">No warning event received.</pre>
+          </div>
+          <div>
+            <h3>Diagnostics sink for this experiment</h3>
+            <p>Shows this run separately from the retained historical call count.</p>
+            <pre id="warning-sink" class="diagnostics-output" aria-live="polite">No warning experiment run.</pre>
+          </div>
+          <div>
+            <h3>Retained warning stats</h3>
+            <pre id="warning-stats" class="diagnostics-output"></pre>
+          </div>
+        </div>
+        <pre id="warning-ownership" class="diagnostics-output diagnostics-output--compact">No warning details compared.</pre>
+      </section>
+
+      <section class="diagnostics-panel diagnostics-panel--lesson" aria-labelledby="resolver-title">
+        <p class="diagnostics-panel__number">2</p>
+        <div>
+          <h2 id="resolver-title">Tracker-managed resolver failure</h2>
+          <p>Tracker invokes the resolver, catches its exception, records <code>rule-label-error</code>, and keeps the marker with a null label.</p>
+        </div>
+        <div class="diagnostics-actions"><button type="button" data-action="resolver">Trigger resolver failure</button></div>
+        <div class="diagnostics-results diagnostics-results--two">
+          <div>
+            <h3>Diagnostics output</h3>
+            <pre id="resolver-sink" class="diagnostics-output" aria-live="polite">No resolver error received.</pre>
+          </div>
+          <div>
+            <h3>Result</h3>
+            <pre id="resolver-result" class="diagnostics-output" aria-live="polite">No resolver experiment run.</pre>
+          </div>
+        </div>
+        <details>
+          <summary>Retained error statistics</summary>
+          <pre id="error-stats" class="diagnostics-output"></pre>
+        </details>
+      </section>
+
+      <section class="diagnostics-panel diagnostics-panel--lesson" aria-labelledby="configuration-title">
+        <p class="diagnostics-panel__number">3</p>
+        <div>
+          <h2 id="configuration-title">Invalid configuration</h2>
+          <p>This is a synchronous public API exception. The rejected candidate does not replace the committed configuration or request a successful synchronization.</p>
+        </div>
+        <div class="diagnostics-actions"><button type="button" data-action="invalid">Apply invalid configuration</button></div>
+        <div class="diagnostics-results diagnostics-results--two">
+          <div>
+            <h3>Thrown exception</h3>
+            <pre id="configuration-error" class="diagnostics-output" aria-live="polite">No invalid configuration attempted.</pre>
+          </div>
+          <div>
+            <h3>Atomicity</h3>
+            <pre id="atomic-result" class="diagnostics-output">No invalid configuration attempted.</pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="diagnostics-panel diagnostics-panel--lesson" aria-labelledby="lifecycle-title">
+        <p class="diagnostics-panel__number">4</p>
+        <div>
+          <h2 id="lifecycle-title">Lifecycle error</h2>
+          <p>A disposable secondary Tracker crosses its terminal boundary. The main diagnostic runtime remains active.</p>
+        </div>
+        <div class="diagnostics-actions"><button type="button" data-action="lifecycle">Trigger lifecycle error</button></div>
+        <div class="diagnostics-results diagnostics-results--two">
+          <div>
+            <h3>Thrown exception</h3>
+            <pre id="lifecycle-error" class="diagnostics-output" aria-live="polite">No lifecycle error triggered.</pre>
+          </div>
+          <div>
+            <h3>Sequence</h3>
+            <pre id="lifecycle-result" class="diagnostics-output">No lifecycle experiment run.</pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="diagnostics-panel" aria-labelledby="fixture-title">
+        <h2 id="fixture-title">Tracked fixture and main runtime</h2>
+        <p id="runtime-status" role="status">Main Tracker is operational.</p>
+        <div id="diagnostic-fixture" class="diagnostic-fixture">
+          <h3 class="diagnostic-target diagnostic-target--safe">Safe marker before failure</h3>
+          <h3 class="diagnostic-target diagnostic-target--failure">Marker with optional failing label</h3>
+          <h3 class="diagnostic-target diagnostic-target--safe">Safe marker after failure</h3>
+        </div>
+      </section>
+
+      <details class="diagnostics-panel">
+        <summary>Debug details</summary>
+        <pre id="debug-stats" class="diagnostics-output"></pre>
+      </details>
+    </main>
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>

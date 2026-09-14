@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Learn how RXT Tracker groups nearby physical marker positions into clusters." />
+    <title>Marker clustering · RXT Tracker</title>
+    <script type="module" src="./src/main.js"></script>
+  </head>
+  <body>
+    <main class="demo-page clustering-demo">
+      <header class="demo-page__intro">
+        <p class="clustering-demo__eyebrow">Vanilla · debug profile</p>
+        <h1>Marker clustering</h1>
+        <p>Nearby represented positions can become one rendered cluster. The source elements and rule matches remain unchanged.</p>
+      </header>
+
+      <section class="clustering-panel" aria-labelledby="clustering-model-heading">
+        <h2 id="clustering-model-heading">From sources to rendered representations</h2>
+        <ol class="clustering-pipeline" aria-label="Clustering pipeline">
+          <li>Tracked source elements</li>
+          <li>Physical marker positions</li>
+          <li>Threshold in track percentage points</li>
+          <li>Standalone marker or cluster</li>
+          <li>Count and activation payload</li>
+        </ol>
+        <p class="clustering-note"><strong>A cluster represents multiple nearby tracked sources.</strong> It creates no source element and does not change rule matching.</p>
+      </section>
+
+      <section class="clustering-panel" aria-labelledby="expected-grouping-heading">
+        <h2 id="expected-grouping-heading">Expected grouping</h2>
+        <dl class="clustering-groups">
+          <div>
+            <dt>Target A</dt>
+            <dd>Standalone</dd>
+          </div>
+          <div>
+            <dt>Target B + Target C</dt>
+            <dd>Cluster of 2</dd>
+          </div>
+          <div>
+            <dt>Target D + Target E + Target F</dt>
+            <dd>Cluster of 3</dd>
+          </div>
+        </dl>
+        <p>Expanded mode keeps A standalone and joins B through F through Core's consecutive-neighbor clustering.</p>
+      </section>
+
+      <section class="clustering-panel clustering-experiment" aria-labelledby="threshold-heading">
+        <div>
+          <h2 id="threshold-heading">Clustering threshold</h2>
+          <fieldset id="threshold-control" class="threshold-control">
+            <legend>Choose one deterministic threshold</legend>
+            <label>
+              <input type="radio" name="threshold" value="compact" checked />
+              <span><strong>Compact</strong><small>1 percentage point</small></span>
+            </label>
+            <label>
+              <input type="radio" name="threshold" value="expanded" />
+              <span><strong>Expanded</strong><small>20 percentage points</small></span>
+            </label>
+          </fieldset>
+        </div>
+
+        <div>
+          <h2>Current result</h2>
+          <dl id="clustering-result" class="clustering-result" aria-live="polite">
+            <div>
+              <dt>Current threshold</dt>
+              <dd><output id="current-threshold">1 percentage point</output></dd>
+            </div>
+            <div>
+              <dt>Tracked sources</dt>
+              <dd><output id="tracked-source-count">6</output></dd>
+            </div>
+            <div>
+              <dt>Standalone markers</dt>
+              <dd><output id="standalone-count">1</output></dd>
+            </div>
+            <div>
+              <dt>Clusters</dt>
+              <dd><output id="cluster-count">2</output></dd>
+            </div>
+            <div>
+              <dt>Represented sources</dt>
+              <dd><output id="represented-source-count">6</output></dd>
+            </div>
+            <div>
+              <dt>Cluster counts</dt>
+              <dd><output id="cluster-counts">2, 3</output></dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      <section id="clustering-activation" class="clustering-panel activation-panel" aria-labelledby="activation-heading">
+        <h2 id="activation-heading">Last activation</h2>
+        <p id="activation-summary" role="status">Activate a standalone marker or cluster on the rail.</p>
+        <dl>
+          <div>
+            <dt>Representation</dt>
+            <dd><output id="activation-kind">None</output></dd>
+          </div>
+          <div>
+            <dt>Count</dt>
+            <dd><output id="activation-count">0</output></dd>
+          </div>
+          <div>
+            <dt>Members</dt>
+            <dd><output id="activation-members">None</output></dd>
+          </div>
+          <div>
+            <dt>Primary navigation target</dt>
+            <dd><output id="activation-primary">None</output></dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="clustering-panel" aria-labelledby="fixture-heading">
+        <h2 id="fixture-heading">Tracked sources</h2>
+        <p>The fixed 50rem content plane makes source ranges deterministic. Scroll this region; the rail represents all six positions.</p>
+        <div id="clustering-stage" class="clustering-stage">
+          <div id="clustering-scroller" class="clustering-scroller" tabindex="0" aria-label="Deterministic clustering source fixture">
+            <div id="clustering-fixture" class="clustering-fixture">
+              <article class="cluster-target cluster-target--a" tabindex="-1" data-target-label="Target A">Target A</article>
+              <article class="cluster-target cluster-target--b" tabindex="-1" data-target-label="Target B">Target B</article>
+              <article class="cluster-target cluster-target--c" tabindex="-1" data-target-label="Target C">Target C</article>
+              <article class="cluster-target cluster-target--d" tabindex="-1" data-target-label="Target D">Target D</article>
+              <article class="cluster-target cluster-target--e" tabindex="-1" data-target-label="Target E">Target E</article>
+              <article class="cluster-target cluster-target--f" tabindex="-1" data-target-label="Target F">Target F</article>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

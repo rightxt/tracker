@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Vue integration playground for RXT Tracker." />
+    <title>Vue playground · RXT Tracker</title>
+    <script type="module" src="./src/main.js"></script>
+  </head>
+  <body class="playground-workbench">
+    <div id="vue-tracker-root"></div>
+    <header class="playground-workbench__intro">
+      <h1>Vue playground</h1>
+      <p>The shared workbench replaces one reactive configuration, consumes Vue emits, and uses the limited exposed handle for rendering and diagnostics commands.</p>
+    </header>
+    <div class="playground-workbench__layout">
+      <aside id="playground-workbench-controls" class="playground-workbench__controls" aria-label="Tracker workbench"></aside>
+      <main id="playground-workbench-content" class="playground-workbench__content" aria-label="Tracked fixture content"></main>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Compare public RXT Tracker styling mechanisms and two unconventional page-level themes." />
+    <title>Styling contract · RXT Tracker</title>
+    <script type="module" src="./src/main.js"></script>
+  </head>
+  <body>
+    <main class="demo-page styling-demo">
+      <header class="demo-page__intro styling-intro">
+        <p class="styling-intro__eyebrow">Public styling contract</p>
+        <h1>Same design, different styling mechanisms</h1>
+        <p>Four independent element-scroll Trackers render the same deterministic content and behavior. Only the primary way each theme is supplied will differ.</p>
+      </header>
+
+      <section class="comparison" aria-labelledby="comparison-title">
+        <div class="section-intro">
+          <h2 id="comparison-title">Four equivalent local Trackers</h2>
+          <p>Scroll each region independently and compare its track, viewport, semantic markers, cluster, and selected state.</p>
+        </div>
+
+        <div class="comparison-grid">
+          <article class="comparison-card" data-comparison-case="cascade">
+            <header class="comparison-card__header">
+              <p class="comparison-card__number">1</p>
+              <div>
+                <h3 class="comparison-card__title">CSS cascade</h3>
+                <p>Primary hooks: inherited public <code>--rxtt-*</code> custom properties.</p>
+              </div>
+            </header>
+            <div class="comparison-stage">
+              <div class="comparison-scroller" tabindex="0" aria-label="CSS cascade fixture">
+                <div class="comparison-fixture" data-fixture-host></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="comparison-card" data-comparison-case="variables">
+            <header class="comparison-card__header">
+              <p class="comparison-card__number">2</p>
+              <div>
+                <h3 class="comparison-card__title">JavaScript CSS variables</h3>
+                <p>Primary hooks: <code>options.cssVariables</code> and <code>rule.marker.cssVariables</code>.</p>
+              </div>
+            </header>
+            <div class="comparison-stage">
+              <div class="comparison-scroller" tabindex="0" aria-label="JavaScript variables fixture">
+                <div class="comparison-fixture" data-fixture-host></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="comparison-card" data-comparison-case="classes">
+            <header class="comparison-card__header">
+              <p class="comparison-card__number">3</p>
+              <div>
+                <h3 class="comparison-card__title">Public class hooks</h3>
+                <p>Primary hooks: track, viewport, marker, and rule marker <code>className</code>.</p>
+              </div>
+            </header>
+            <div class="comparison-stage">
+              <div class="comparison-scroller" tabindex="0" aria-label="Public classes fixture">
+                <div class="comparison-fixture" data-fixture-host></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="comparison-card" data-comparison-case="attributes">
+            <header class="comparison-card__header">
+              <p class="comparison-card__number">4</p>
+              <div>
+                <h3 class="comparison-card__title">Selector and attribute hooks</h3>
+                <p>Primary hooks: marker attributes and documented <code>data-rxtt-*</code> state selectors.</p>
+              </div>
+            </header>
+            <div class="comparison-stage">
+              <div class="comparison-scroller" tabindex="0" aria-label="Selector and attribute fixture">
+                <div class="comparison-fixture" data-fixture-host></div>
+              </div>
+            </div>
+            <p class="attribute-note">This case also preserves global attributes, rule overrides, rule suppression, and runtime deletion.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="global-themes" aria-labelledby="global-themes-title">
+        <div class="section-intro">
+          <h2 id="global-themes-title">Unconventional page-level themes</h2>
+          <p>A minimal ruler on the left and an expressive neon rail on the right track the same four case headings in the window scroll coordinate space.</p>
+        </div>
+        <div class="global-theme-notes">
+          <article>
+            <h3>Minimal ruler</h3>
+            <p class="global-theme-note__description">A restrained monochrome rail with fine tick markers and a quiet viewport indicator.</p>
+          </article>
+          <article>
+            <h3>Neon rail</h3>
+            <p class="global-theme-note__description">A translucent rail with glow and outward effects enabled through the documented containment variables.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <template id="comparison-fixture-template">
+      <div class="fixture-content">
+        <header class="fixture-intro">
+          <p class="fixture-kicker">Quarterly service review</p>
+          <h4>Deterministic comparison fixture</h4>
+          <p>Every case clones this exact template, so target order and geometry remain equivalent.</p>
+        </header>
+
+        <section class="fixture-section fixture-section--overview">
+          <article class="fixture-target fixture-target--normal">
+            <strong>Overview checkpoint</strong>
+            <span>Normal informational marker.</span>
+          </article>
+        </section>
+
+        <section class="fixture-section fixture-section--warning">
+          <article class="fixture-target fixture-target--warning">
+            <strong>Capacity warning</strong>
+            <span>Semantic warning marker.</span>
+          </article>
+        </section>
+
+        <section class="fixture-section fixture-section--cluster">
+          <p class="fixture-section__label">Closely related validation results</p>
+          <article class="fixture-target fixture-target--error">
+            <strong>Billing mismatch</strong>
+            <span>First error in the intentional cluster.</span>
+          </article>
+          <article class="fixture-target fixture-target--error">
+            <strong>Payment rejected</strong>
+            <span>Second error in the intentional cluster.</span>
+          </article>
+        </section>
+
+        <section class="fixture-section fixture-section--follow-up">
+          <article class="fixture-target fixture-target--normal">
+            <strong>Follow-up note</strong>
+            <span>Second normal marker.</span>
+          </article>
+        </section>
+
+        <section class="fixture-section fixture-section--final">
+          <article class="fixture-target fixture-target--error">
+            <strong>Security issue</strong>
+            <span>Standalone semantic error marker.</span>
+          </article>
+        </section>
+      </div>
+    </template>
+  </body>
+</html>

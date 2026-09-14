@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "@rightxt/tracker-vanilla": "1.0.0"
+  },
+  "devDependencies": {
+    "vite": "8.2.2"
+  },
+  "name": "@rxt-tracker-demo/recipe-document",
+  "private": true,
+  "scripts": {
+    "build": "vite build --base=./"
+  },
+  "type": "module",
+  "version": "0.1.0"
+}

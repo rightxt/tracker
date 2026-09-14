@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Trace how RXT Tracker resolves overlapping rules, labels, activation targets, and events." />
+    <title>Rule resolution · RXT Tracker</title>
+    <script type="module" src="./src/main.js"></script>
+  </head>
+  <body>
+    <main class="demo-page rule-resolution-demo">
+      <header class="demo-page__intro">
+        <p class="rule-resolution-demo__eyebrow">Vanilla · debug profile</p>
+        <h1>Rule resolution</h1>
+        <p>Follow one matched element from an ordered rule list to its marker and activation behavior. The priority card matches both rules below, but the first matching rule owns it and produces exactly one marker.</p>
+      </header>
+
+      <section class="lesson-section" aria-labelledby="pipeline-heading">
+        <h2 id="pipeline-heading">Resolution pipeline</h2>
+        <ol class="resolution-pipeline">
+          <li><strong>Source</strong><span>The mounted source root defines the searchable document.</span></li>
+          <li><strong>Ordered selectors</strong><span>Rules are queried in their configured array order.</span></li>
+          <li><strong>First match owns</strong><span>An element found by an earlier rule is not claimed again.</span></li>
+          <li><strong>Label</strong><span>The owning rule computes the label during synchronization.</span></li>
+          <li><strong>Marker</strong><span>One marker record is created for the owned element.</span></li>
+          <li><strong>Activation</strong><span>Activating the marker starts built-in behavior.</span></li>
+          <li><strong>Scroll target</strong><span>The scroll resolver selects a nested destination.</span></li>
+          <li><strong>Focus target</strong><span>The focus resolver reads the current application mode.</span></li>
+          <li><strong>Built-ins</strong><span>Core scrolls first and then moves focus without scrolling again.</span></li>
+          <li>
+            <strong>Application event</strong><span><code>marker:activate</code> runs after both built-ins.</span>
+          </li>
+        </ol>
+      </section>
+
+      <section class="lesson-section" aria-labelledby="rules-heading">
+        <h2 id="rules-heading">Ordered rules</h2>
+        <p><strong>Rule order is priority order. The first matching rule owns an element.</strong> Both selectors match the priority card, so Rule 0 wins; Rule 1 remains the fallback for every other card.</p>
+        <div class="rule-configurations">
+          <article class="rule-configuration rule-configuration--priority">
+            <p class="rule-configuration__index">Rule 0 · higher priority</p>
+            <code>.rule-card[data-priority="high"]</code>
+            <p>Label: <code>Priority · &lt;title&gt;</code></p>
+          </article>
+          <article class="rule-configuration rule-configuration--fallback">
+            <p class="rule-configuration__index">Rule 1 · fallback</p>
+            <code>.rule-card</code>
+            <p>Label: <code>&lt;title&gt;</code></p>
+          </article>
+        </div>
+      </section>
+
+      <section class="lesson-section" aria-labelledby="timing-heading">
+        <h2 id="timing-heading">When each function runs</h2>
+        <div class="timing-table-wrapper">
+          <table class="timing-table">
+            <thead>
+              <tr>
+                <th scope="col">Extension point</th>
+                <th scope="col">Timing</th>
+                <th scope="col">Responsibility</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row"><code>label(element)</code></th>
+                <td>During synchronization</td>
+                <td>Returns the marker label from current source content.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>scroll.target(element)</code></th>
+                <td>During activation</td>
+                <td>Returns the element Core should bring into view.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>focus.target(element)</code></th>
+                <td>During activation, after scrolling</td>
+                <td>Returns the element Core should focus.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>marker:activate</code></th>
+                <td>After built-in activation behavior</td>
+                <td>Applies application-owned state and reports the public payload.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="resolver-guidance">Resolver functions are synchronous computations, not lifecycle callbacks. They may read the matched element, its descendants, and current application state, but should remain inexpensive, side-effect free, and synchronous.</p>
+      </section>
+
+      <section class="lesson-section interaction-lab" aria-labelledby="lab-heading">
+        <h2 id="lab-heading">Try the lifecycle</h2>
+        <div class="interaction-lab__controls">
+          <div>
+            <button id="rename-normal-item" type="button">Rename a normal item</button>
+            <p id="rename-status" class="control-status" role="status">Its computed marker label will update through normal mutation observation.</p>
+          </div>
+          <fieldset class="focus-mode">
+            <legend>Focus target for the next activation</legend>
+            <label><input type="radio" name="focus-mode" value="primary" checked /> Primary action</label>
+            <label><input type="radio" name="focus-mode" value="secondary" /> Secondary action</label>
+            <p id="focus-mode-status" class="control-status" role="status">Primary action selected.</p>
+          </fieldset>
+        </div>
+
+        <section id="activation-result" class="activation-result" aria-labelledby="activation-heading">
+          <h3 id="activation-heading">Last public activation payload</h3>
+          <p id="activation-summary" role="status">Activate a marker to inspect its owner and the completed focus behavior.</p>
+          <dl>
+            <div>
+              <dt>Source title</dt>
+              <dd><output id="activation-title">None</output></dd>
+            </div>
+            <div>
+              <dt>Selector</dt>
+              <dd><output id="activation-selector">None</output></dd>
+            </div>
+            <div>
+              <dt>Rule index</dt>
+              <dd><output id="activation-rule-index">None</output></dd>
+            </div>
+            <div>
+              <dt>Resolved label</dt>
+              <dd><output id="activation-label">None</output></dd>
+            </div>
+            <div>
+              <dt>Focus state</dt>
+              <dd><output id="activation-focus">None</output></dd>
+            </div>
+          </dl>
+        </section>
+      </section>
+
+      <section id="rule-fixture" class="rule-fixture" aria-labelledby="fixture-heading">
+        <header class="rule-fixture__intro">
+          <h2 id="fixture-heading">Review queue</h2>
+          <p>Use the rail to navigate these six static cards. Marker clustering is disabled for a direct comparison.</p>
+        </header>
+
+        <article id="release-readiness" class="rule-card">
+          <header class="rule-card__scroll-target" data-scroll-target>
+            <p class="rule-card__kind">Normal item · Rule 1</p>
+            <h3 data-rule-title>Release readiness</h3>
+          </header>
+          <p>Confirm the package metadata, generated declarations, and consumer-facing examples before creating a release candidate.</p>
+          <p>This card matches only the fallback rule, so Rule 1 owns its marker behavior.</p>
+          <div class="rule-card__actions">
+            <button type="button" data-focus-target="primary">Primary action</button>
+            <button type="button" data-focus-target="secondary">Secondary action</button>
+          </div>
+        </article>
+
+        <article id="blocking-deployment" class="rule-card rule-card--priority" data-priority="high">
+          <header class="rule-card__scroll-target" data-scroll-target>
+            <p class="rule-card__kind">Priority item · Rule 0</p>
+            <h3 data-rule-title>Blocking deployment</h3>
+          </header>
+          <p>This card matches both rules. Rule 0 owns it because rule order is priority order.</p>
+          <p>Even with overlapping selectors, the resolution pipeline creates one marker for this source element.</p>
+          <div class="rule-card__actions">
+            <button type="button" data-focus-target="primary">Primary action</button>
+            <button type="button" data-focus-target="secondary">Secondary action</button>
+          </div>
+        </article>
+
+        <article id="accessibility-review" class="rule-card">
+          <header class="rule-card__scroll-target" data-scroll-target>
+            <p class="rule-card__kind">Normal item · Rule 1</p>
+            <h3 data-rule-title>Accessibility review</h3>
+          </header>
+          <p>Review keyboard order, visible focus, accessible names, live updates, and contrast in the completed interface.</p>
+          <p>The rename control changes this heading so normal mutation observation can recompute the marker label.</p>
+          <div class="rule-card__actions">
+            <button type="button" data-focus-target="primary">Primary action</button>
+            <button type="button" data-focus-target="secondary">Secondary action</button>
+          </div>
+        </article>
+
+        <article id="security-approval" class="rule-card">
+          <header class="rule-card__scroll-target" data-scroll-target>
+            <p class="rule-card__kind">Normal item · Rule 1</p>
+            <h3 data-rule-title>Security approval</h3>
+          </header>
+          <p>Check dependency provenance, browser-facing boundaries, and the assumptions made by public integration surfaces.</p>
+          <p>Its nested header, rather than the whole card, is the scroll destination resolved during activation.</p>
+          <div class="rule-card__actions">
+            <button type="button" data-focus-target="primary">Primary action</button>
+            <button type="button" data-focus-target="secondary">Secondary action</button>
+          </div>
+        </article>
+
+        <article id="performance-budget" class="rule-card">
+          <header class="rule-card__scroll-target" data-scroll-target>
+            <p class="rule-card__kind">Normal item · Rule 1</p>
+            <h3 data-rule-title>Performance budget</h3>
+          </header>
+          <p>Compare representative synchronization and activation costs without placing instrumentation inside resolver functions.</p>
+          <p>Resolvers remain synchronous and side-effect free, while the application reacts through the public event.</p>
+          <div class="rule-card__actions">
+            <button type="button" data-focus-target="primary">Primary action</button>
+            <button type="button" data-focus-target="secondary">Secondary action</button>
+          </div>
+        </article>
+
+        <article id="documentation-handoff" class="rule-card">
+          <header class="rule-card__scroll-target" data-scroll-target>
+            <p class="rule-card__kind">Normal item · Rule 1</p>
+            <h3 data-rule-title>Documentation handoff</h3>
+          </header>
+          <p>Capture the ordered rule contract and distinguish synchronization-time functions from activation-time functions.</p>
+          <p>The two action buttons make the current focus resolver choice visible without changing Tracker configuration.</p>
+          <div class="rule-card__actions">
+            <button type="button" data-focus-target="primary">Primary action</button>
+            <button type="button" data-focus-target="secondary">Secondary action</button>
+          </div>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>

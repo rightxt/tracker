@@ -1,0 +1,202 @@
+.clustering-demo {
+  width: min(58rem, calc(100% - 4rem));
+}
+
+.clustering-demo__eyebrow {
+  margin-block-end: 0.25rem;
+  font-weight: 700;
+}
+
+.clustering-panel {
+  margin-block: 2rem;
+  padding: 1.25rem;
+  border: 1px solid var(--demo-border);
+  border-radius: 0.5rem;
+  background: var(--demo-surface);
+}
+
+.clustering-panel h2 {
+  margin-block-start: 0;
+}
+
+.clustering-pipeline {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1.5rem;
+  padding: 0;
+  list-style: none;
+  counter-reset: pipeline;
+}
+
+.clustering-pipeline li {
+  position: relative;
+  padding: 0.75rem;
+  border: 1px solid var(--demo-border);
+  border-radius: 0.375rem;
+  background: var(--demo-surface-muted);
+  counter-increment: pipeline;
+}
+
+.clustering-pipeline li::before {
+  display: block;
+  margin-block-end: 0.25rem;
+  color: #495057;
+  content: counter(pipeline);
+  font-weight: 700;
+}
+
+.clustering-pipeline li:not(:last-child)::after {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-end: -1.2rem;
+  content: '→';
+}
+
+.clustering-note {
+  margin-block: 1rem 0;
+  padding: 0.75rem 1rem;
+  border-inline-start: 0.25rem solid #1971c2;
+  background: #e7f5ff;
+}
+
+.clustering-groups,
+.clustering-result,
+.activation-panel dl {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+}
+
+.clustering-groups > div,
+.clustering-result > div,
+.activation-panel dl > div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(9rem, auto);
+  gap: 1rem;
+  padding-block: 0.5rem;
+  border-block-end: 1px solid var(--demo-border);
+}
+
+.clustering-groups dd,
+.clustering-result dd,
+.activation-panel dd {
+  margin: 0;
+  font-weight: 700;
+  text-align: end;
+}
+
+.clustering-experiment {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2rem;
+}
+
+.threshold-control {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 1rem;
+  border: 1px solid var(--demo-border);
+}
+
+.threshold-control label {
+  display: flex;
+  gap: 0.75rem;
+  align-items: start;
+  padding: 0.75rem;
+  border: 1px solid var(--demo-border);
+  border-radius: 0.375rem;
+  cursor: pointer;
+}
+
+.threshold-control label:has(input:checked) {
+  border-color: #1971c2;
+  background: #e7f5ff;
+}
+
+.threshold-control span,
+.threshold-control small {
+  display: block;
+}
+
+.clustering-stage {
+  position: relative;
+  border: 1px solid var(--demo-border);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.clustering-scroller {
+  block-size: 30rem;
+  padding-inline: 1rem 2.5rem;
+  overflow-y: auto;
+  background: var(--demo-surface-muted);
+}
+
+.clustering-fixture {
+  position: relative;
+  block-size: 50rem;
+}
+
+.cluster-target {
+  position: absolute;
+  inset-inline: 0;
+  block-size: 1.5rem;
+  padding-inline: 0.75rem;
+  border-inline-start: 0.35rem solid #1971c2;
+  background: #fff;
+  font-weight: 700;
+  line-height: 1.5rem;
+}
+
+.cluster-target:focus {
+  outline: 3px solid #f59f00;
+  outline-offset: 2px;
+}
+
+.cluster-target--a {
+  inset-block-start: 2rem;
+}
+
+.cluster-target--b {
+  inset-block-start: 18rem;
+}
+
+.cluster-target--c {
+  inset-block-start: 20rem;
+}
+
+.cluster-target--d {
+  inset-block-start: 31rem;
+}
+
+.cluster-target--e {
+  inset-block-start: 33rem;
+}
+
+.cluster-target--f {
+  inset-block-start: 35rem;
+}
+
+.clustering-track {
+  --rxtt-marker-bg: #1971c2;
+  --rxtt-track-bg: #e7f5ff;
+  --rxtt-track-border-color: #1971c2;
+  --rxtt-track-border-width: 1px;
+  --rxtt-track-thickness: 1.5rem;
+}
+
+@media (width <= 48rem) {
+  .clustering-demo {
+    width: min(100% - 3rem, 58rem);
+  }
+
+  .clustering-pipeline,
+  .clustering-experiment {
+    grid-template-columns: 1fr;
+  }
+
+  .clustering-pipeline li:not(:last-child)::after {
+    display: none;
+  }
+}

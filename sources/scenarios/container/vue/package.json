@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "@rightxt/tracker-vue": "1.0.0",
+    "vue": "3.5.42"
+  },
+  "devDependencies": {
+    "vite": "8.2.2"
+  },
+  "name": "@rxt-tracker-demo/scenario-container-vue",
+  "private": true,
+  "scripts": {
+    "build": "vite build --base=./"
+  },
+  "type": "module",
+  "version": "0.1.0"
+}

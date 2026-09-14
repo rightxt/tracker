@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta name="description" content="Review real timed caption candidates across a horizontal audio timeline." />
+    <title>Audio caption review · RXT Tracker</title>
+    <script type="module" src="./src/main.js"></script>
+  </head>
+  <body>
+    <header class="page-header">
+      <div class="page-header__inner">
+        <p class="eyebrow">Recipe · Vanilla</p>
+        <h1>Audio caption review</h1>
+        <p>A horizontal review workspace driven by real timed captions from a Wikimedia Futures Lab interview.</p>
+      </div>
+    </header>
+    <main class="page-main">
+      <section class="review-card" aria-labelledby="recording-title">
+        <header class="recording-header">
+          <div>
+            <p class="eyebrow">Wikimedia Futures Lab interview</p>
+            <h2 id="recording-title">Wikipediapodden #351 · Eva Martin</h2>
+            <p>Review timing candidates without losing the complete media context.</p>
+          </div>
+          <div class="recording-summary" aria-label="Caption review summary">
+            <span><strong id="caption-count">—</strong> captions</span><span><strong id="question-count">—</strong> questions</span><span><strong id="open-count">—</strong> open</span><span><strong id="reviewed-count">0</strong> reviewed</span><span><strong id="recording-duration">10:52</strong> duration</span>
+          </div>
+        </header>
+        <div class="player-toolbar">
+          <div><button id="play-button" class="button button--primary" type="button" disabled>Play</button><output id="time-display">00:00 / 10:52</output></div>
+          <fieldset>
+            <legend>Timeline zoom</legend>
+            <div id="zoom-options" class="zoom-options"></div>
+          </fieldset>
+        </div>
+        <div id="timeline-scroller" class="timeline-scroller" tabindex="0" aria-label="Horizontally scrollable audio caption review timeline">
+          <div id="timeline-content" class="timeline-content">
+            <div id="waveform" class="waveform" aria-label="Audio waveform"></div>
+            <div class="annotation-section">
+              <div class="lane-labels" aria-hidden="true"><span>Captions</span><span>Questions</span><span>Review</span></div>
+              <div id="annotation-lanes" class="annotation-lanes"></div>
+            </div>
+          </div>
+        </div>
+        <section class="derived-rules">
+          <div>
+            <p class="eyebrow">Derived from the local SRT</p>
+            <h3>Objective review candidates</h3>
+          </div>
+          <ul>
+            <li>Very short caption ≤ 0.5 s</li>
+            <li>Long caption ≥ 9.0 s</li>
+            <li>Caption gap ≥ 2.0 s</li>
+          </ul>
+        </section>
+        <section class="review-overview" aria-labelledby="review-overview-title">
+          <div>
+            <p class="eyebrow">Remaining work</p>
+            <h3 id="review-overview-title">Review overview <span id="overview-open-count">0 remaining</span></h3>
+          </div>
+          <div id="tracker-host" class="tracker-host"></div>
+          <div class="review-legend" aria-label="Review marker legend">
+            <span class="review-legend__item">
+              <span class="review-legend__swatch review-legend__swatch--short" aria-hidden="true"></span>
+              Very short caption
+            </span>
+            <span class="review-legend__item">
+              <span class="review-legend__swatch review-legend__swatch--long" aria-hidden="true"></span>
+              Long caption
+            </span>
+            <span class="review-legend__item">
+              <span class="review-legend__swatch review-legend__swatch--pause" aria-hidden="true"></span>
+              Long caption gap
+            </span>
+          </div>
+        </section>
+        <p id="loading-status" class="loading-status" role="status">Loading local audio and timed captions…</p>
+        <section class="item-details" aria-labelledby="item-details-title">
+          <div>
+            <p class="eyebrow">Selected review candidate</p>
+            <h3 id="item-details-title">Choose a review candidate</h3>
+          </div>
+          <div>
+            <p id="item-details-time">—</p>
+            <p id="item-details-description">Candidates are derived from the local timed-caption file using fixed, neutral timing rules.</p>
+            <blockquote id="item-details-transcript" hidden></blockquote>
+            <p><span id="item-details-kind" hidden></span> <span id="item-details-status" hidden></span></p>
+            <button id="review-status-button" class="button" type="button" hidden>Mark reviewed</button>
+          </div>
+        </section>
+      </section>
+      <footer class="fixture-attribution">
+        <p>Audio: <a href="https://commons.wikimedia.org/wiki/File:WP351_-_Wikimedia_Futures_Lab,_Eva_Martin.mp3">“WP351 – Wikimedia Futures Lab, Eva Martin”</a> by <a href="https://commons.wikimedia.org/wiki/User:Ainali">Ainali</a>, licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>. English timed captions: <a href="https://commons.wikimedia.org/wiki/User:Ainali">Ainali</a>, <a href="https://commons.wikimedia.org/wiki/TimedText:WP351_-_Wikimedia_Futures_Lab,_Eva_Martin.mp3.en.srt">Wikimedia Commons TimedText</a>, licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</p>
+      </footer>
+    </main>
+  </body>
+</html>

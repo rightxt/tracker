@@ -1,0 +1,248 @@
+.event-demo {
+  width: min(62rem, calc(100% - 8rem));
+}
+
+.event-demo__intro {
+  max-width: 52rem;
+}
+
+.event-demo__eyebrow {
+  margin: 0 0 0.35rem;
+  color: #475569;
+  font-size: 0.78rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.event-panel {
+  margin-block: 1.5rem;
+  padding: 1.25rem;
+  border: 1px solid var(--demo-border);
+  border-radius: 0.65rem;
+  background: #fff;
+}
+
+.event-panel h2 {
+  margin-block-start: 0;
+}
+
+.event-panel__heading {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.event-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.event-experiments {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.event-experiments > div {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  padding: 0.85rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.45rem;
+}
+
+.event-experiments h3 {
+  margin-block: 0;
+}
+
+.event-experiments p {
+  flex: 1;
+}
+
+.event-actions--warning {
+  margin-block-start: 0.75rem;
+}
+
+.event-actions button,
+.event-experiments button,
+.event-panel__heading button {
+  min-height: 2.5rem;
+  padding: 0.45rem 0.8rem;
+  border: 1px solid #64748b;
+  border-radius: 0.35rem;
+  background: #f8fafc;
+  color: #0f172a;
+  cursor: pointer;
+}
+
+.event-actions button:hover,
+.event-experiments button:hover,
+.event-panel__heading button:hover {
+  background: #e2e8f0;
+}
+
+.event-actions button:disabled,
+.event-experiments button:disabled {
+  border-color: #cbd5e1;
+  background: #f8fafc;
+  color: #94a3b8;
+  cursor: not-allowed;
+}
+
+.event-demo__tracker-host {
+  position: relative;
+}
+
+.event-fixture {
+  border: 1px solid #cbd5e1;
+  border-radius: 0.5rem;
+  background: #f8fafc;
+}
+
+.event-fixture__section {
+  min-height: 24rem;
+  padding: 1rem 1.5rem;
+  border-block-end: 1px solid #e2e8f0;
+}
+
+.event-fixture__section--cluster {
+  min-height: 14rem;
+}
+
+.event-target {
+  padding: 0.65rem 0.8rem;
+  border-inline-start: 0.3rem solid #2563eb;
+  background: #fff;
+  font-size: 1rem;
+}
+
+.event-target--cluster {
+  margin-block: 0.2rem;
+  border-inline-start-color: #7c3aed;
+}
+
+.event-target--mutable {
+  border-inline-start-color: #b45309;
+}
+
+.event-table-wrap {
+  max-height: 24rem;
+  overflow: auto;
+}
+
+.event-panel--lifecycle {
+  border-inline-start: 0.35rem solid #2563eb;
+}
+
+.event-state {
+  display: inline-block;
+  margin-block-end: 0;
+  padding: 0.35rem 0.55rem;
+  border-radius: 0.35rem;
+  background: #eef2ff;
+}
+
+.event-sync-activity {
+  margin-block-start: 1rem;
+  padding-block-start: 1rem;
+  border-block-start: 1px solid #e2e8f0;
+}
+
+.event-sync-activity h3 {
+  margin-block: 0;
+}
+
+.event-sync-activity dl {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.event-sync-activity dl > div {
+  padding: 0.65rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.35rem;
+}
+
+.event-sync-activity dt {
+  color: #475569;
+  font-size: 0.78rem;
+}
+
+.event-sync-activity dd {
+  margin: 0.25rem 0 0;
+  overflow-wrap: anywhere;
+  font-weight: 700;
+}
+
+[data-record-type='boundary'] td {
+  border-block-start: 2px solid #64748b;
+  background: #f8fafc;
+}
+
+[data-record-type='event'] strong {
+  color: #1d4ed8;
+}
+
+[data-record-type='completion'] strong {
+  color: #047857;
+}
+
+.event-error-total {
+  font-weight: 700;
+}
+
+.event-panel > summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.event-table-wrap table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.86rem;
+}
+
+.event-table-wrap th,
+.event-table-wrap td {
+  padding: 0.55rem;
+  border-block-end: 1px solid #e2e8f0;
+  text-align: start;
+  vertical-align: top;
+}
+
+.event-log-list {
+  min-height: 2rem;
+  padding-inline-start: 1.5rem;
+}
+
+.event-panel pre {
+  max-width: 100%;
+  overflow: auto;
+  padding: 0.75rem;
+  border-radius: 0.35rem;
+  background: #f1f5f9;
+  white-space: pre-wrap;
+}
+
+@media (width <= 42rem) {
+  .event-demo {
+    width: min(100% - 3rem, 62rem);
+  }
+
+  .event-table-wrap table {
+    min-width: 42rem;
+  }
+
+  .event-sync-activity dl {
+    grid-template-columns: 1fr;
+  }
+
+  .event-experiments {
+    grid-template-columns: 1fr;
+  }
+}

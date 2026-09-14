@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Vue RXT Tracker in element mode with an external HTMLElement source and scroll root." />
+    <title>Vue container · RXT Tracker</title>
+    <script type="module" src="./src/main.js"></script>
+  </head>
+  <body>
+    <main class="demo-page">
+      <header class="demo-page__intro">
+        <h1>Container tracker — Vue</h1>
+        <p>
+          A framework can render &lt;Tracker&gt; here while Tracker represents an external
+          <code>HTMLElement</code> scroller elsewhere.
+        </p>
+        <div class="demo-concept" role="img" aria-label="The framework renderer owns the Tracker rail, which represents a separate external HTMLElement used as sourceRoot and scrollRoot.">
+          <div><strong>Framework renderer</strong><code>&lt;Tracker&gt;</code><span>rail stays here</span></div>
+          <strong aria-hidden="true">represents →</strong>
+          <div><strong>External HTMLElement</strong><code>sourceRoot + scrollRoot</code><span>tracked content scrolls here</span></div>
+        </div>
+        <p>The roots configure runtime behavior. They do not portal or relocate the framework renderer. Changing the DOM-reference props/inputs changes the mounted runtime context while the framework component remains in place.</p>
+        <p>Framework DOM references may initially be unavailable. The adapter tolerates the non-mounted state until the actual <code>HTMLElement</code> is available.</p>
+      </header>
+      <div id="vue-app"></div>
+    </main>
+  </body>
+</html>
