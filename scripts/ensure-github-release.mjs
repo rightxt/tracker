@@ -253,6 +253,8 @@ if (mode === 'anchor') {
   }
 } else if (existingRelease !== null) {
   process.stdout.write(`GitHub Release ${tagName} already exists and matches this release; reusing it.\n`);
+} else if (existingTagCommitSha === null) {
+  throw new Error(`Cannot publish GitHub Release ${tagName}: release tag does not exist.`);
 } else {
   const createdRelease = await requestGitHubJson(`repos/${repository}/releases`, {
     method: 'POST',
@@ -263,7 +265,6 @@ if (mode === 'anchor') {
       name: tagName,
       prerelease: false,
       tag_name: tagName,
-      target_commitish: expectedCommitSha,
     },
   });
   const createdTagCommitSha = await getTagCommitSha(repository, tagName);
