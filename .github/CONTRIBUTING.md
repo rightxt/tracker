@@ -2,7 +2,7 @@
 
 Contributions are welcome. Tracker is a monorepo, so one change may legitimately affect several packages or project areas.
 
-Please follow the [Code of Conduct](./CODE_OF_CONDUCT.md) when participating in the project.
+Please follow the [Code of Conduct](https://github.com/rightxt/tracker/blob/main/.github/CODE_OF_CONDUCT.md) when participating in the project.
 
 ## Where to start
 
@@ -12,7 +12,7 @@ Use the channel that matches what you want to report or propose:
 - **Documentation error:** open a Documentation issue, or submit an obvious correction directly as a pull request.
 - **Usage or integration question:** use GitHub Discussions in **Q&A**.
 - **Feature, API, behavior, architecture, demo, benchmark, or tooling improvement:** start in GitHub Discussions under **Ideas** before investing in a substantial implementation.
-- **Security vulnerability:** follow [SECURITY.md](./SECURITY.md). Do not disclose vulnerabilities in public issues, discussions, or pull requests.
+- **Security vulnerability:** follow [SECURITY.md](https://github.com/rightxt/tracker/security/policy). Do not disclose vulnerabilities in public issues, discussions, or pull requests.
 
 Discuss substantial API, behavior, or architecture changes before implementing them.
 
@@ -37,9 +37,9 @@ pnpm install --frozen-lockfile
 
 See the workflow-specific documentation:
 
-- [`tests/README.md`](../tests/README.md) for the test architecture and browser/distribution verification.
-- [`benchmarks/README.md`](../benchmarks/README.md) for benchmark prerequisites, profiles, and report comparison.
-- [`site/README.md`](../site/README.md) for the documentation/demo/tooling site.
+- [`tests/README.md`](https://github.com/rightxt/tracker/blob/main/tests/README.md) for the test architecture and browser/distribution verification.
+- [`benchmarks/README.md`](https://github.com/rightxt/tracker/blob/main/benchmarks/README.md) for benchmark prerequisites, profiles, and report comparison.
+- [`site/README.md`](https://github.com/rightxt/tracker/blob/main/site/README.md) for the documentation/demo/tooling site.
 
 ## Verification
 
