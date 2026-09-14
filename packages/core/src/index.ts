@@ -1,0 +1,107 @@
+// Shared public Core contract used by both visual SPIs.
+export { ORIENTATIONS, PLACEMENTS } from './constants.js';
+export { EVENT_NAMES, EVENT_NAME_VALUES } from './events/eventNames.js';
+export { TrackerConfigurationError, TrackerError, TrackerLifecycleError } from './errors.js';
+
+// Public configuration and rule helpers.
+export { assertCompleteTrackerConfigurationEnvelope } from './config/assertCompleteTrackerConfigurationEnvelope.js';
+export { assertValidTrackerConfiguration } from './config/assertValidTrackerConfiguration.js';
+export { createDefaultOptions } from './config/defaultOptions.js';
+export { cloneTrackerConfiguration, isTrackerConfigurationObject } from './config/configurationValue.js';
+export { diffOptions } from './config/diffOptions.js';
+export { normalizeOptions } from './config/normalizeOptions.js';
+export { resolveTrackerOptions } from './config/resolveOptions.js';
+export { validateOptions } from './config/validateOptions.js';
+export { normalizeRule } from './rules/normalizeRule.js';
+export { validateRule } from './rules/validateRule.js';
+export { validateRules } from './rules/validateRules.js';
+
+export type {
+  TrackerA11yOptions,
+  TrackerAddRuleParams,
+  TrackerClusterActivateEventPayload,
+  TrackerClusterSnapshot,
+  TrackerClusteringOptions,
+  TrackerConfiguration,
+  TrackerConfigurationReplacement,
+  TrackerCssVariablePatch,
+  TrackerCssVariablePatchValue,
+  TrackerCssVariableValue,
+  TrackerDebugStats,
+  TrackerDestroyEventPayload,
+  TrackerDiagnosticCode,
+  TrackerDiagnosticEntry,
+  TrackerDiagnosticStats,
+  TrackerDiagnosticsOptions,
+  TrackerErrorCode,
+  TrackerErrorOptions,
+  TrackerEventHandler,
+  TrackerEventMarker,
+  TrackerEventName,
+  TrackerEventNameConstants,
+  TrackerEventPayload,
+  TrackerEventPayloadMap,
+  TrackerEventUnsubscribe,
+  TrackerFocusOptions,
+  TrackerFocusOptionsObject,
+  TrackerInteractionOptions,
+  TrackerIntervalUpdateOptions,
+  TrackerLifecycleSnapshot,
+  TrackerMarkerActivateEventPayload,
+  TrackerMarkerDefaults,
+  TrackerMarkerLayerOptions,
+  TrackerMarkerOptions,
+  TrackerMarkerSnapshot,
+  TrackerMutationObserverOptions,
+  TrackerMutationUpdateOptions,
+  TrackerOperationParams,
+  TrackerOptions,
+  TrackerOptionsCandidate,
+  TrackerOptionsDiff,
+  TrackerOptionsNormalizationContext,
+  TrackerOptionsSnapshot,
+  TrackerOptionsValidationContext,
+  TrackerOptionsValidationResult,
+  TrackerOrientation,
+  TrackerOrientationConstants,
+  TrackerPlacement,
+  TrackerPlacementConstants,
+  TrackerReadonlyOptions,
+  TrackerReadonlyRule,
+  TrackerRenderSnapshot,
+  TrackerResizeUpdateOptions,
+  TrackerRule,
+  TrackerRuleCssVariables,
+  TrackerRuleNormalizationContext,
+  TrackerRuleSource,
+  TrackerRuleValidationContext,
+  TrackerRuleValidationResult,
+  TrackerRulesValidationResult,
+  TrackerScrollAlign,
+  TrackerScrollBehavior,
+  TrackerScrollMode,
+  TrackerScrollOptions,
+  TrackerScrollOptionsObject,
+  TrackerScrollRoot,
+  TrackerScrollUpdateOptions,
+  TrackerSelectionChangeEventPayload,
+  TrackerSelectionSnapshot,
+  TrackerSnapshot,
+  TrackerSnapshotItem,
+  TrackerSnapshotListener,
+  TrackerSnapshotUnsubscribe,
+  TrackerSourceRoot,
+  TrackerState,
+  TrackerStats,
+  TrackerSyncEndEventPayload,
+  TrackerSyncStartEventPayload,
+  TrackerTargetSpec,
+  TrackerTrackActivateEventPayload,
+  TrackerTrackOptions,
+  TrackerTypedEventHandler,
+  TrackerUpdateOptions,
+  TrackerValidationDiagnostic,
+  TrackerViewportOptions,
+  TrackerViewportSnapshot,
+  TrackerWarningEventPayload,
+} from './types.js';

@@ -1,0 +1,129 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    name: Quality and package contracts
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24.15.0
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Check formatting
+        run: pnpm format:check
+
+      - name: Type-check
+        run: pnpm typecheck
+
+      - name: Lint scripts
+        run: pnpm eslint
+
+      - name: Lint styles
+        run: pnpm stylelint
+
+      - name: Check centralized package metadata
+        run: pnpm packages:metadata:check
+
+      - name: Run unit tests
+        run: pnpm packages:test
+
+      - name: Build packages
+        run: pnpm packages:build
+
+      - name: Check distribution contracts
+        run: pnpm packages:verify:dist
+
+      - name: Check package tarball contracts
+        run: pnpm packages:verify:pack
+
+      - name: Check benchmark infrastructure
+        run: pnpm benchmarks:test
+
+  browser:
+    name: Browser matrix
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24.15.0
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install --with-deps chromium firefox webkit
+
+      - name: Run browser tests (Chromium)
+        run: pnpm packages:test:browser:chromium
+
+      - name: Run browser tests (Firefox)
+        run: pnpm packages:test:browser:firefox
+
+      - name: Run browser tests (WebKit)
+        run: pnpm packages:test:browser:webkit
+
+  site:
+    name: Site contracts
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24.15.0
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run site tests
+        run: pnpm site:test
+
+      - name: Build packages for local consumers
+        run: pnpm packages:build
+
+      - name: Build development site artifact
+        run: pnpm site:build:dev
+
+      - name: Install Chromium
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Run site browser smoke
+        run: pnpm site:test:browser:chromium

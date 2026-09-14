@@ -1,0 +1,15 @@
+.idea/
+coverage/
+dist/
+node_modules/
+
+# Release workflow outputs
+/.release/
+
+# Site infrastructure outputs
+/site-dist/
+/site/.cache/
+/site/.work/
+/site/**/.angular/
+/site/**/.vite/
+/site/**/out-tsc/

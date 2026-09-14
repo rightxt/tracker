@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Explore RXT Tracker accessible naming, keyboard selection, and activation." />
+    <title>Accessibility and keyboard navigation · RXT Tracker</title>
+    <script type="module" src="./src/main.js"></script>
+  </head>
+  <body>
+    <main class="demo-page accessibility-demo">
+      <header class="demo-page__intro">
+        <p class="accessibility-demo__eyebrow">Vanilla · debug profile</p>
+        <h1>Accessibility and keyboard navigation</h1>
+        <p>This scenario demonstrates Tracker's public accessible naming and keyboard interaction contract. Complete application accessibility still depends on the surrounding content, controls, styles, and testing.</p>
+      </header>
+
+      <section class="accessibility-panel" aria-labelledby="interaction-model-heading">
+        <h2 id="interaction-model-heading">Focus, selection, and activation</h2>
+        <ol class="accessibility-model">
+          <li><strong>DOM focus</strong><span>Tab places focus on the Tracker root.</span></li>
+          <li><strong>Tracker selection</strong><span>Axis arrows change the selected rendered item while focus stays on the root.</span></li>
+          <li><strong>Activation</strong><span>Enter or Space activates the selected item, scrolls to its source, and applies the rule's focus behavior.</span></li>
+        </ol>
+        <p class="accessibility-note"><strong>DOM focus, logical Tracker selection, and activation are separate states.</strong> Selection starts at the first rendered item as soon as keyboard accessibility mounts.</p>
+      </section>
+
+      <section class="accessibility-grid" aria-label="Accessible Tracker configuration and controls">
+        <div class="accessibility-panel">
+          <h2>Accessible Tracker name</h2>
+          <p class="accessible-name"><code>Demo section navigation</code></p>
+          <p>Core exposes this configured name as the Tracker root's accessible label. The root enters the native tab order only when both accessibility and keyboard support are enabled.</p>
+        </div>
+
+        <div class="accessibility-panel">
+          <h2>Keyboard model</h2>
+          <dl class="key-guide">
+            <div>
+              <dt><kbd>Tab</kbd></dt>
+              <dd>Enter or leave the Tracker root through normal page order.</dd>
+            </div>
+            <div>
+              <dt><kbd>↑</kbd> <kbd>↓</kbd></dt>
+              <dd>Move selection on this vertical rail.</dd>
+            </div>
+            <div>
+              <dt><kbd>Home</kbd> <kbd>End</kbd></dt>
+              <dd>Select the first or last marker.</dd>
+            </div>
+            <div>
+              <dt><kbd>Enter</kbd> <kbd>Space</kbd></dt>
+              <dd>Activate the selected marker.</dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      <section id="accessibility-state" class="accessibility-panel" aria-labelledby="state-heading">
+        <h2 id="state-heading">Current state</h2>
+        <dl class="accessibility-state">
+          <div>
+            <dt>DOM focus</dt>
+            <dd><output id="focus-state">Document body</output></dd>
+          </div>
+          <div>
+            <dt>Tracker selection</dt>
+            <dd><output id="selection-state" aria-live="polite" aria-atomic="true">Waiting for Tracker</output></dd>
+          </div>
+          <div>
+            <dt>Last selection transition</dt>
+            <dd><output id="selection-transition">None</output></dd>
+          </div>
+          <div>
+            <dt>Last activation</dt>
+            <dd><output id="activation-state" aria-live="polite" aria-atomic="true">None</output></dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="accessibility-panel keyboard-path" aria-labelledby="keyboard-path-heading">
+        <h2 id="keyboard-path-heading">Try the native tab path</h2>
+        <p>Focus the first button, then use only the keyboard. The Tracker root is inserted between these two ordinary application controls in DOM order.</p>
+        <button id="outside-before" type="button">Outside focus target before Tracker</button>
+        <div id="accessibility-tracker-host" class="accessibility-tracker-host"></div>
+        <button id="outside-after" type="button">Outside focus target after Tracker</button>
+      </section>
+
+      <section id="accessibility-fixture" class="accessibility-fixture" aria-labelledby="fixture-heading">
+        <header>
+          <h2 id="fixture-heading">Tracked sections</h2>
+          <p>Clustering is disabled, so each source has one independently selectable marker.</p>
+        </header>
+        <article class="accessibility-target" tabindex="-1" data-section-label="Introduction">
+          <h3>Introduction</h3>
+          <p>Start with the rail's accessible name and observe the initially selected first marker.</p>
+        </article>
+        <article class="accessibility-target" tabindex="-1" data-section-label="Installation">
+          <h3>Installation</h3>
+          <p>Press Arrow Down while the rail has focus to move the logical selection here.</p>
+        </article>
+        <article class="accessibility-target" tabindex="-1" data-section-label="Configuration">
+          <h3>Configuration</h3>
+          <p>Selection changes the Tracker-owned marker state without moving DOM focus away from the rail.</p>
+        </article>
+        <article class="accessibility-target" tabindex="-1" data-section-label="Events">
+          <h3>Events</h3>
+          <p>The application observes committed selection transitions and marker activation through public events.</p>
+        </article>
+        <article class="accessibility-target" tabindex="-1" data-section-label="Cleanup">
+          <h3>Cleanup</h3>
+          <p>Activation moves focus to the selected source because this demo rule explicitly enables focus behavior.</p>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>

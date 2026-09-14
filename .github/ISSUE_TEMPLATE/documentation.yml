@@ -1,0 +1,64 @@
+name: Documentation issue
+description: Report incorrect, missing, outdated, or unclear documentation or code comments.
+type: task
+labels:
+  - documentation
+  - 'status: needs triage'
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form for incorrect, missing, outdated, or unclear documentation. Use the Bug report form when the software itself is broken.
+
+        Obvious corrections, such as typos, may be submitted directly as a pull request.
+
+  - type: dropdown
+    id: documentation-area
+    attributes:
+      label: Documentation area
+      options:
+        - Code comments / JSDoc
+        - Documentation
+    validations:
+      required: true
+
+  - type: input
+    id: location
+    attributes:
+      label: Location
+      description: Link the affected page or provide the repository path and section. If unclear, describe where you found it.
+      placeholder: 'e.g. packages/vue/README.md or a documentation page URL'
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: Explain what is incorrect, missing, outdated, or unclear.
+    validations:
+      required: true
+
+  - type: textarea
+    id: suggested-improvement
+    attributes:
+      label: Suggested improvement
+      description: Describe a proposed fix, if you have one.
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional context
+      description: Add relevant screenshots, examples, or links.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I searched existing documentation issues for the same problem.
+          required: true

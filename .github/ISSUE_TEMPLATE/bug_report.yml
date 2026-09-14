@@ -1,0 +1,121 @@
+name: Bug report
+description: Report a Tracker or repository defect.
+type: bug
+labels:
+  - 'status: needs triage'
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use GitHub Discussions for usage questions and feature requests.
+
+        Use private vulnerability reporting for security issues.
+
+  - type: dropdown
+    id: affected-areas
+    attributes:
+      label: Affected areas
+      description: Select all affected areas. Maintainers may adjust them during triage.
+      multiple: true
+      options:
+        - Core
+        - Vanilla
+        - Custom Element
+        - React
+        - Vue
+        - Angular
+        - Package / installation / exports
+        - Website / demos / tools
+        - Tests
+        - Benchmarks
+        - Build / repository tooling
+        - Not sure
+    validations:
+      required: true
+
+  - type: input
+    id: tracker-version
+    attributes:
+      label: Tracker version
+      description: Provide the released version, `main`, or a commit identifier. Use `unknown` if you cannot determine it.
+      placeholder: 'e.g. 1.3.2, main, or abc1234'
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Provide the details relevant to the problem. Remove lines that do not apply.
+      value: |
+        Browser and version:
+        OS:
+        Framework and version, if applicable:
+        Bundler/build tool, if applicable:
+        Package manager, if relevant:
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: Provide a minimal repository, playground, or code sample, or explain why one is unavailable.
+      placeholder: Link, minimal code, or an explanation.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. ...
+        2. ...
+        3. ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What did you expect to happen?
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: What happened instead?
+    validations:
+      required: true
+
+  - type: textarea
+    id: regression
+    attributes:
+      label: Regression information
+      description: If this is a regression, provide the last known working version or commit and the first known broken one, if known.
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional context
+      description: Add relevant logs, screenshots, stack traces, or links. Do not include secrets or private source code.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I searched existing issues and discussions for the same problem.
+          required: true
+        - label: This is a defect, not a usage question or feature request.
+          required: true
+        - label: This issue does not disclose a security vulnerability or sensitive information.
+          required: true

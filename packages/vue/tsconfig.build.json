@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "declarationDir": "./dist",
+    "declarationMap": false,
+    "emitDeclarationOnly": true,
+    "noEmit": false,
+    "paths": {
+      "@rightxt/tracker-core": ["../../packages/core/dist/index.d.ts"],
+      "@rightxt/tracker-core/projection": ["../../packages/core/dist/projection.d.ts"]
+    },
+    "rootDir": "./src"
+  },
+  "exclude": ["./dist", "./src/__tests__", "node_modules"],
+  "extends": "../../tsconfig.json",
+  "include": ["./src/**/*.ts"]
+}

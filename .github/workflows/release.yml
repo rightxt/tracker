@@ -1,0 +1,282 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Exact Tracker version from the release commit
+        required: true
+        type: string
+      stage:
+        description: Manual release stage to run
+        required: true
+        type: choice
+        options:
+          - core
+          - packages
+          - finalize
+
+permissions:
+  contents: read
+
+env:
+  RELEASE_STAGE: ${{ inputs.stage }}
+  RELEASE_VERSION: ${{ inputs.version }}
+
+concurrency:
+  group: npm-release
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    name: Validate release stage
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      release_sha: ${{ steps.release-source.outputs.sha }}
+
+    steps:
+      - name: Require main branch dispatch
+        shell: bash
+        run: |
+          if [[ "${GITHUB_REF}" != "refs/heads/main" ]]; then
+            echo "::error::Release stages must be dispatched from main."
+            exit 1
+          fi
+
+      - name: Check out dispatch source
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.sha }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24.15.0
+
+      - name: Validate requested version syntax
+        run: node scripts/verify-release-version.mjs --version="$RELEASE_VERSION" --syntax-only
+
+      - name: Resolve release source
+        id: release-ref
+        shell: bash
+        run: |
+          if [[ "$RELEASE_STAGE" == "core" ]]; then
+            printf 'ref=%s\n' "$GITHUB_SHA" >> "$GITHUB_OUTPUT"
+          else
+            printf 'ref=refs/tags/v%s\n' "$RELEASE_VERSION" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Check out release source
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ steps.release-ref.outputs.ref }}
+
+      - name: Record release source
+        id: release-source
+        shell: bash
+        run: printf 'sha=%s\n' "$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Match requested version
+        run: node scripts/verify-release-version.mjs --version="$RELEASE_VERSION"
+
+      - name: Verify release metadata
+        run: node scripts/verify-release-metadata.mjs
+
+      - name: Validate existing GitHub release state
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        shell: bash
+        run: >-
+          node scripts/ensure-github-release.mjs
+          --version="$RELEASE_VERSION"
+          --mode=check
+          --commit="$(git rev-parse HEAD)"
+
+  verify:
+    name: Run full verification
+    needs: validate
+    if: inputs.stage == 'core'
+    uses: ./.github/workflows/ci.yml
+
+  prepare:
+    name: Prepare verified npm tarballs
+    needs:
+      - validate
+      - verify
+    if: >-
+      always() &&
+      needs.validate.result == 'success' &&
+      (inputs.stage != 'core' || needs.verify.result == 'success')
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Check out release source
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ needs.validate.outputs.release_sha }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24.15.0
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build packages
+        run: pnpm packages:build
+
+      - name: Create and verify release tarballs
+        run: >-
+          node scripts/prepare-release-artifacts.mjs
+          --version="$RELEASE_VERSION"
+          --output=.release/packages
+
+      - name: Upload release tarballs
+        uses: actions/upload-artifact@v7
+        with:
+          name: npm-release-${{ inputs.version }}-${{ inputs.stage }}
+          path: .release/packages/*.tgz
+          if-no-files-found: error
+          retention-days: 7
+
+  publish-core:
+    name: Anchor release and publish/verify Core
+    needs:
+      - validate
+      - prepare
+    if: inputs.stage == 'core'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: npm-release
+    permissions:
+      contents: write
+      id-token: write
+
+    steps:
+      - name: Check out release source
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ needs.validate.outputs.release_sha }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24.15.0
+
+      - name: Download verified tarballs
+        uses: actions/download-artifact@v8
+        with:
+          name: npm-release-${{ inputs.version }}-${{ inputs.stage }}
+          path: .release/packages
+
+      - name: Preflight Core publication state
+        run: >-
+          node scripts/publish-release-artifacts.mjs
+          --version="$RELEASE_VERSION"
+          --directory=.release/packages
+          --mode=core-preflight
+
+      - name: Create or verify release anchor tag
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        shell: bash
+        run: >-
+          node scripts/ensure-github-release.mjs
+          --version="$RELEASE_VERSION"
+          --mode=anchor
+          --commit="$(git rev-parse HEAD)"
+
+      - name: Publish or verify Core
+        run: >-
+          node scripts/publish-release-artifacts.mjs
+          --version="$RELEASE_VERSION"
+          --directory=.release/packages
+          --mode=core
+
+  publish-packages:
+    name: Publish/verify implementation packages
+    needs:
+      - validate
+      - prepare
+    if: inputs.stage == 'packages'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: npm-release
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Check out release source
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ needs.validate.outputs.release_sha }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24.15.0
+
+      - name: Download verified tarballs
+        uses: actions/download-artifact@v8
+        with:
+          name: npm-release-${{ inputs.version }}-${{ inputs.stage }}
+          path: .release/packages
+
+      - name: Verify Core and publish implementation packages
+        run: >-
+          node scripts/publish-release-artifacts.mjs
+          --version="$RELEASE_VERSION"
+          --directory=.release/packages
+          --mode=packages
+
+  publish-release:
+    name: Verify npm packages and publish GitHub Release
+    needs:
+      - validate
+      - prepare
+    if: inputs.stage == 'finalize'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+
+    steps:
+      - name: Check out release source
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ needs.validate.outputs.release_sha }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24.15.0
+
+      - name: Download verified tarballs
+        uses: actions/download-artifact@v8
+        with:
+          name: npm-release-${{ inputs.version }}-${{ inputs.stage }}
+          path: .release/packages
+
+      - name: Verify all npm packages are available and exact
+        run: >-
+          node scripts/publish-release-artifacts.mjs
+          --version="$RELEASE_VERSION"
+          --directory=.release/packages
+          --mode=verify
+
+      - name: Publish or verify GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        shell: bash
+        run: >-
+          node scripts/ensure-github-release.mjs
+          --version="$RELEASE_VERSION"
+          --mode=publish
+          --commit="$(git rev-parse HEAD)"

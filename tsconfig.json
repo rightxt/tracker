@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": false,
+    "exactOptionalPropertyTypes": true,
+    "experimentalDecorators": true,
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "noEmit": true,
+    "paths": {
+      "@rightxt/tracker-angular": ["./packages/angular/src/public-api.ts"],
+      "@rightxt/tracker-core": ["./packages/core/src/index.ts"],
+      "@rightxt/tracker-core/advanced": ["./packages/core/src/advanced.ts"],
+      "@rightxt/tracker-core/advanced/debug": ["./packages/core/src/advanced.ts"],
+      "@rightxt/tracker-core/debug": ["./packages/core/src/index.ts"],
+      "@rightxt/tracker-core/projection": ["./packages/core/src/projection.ts"],
+      "@rightxt/tracker-core/projection/debug": ["./packages/core/src/projection.ts"],
+      "@rightxt/tracker-core/renderer": ["./packages/core/src/renderer.ts"],
+      "@rightxt/tracker-core/renderer/debug": ["./packages/core/src/renderer.ts"],
+      "@rightxt/tracker-react": ["./packages/react/src/index.ts"],
+      "@rightxt/tracker-vue": ["./packages/vue/src/index.ts"]
+    },
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "ES2022"
+  },
+  "exclude": ["**/dist/**", "node_modules"],
+  "include": [
+    "packages/core/src/**/*",
+    "packages/vanilla/src/**/*",
+    "packages/element/src/**/*",
+    "packages/react/src/**/*",
+    "packages/vue/src/**/*",
+    "packages/angular/src/**/*",
+    "benchmarks/**/*.ts",
+    "build.js",
+    "vite.config.js"
+  ]
+}

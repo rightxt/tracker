@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "noEmit": true,
+    "paths": {
+      "@rightxt/tracker-core": ["../../packages/core/dist/index.d.ts"],
+      "@rightxt/tracker-core/projection": ["../../packages/core/dist/projection.d.ts"],
+      "@rightxt/tracker-vue": ["../../packages/vue/dist/index.d.ts"]
+    }
+  },
+  "extends": "../../tsconfig.json",
+  "include": ["./vue-consumer.ts", "./vue-style.d.ts"]
+}

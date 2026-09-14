@@ -1,0 +1,69 @@
+{
+  "author": "Igor Iakovlev",
+  "bugs": {
+    "url": "https://github.com/rightxt/tracker/issues"
+  },
+  "dependencies": {
+    "@rightxt/tracker-core": "workspace:*"
+  },
+  "description": "React integration for RXT Tracker.",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/rxt-tracker-react.mjs",
+      "default": "./dist/rxt-tracker-react.mjs"
+    },
+    "./package.json": "./package.json",
+    "./style.css": "./dist/rxt-tracker.css"
+  },
+  "files": [
+    "README.md",
+    "dist"
+  ],
+  "funding": [
+    "https://ko-fi.com/igorxut",
+    "https://pay.cloudtips.ru/p/d4378494"
+  ],
+  "homepage": "https://rightxt.github.io/tracker/",
+  "keywords": [
+    "dom",
+    "markers",
+    "minimap",
+    "overview-ruler",
+    "react",
+    "react-component",
+    "scroll",
+    "scroll-marker",
+    "scroll-navigation",
+    "scrollbar",
+    "tracker"
+  ],
+  "license": "MIT",
+  "module": "./dist/rxt-tracker-react.mjs",
+  "name": "@rightxt/tracker-react",
+  "peerDependencies": {
+    "@types/react": ">=19 <20",
+    "react": ">=19 <20"
+  },
+  "peerDependenciesMeta": {
+    "@types/react": {
+      "optional": true
+    }
+  },
+  "private": false,
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "directory": "packages/react",
+    "type": "git",
+    "url": "git+https://github.com/rightxt/tracker.git"
+  },
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "version": "1.0.0"
+}

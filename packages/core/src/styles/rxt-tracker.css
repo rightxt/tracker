@@ -1,0 +1,196 @@
+@layer rxtt.theme;
+
+.rxtt {
+  border-width: 0;
+  box-sizing: border-box;
+  contain: var(--rxtt-track-contain, layout paint);
+  cursor: pointer;
+  direction: ltr;
+  display: block;
+  margin: 0;
+  overflow: var(--rxtt-track-overflow, hidden);
+  padding: 0;
+  position: fixed;
+  user-select: none;
+  writing-mode: horizontal-tb;
+  z-index: var(--rxtt-track-z-index, 1000);
+}
+
+.rxtt,
+.rxtt *,
+.rxtt *::before,
+.rxtt *::after {
+  box-sizing: border-box;
+}
+
+/* Element mode is an overlay inside a user-supplied host: it positions against that host's containing block instead of the fixed viewport. */
+.rxtt[data-rxtt-scroll-mode='element'] {
+  position: absolute;
+}
+
+.rxtt[data-rxtt-geometry='unavailable'] {
+  display: none;
+}
+
+.rxtt[data-rxtt-drag='true'][data-rxtt-orientation='vertical'] {
+  touch-action: pan-x pinch-zoom;
+}
+
+.rxtt[data-rxtt-drag='true'][data-rxtt-orientation='horizontal'] {
+  touch-action: pan-y pinch-zoom;
+}
+
+/* stylelint-disable length-zero-no-unit -- Public length-token fallbacks require typed zeroes. */
+.rxtt[data-rxtt-orientation='vertical'] {
+  height: calc(100dvh - var(--rxtt-track-start, 0px) - var(--rxtt-track-end, 0px));
+  top: var(--rxtt-track-start, 0px);
+  width: var(--rxtt-track-thickness, 1rem);
+}
+
+.rxtt[data-rxtt-scroll-mode='element'][data-rxtt-orientation='vertical'] {
+  height: calc(100% - var(--rxtt-track-start, 0px) - var(--rxtt-track-end, 0px));
+}
+
+.rxtt[data-rxtt-orientation='vertical'][data-rxtt-placement='left'] {
+  border-right-width: var(--rxtt-track-border-width, 1px);
+  left: var(--rxtt-track-offset, 0px);
+}
+
+.rxtt[data-rxtt-orientation='vertical'][data-rxtt-placement='right'] {
+  border-left-width: var(--rxtt-track-border-width, 1px);
+  right: var(--rxtt-track-offset, 0px);
+}
+
+.rxtt[data-rxtt-orientation='horizontal'] {
+  height: var(--rxtt-track-thickness, 1rem);
+  left: var(--rxtt-track-start, 0px);
+  width: calc(100dvw - var(--rxtt-track-start, 0px) - var(--rxtt-track-end, 0px));
+}
+
+.rxtt[data-rxtt-scroll-mode='element'][data-rxtt-orientation='horizontal'] {
+  width: calc(100% - var(--rxtt-track-start, 0px) - var(--rxtt-track-end, 0px));
+}
+
+.rxtt[data-rxtt-orientation='horizontal'][data-rxtt-placement='top'] {
+  border-bottom-width: var(--rxtt-track-border-width, 1px);
+  top: var(--rxtt-track-offset, 0px);
+}
+
+.rxtt[data-rxtt-orientation='horizontal'][data-rxtt-placement='bottom'] {
+  border-top-width: var(--rxtt-track-border-width, 1px);
+  bottom: var(--rxtt-track-offset, 0px);
+}
+/* stylelint-enable length-zero-no-unit */
+
+.rxtt > .rxtt__viewport {
+  pointer-events: none;
+  position: absolute;
+  z-index: 1;
+}
+
+.rxtt > .rxtt__viewport[hidden] {
+  display: none;
+}
+
+.rxtt > .rxtt__markers {
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 2;
+}
+
+.rxtt[data-rxtt-geometry='suspended'] > .rxtt__markers,
+.rxtt[data-rxtt-geometry='suspended'] > .rxtt__viewport {
+  display: none;
+}
+
+.rxtt > .rxtt__markers > .rxtt__marker {
+  display: block;
+  margin: 0;
+  padding: 0;
+  pointer-events: auto;
+  position: absolute;
+}
+
+.rxtt[data-rxtt-orientation='vertical'] > .rxtt__viewport {
+  height: var(--rxtt-viewport-size, 0%);
+  left: 0;
+  right: 0;
+  top: var(--rxtt-viewport-start, 0%);
+  width: 100%;
+}
+
+.rxtt[data-rxtt-orientation='vertical'] > .rxtt__markers > .rxtt__marker {
+  height: max(var(--rxtt-marker-size, 0%), var(--rxtt-marker-min-size, 2px));
+  left: 0;
+  right: 0;
+  top: var(--rxtt-marker-start, 0%);
+  width: 100%;
+}
+
+.rxtt[data-rxtt-orientation='horizontal'] > .rxtt__viewport {
+  bottom: 0;
+  height: 100%;
+  left: var(--rxtt-viewport-start, 0%);
+  top: 0;
+  width: var(--rxtt-viewport-size, 0%);
+}
+
+.rxtt[data-rxtt-orientation='horizontal'] > .rxtt__markers > .rxtt__marker {
+  bottom: 0;
+  height: 100%;
+  left: var(--rxtt-marker-start, 0%);
+  top: 0;
+  width: max(var(--rxtt-marker-size, 0%), var(--rxtt-marker-min-size, 2px));
+}
+
+.rxtt > .rxtt__markers > .rxtt__marker[data-rxtt-kind='cluster'] {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  line-height: 1;
+}
+
+@layer rxtt.theme {
+  .rxtt {
+    background-color: var(--rxtt-track-bg, rgb(248 249 250 / 1));
+    border-color: var(--rxtt-track-border-color, rgb(108 117 125 / 1));
+    border-style: var(--rxtt-track-border-style, solid);
+  }
+
+  .rxtt:focus-visible {
+    outline: var(--rxtt-focus-outline-width, 2px) var(--rxtt-focus-outline-style, solid) var(--rxtt-focus-outline-color, Highlight);
+    outline-offset: var(--rxtt-focus-outline-offset, -2px);
+  }
+
+  .rxtt > .rxtt__viewport {
+    background-color: var(--rxtt-viewport-bg, rgb(108 117 125 / 0.3));
+  }
+
+  .rxtt > .rxtt__markers > .rxtt__marker {
+    background-color: var(--rxtt-marker-bg, rgb(220 53 69 / 1));
+    border-color: var(--rxtt-marker-border-color, rgb(108 117 125 / 1));
+    border-style: var(--rxtt-marker-border-style, solid);
+    border-width: var(--rxtt-marker-border-width, 0);
+    border-radius: var(--rxtt-marker-border-radius, 0);
+    opacity: var(--rxtt-marker-opacity, 1);
+  }
+
+  .rxtt > .rxtt__markers > .rxtt__marker:hover {
+    box-shadow: inset 0 0 0 var(--rxtt-marker-hover-ring-width, var(--rxtt-marker-ring-width, 1px)) var(--rxtt-marker-hover-ring-color, var(--rxtt-marker-ring-color, rgb(108 117 125 / 1)));
+  }
+
+  .rxtt:focus-visible > .rxtt__markers > .rxtt__marker[data-rxtt-selected='true'] {
+    box-shadow: inset 0 0 0 var(--rxtt-marker-selected-ring-width, var(--rxtt-marker-ring-width, 1px)) var(--rxtt-marker-selected-ring-color, var(--rxtt-marker-ring-color, rgb(108 117 125 / 1)));
+  }
+
+  .rxtt > .rxtt__markers > .rxtt__marker[data-rxtt-kind='cluster'] {
+    background-color: var(--rxtt-cluster-bg, var(--rxtt-marker-bg, rgb(220 53 69 / 1)));
+    font-size: var(--rxtt-cluster-font-size, 10px);
+  }
+
+  .rxtt > .rxtt__markers > .rxtt__marker[data-rxtt-kind='cluster']::after {
+    color: var(--rxtt-cluster-text-color, #fff);
+    content: var(--rxtt-cluster-content, attr(data-rxtt-count));
+  }
+}

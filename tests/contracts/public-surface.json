@@ -1,0 +1,387 @@
+{
+  "schemaVersion": 1,
+  "packages": {
+    "angular": {
+      "entrypoints": {
+        ".": {
+          "typeExports": ["TrackerComponent"],
+          "valueExports": ["TrackerComponent"]
+        }
+      },
+      "exports": {
+        ".": {
+          "types": "./dist/public-api.d.ts",
+          "import": "./dist/rxt-tracker-angular.mjs",
+          "default": "./dist/rxt-tracker-angular.mjs"
+        },
+        "./style.css": "./dist/rxt-tracker.css",
+        "./package.json": "./package.json"
+      },
+      "metadata": {
+        "module": "./dist/rxt-tracker-angular.mjs",
+        "types": "./dist/public-api.d.ts"
+      },
+      "name": "@rightxt/tracker-angular"
+    },
+    "core": {
+      "entrypoints": {
+        ".": {
+          "typeExports": [
+            "TrackerA11yOptions",
+            "TrackerAddRuleParams",
+            "TrackerClusterActivateEventPayload",
+            "TrackerClusterSnapshot",
+            "TrackerClusteringOptions",
+            "TrackerConfiguration",
+            "TrackerConfigurationError",
+            "TrackerConfigurationReplacement",
+            "TrackerCssVariablePatch",
+            "TrackerCssVariablePatchValue",
+            "TrackerCssVariableValue",
+            "TrackerDebugStats",
+            "TrackerDestroyEventPayload",
+            "TrackerDiagnosticCode",
+            "TrackerDiagnosticEntry",
+            "TrackerDiagnosticStats",
+            "TrackerDiagnosticsOptions",
+            "TrackerError",
+            "TrackerErrorCode",
+            "TrackerErrorOptions",
+            "TrackerEventHandler",
+            "TrackerEventMarker",
+            "TrackerEventName",
+            "TrackerEventNameConstants",
+            "TrackerEventPayload",
+            "TrackerEventPayloadMap",
+            "TrackerEventUnsubscribe",
+            "TrackerFocusOptions",
+            "TrackerFocusOptionsObject",
+            "TrackerInteractionOptions",
+            "TrackerIntervalUpdateOptions",
+            "TrackerLifecycleError",
+            "TrackerLifecycleSnapshot",
+            "TrackerMarkerActivateEventPayload",
+            "TrackerMarkerDefaults",
+            "TrackerMarkerLayerOptions",
+            "TrackerMarkerOptions",
+            "TrackerMarkerSnapshot",
+            "TrackerMutationObserverOptions",
+            "TrackerMutationUpdateOptions",
+            "TrackerOperationParams",
+            "TrackerOptions",
+            "TrackerOptionsCandidate",
+            "TrackerOptionsDiff",
+            "TrackerOptionsNormalizationContext",
+            "TrackerOptionsSnapshot",
+            "TrackerOptionsValidationContext",
+            "TrackerOptionsValidationResult",
+            "TrackerOrientation",
+            "TrackerOrientationConstants",
+            "TrackerPlacement",
+            "TrackerPlacementConstants",
+            "TrackerReadonlyOptions",
+            "TrackerReadonlyRule",
+            "TrackerRenderSnapshot",
+            "TrackerResizeUpdateOptions",
+            "TrackerRule",
+            "TrackerRuleCssVariables",
+            "TrackerRuleNormalizationContext",
+            "TrackerRuleSource",
+            "TrackerRuleValidationContext",
+            "TrackerRuleValidationResult",
+            "TrackerRulesValidationResult",
+            "TrackerScrollAlign",
+            "TrackerScrollBehavior",
+            "TrackerScrollMode",
+            "TrackerScrollOptions",
+            "TrackerScrollOptionsObject",
+            "TrackerScrollRoot",
+            "TrackerScrollUpdateOptions",
+            "TrackerSelectionChangeEventPayload",
+            "TrackerSelectionSnapshot",
+            "TrackerSnapshot",
+            "TrackerSnapshotItem",
+            "TrackerSnapshotListener",
+            "TrackerSnapshotUnsubscribe",
+            "TrackerSourceRoot",
+            "TrackerState",
+            "TrackerStats",
+            "TrackerSyncEndEventPayload",
+            "TrackerSyncStartEventPayload",
+            "TrackerTargetSpec",
+            "TrackerTrackActivateEventPayload",
+            "TrackerTrackOptions",
+            "TrackerTypedEventHandler",
+            "TrackerUpdateOptions",
+            "TrackerValidationDiagnostic",
+            "TrackerViewportOptions",
+            "TrackerViewportSnapshot",
+            "TrackerWarningEventPayload"
+          ],
+          "valueExports": [
+            "EVENT_NAMES",
+            "EVENT_NAME_VALUES",
+            "ORIENTATIONS",
+            "PLACEMENTS",
+            "TrackerConfigurationError",
+            "TrackerError",
+            "TrackerLifecycleError",
+            "assertCompleteTrackerConfigurationEnvelope",
+            "assertValidTrackerConfiguration",
+            "cloneTrackerConfiguration",
+            "createDefaultOptions",
+            "diffOptions",
+            "isTrackerConfigurationObject",
+            "normalizeOptions",
+            "normalizeRule",
+            "resolveTrackerOptions",
+            "validateOptions",
+            "validateRule",
+            "validateRules"
+          ]
+        },
+        "./advanced": {
+          "typeExports": ["TrackerDebugIntegration", "TrackerDebugTraceEntry"],
+          "valueExports": ["getTrackerDebugTrace"]
+        },
+        "./advanced/debug": {
+          "sameAs": "./advanced"
+        },
+        "./debug": {
+          "sameAs": "."
+        },
+        "./projection": {
+          "typeExports": [
+            "TrackerChromeView",
+            "TrackerElementView",
+            "TrackerItemView",
+            "TrackerMountView",
+            "TrackerProjectionCommit",
+            "TrackerProjectionDomain",
+            "TrackerProjectionIntegration",
+            "TrackerProjectionListener",
+            "TrackerProjectionMountRequest",
+            "TrackerProjectionState",
+            "TrackerProjectionUnsubscribe",
+            "TrackerSelectionView",
+            "TrackerViewportView"
+          ],
+          "valueExports": ["DATA_ATTRIBUTES", "createTrackerProjectionIntegration", "projectTrackerChromeView"]
+        },
+        "./projection/debug": {
+          "sameAs": "./projection"
+        },
+        "./renderer": {
+          "typeExports": [
+            "TrackerActivateItemOptions",
+            "TrackerClassNameConstants",
+            "TrackerClusterRenderRecord",
+            "TrackerCssVariableConstants",
+            "TrackerCssVariablePatch",
+            "TrackerCssVariablePatchValue",
+            "TrackerCssVariableValue",
+            "TrackerDataAttributeConstants",
+            "TrackerDiagnosticsSink",
+            "TrackerMarkerDefaultsSnapshot",
+            "TrackerMarkerRecord",
+            "TrackerMarkerRenderRecord",
+            "TrackerNormalizedMarkerAttributes",
+            "TrackerNormalizedMarkerOptions",
+            "TrackerNormalizedRule",
+            "TrackerReadonlyOptions",
+            "TrackerRenderRecord",
+            "TrackerRendererContext",
+            "TrackerRendererIntegration",
+            "TrackerRendererIntegrationMountRequest",
+            "TrackerRendererIntegrationOptions",
+            "TrackerRendererLike",
+            "TrackerRendererMountContext",
+            "TrackerRendererMountTarget",
+            "TrackerResolvedMarkerPresentation",
+            "TrackerRuleCssVariables",
+            "TrackerUserAttributeInputValue",
+            "TrackerUserAttributeValue",
+            "TrackerUserAttributes",
+            "TrackerViewportLayoutRecord"
+          ],
+          "valueExports": [
+            "CLASS_NAMES",
+            "CSS_VARIABLES",
+            "DATA_ATTRIBUTES",
+            "createCssValueMap",
+            "createTrackerRendererIntegration",
+            "getPrimaryMarkerRecord",
+            "isClusterRenderRecord",
+            "isMarkerRenderRecord",
+            "resolveMarkerPresentation",
+            "toCssValue",
+            "toPercent"
+          ]
+        },
+        "./renderer/debug": {
+          "sameAs": "./renderer"
+        }
+      },
+      "exports": {
+        ".": {
+          "types": "./dist/index.d.ts",
+          "development": "./dist/debug.mjs",
+          "production": "./dist/index.mjs",
+          "default": "./dist/index.mjs"
+        },
+        "./debug": {
+          "types": "./dist/index.d.ts",
+          "import": "./dist/debug.mjs",
+          "default": "./dist/debug.mjs"
+        },
+        "./projection": {
+          "types": "./dist/projection.d.ts",
+          "development": "./dist/projection.debug.mjs",
+          "production": "./dist/projection.mjs",
+          "default": "./dist/projection.mjs"
+        },
+        "./projection/debug": {
+          "types": "./dist/projection.d.ts",
+          "import": "./dist/projection.debug.mjs",
+          "default": "./dist/projection.debug.mjs"
+        },
+        "./advanced": {
+          "types": "./dist/advanced.d.ts",
+          "development": "./dist/advanced.debug.mjs",
+          "production": "./dist/advanced.mjs",
+          "default": "./dist/advanced.mjs"
+        },
+        "./advanced/debug": {
+          "types": "./dist/advanced.d.ts",
+          "import": "./dist/advanced.debug.mjs",
+          "default": "./dist/advanced.debug.mjs"
+        },
+        "./renderer": {
+          "types": "./dist/renderer.d.ts",
+          "development": "./dist/renderer.debug.mjs",
+          "production": "./dist/renderer.mjs",
+          "default": "./dist/renderer.mjs"
+        },
+        "./renderer/debug": {
+          "types": "./dist/renderer.d.ts",
+          "import": "./dist/renderer.debug.mjs",
+          "default": "./dist/renderer.debug.mjs"
+        },
+        "./style.css": "./dist/rxt-tracker.css",
+        "./package.json": "./package.json"
+      },
+      "metadata": {
+        "module": "./dist/index.mjs",
+        "types": "./dist/index.d.ts"
+      },
+      "name": "@rightxt/tracker-core"
+    },
+    "element": {
+      "entrypoints": {
+        ".": {
+          "typeExports": ["TrackerElement", "TrackerElementOptions", "default"],
+          "valueExports": ["TrackerElement", "default", "defineTrackerElement"]
+        }
+      },
+      "exports": {
+        ".": {
+          "types": "./dist/index.d.ts",
+          "import": "./dist/rxt-tracker-element.mjs",
+          "default": "./dist/rxt-tracker-element.mjs"
+        },
+        "./register": {
+          "types": "./dist/register.d.ts",
+          "import": "./dist/register.mjs",
+          "default": "./dist/register.mjs"
+        },
+        "./rxt-tracker-element.js": "./dist/rxt-tracker-element.js",
+        "./rxt-tracker-element.debug.js": "./dist/rxt-tracker-element.debug.js",
+        "./style.css": "./dist/rxt-tracker.css",
+        "./package.json": "./package.json"
+      },
+      "metadata": {
+        "browser": "./dist/rxt-tracker-element.mjs",
+        "jsdelivr": "./dist/rxt-tracker-element.js",
+        "main": "./dist/rxt-tracker-element.mjs",
+        "module": "./dist/rxt-tracker-element.mjs",
+        "style": "./dist/rxt-tracker.css",
+        "types": "./dist/index.d.ts",
+        "unpkg": "./dist/rxt-tracker-element.js"
+      },
+      "name": "@rightxt/tracker-element"
+    },
+    "react": {
+      "entrypoints": {
+        ".": {
+          "typeExports": ["TrackerHandle", "TrackerProps"],
+          "valueExports": ["Tracker", "default"]
+        }
+      },
+      "exports": {
+        ".": {
+          "types": "./dist/index.d.ts",
+          "import": "./dist/rxt-tracker-react.mjs",
+          "default": "./dist/rxt-tracker-react.mjs"
+        },
+        "./style.css": "./dist/rxt-tracker.css",
+        "./package.json": "./package.json"
+      },
+      "metadata": {
+        "module": "./dist/rxt-tracker-react.mjs",
+        "types": "./dist/index.d.ts"
+      },
+      "name": "@rightxt/tracker-react"
+    },
+    "vanilla": {
+      "entrypoints": {
+        ".": {
+          "typeExports": ["Tracker", "TrackerVanillaMountRequest", "default"],
+          "valueExports": ["Tracker", "default"]
+        }
+      },
+      "exports": {
+        ".": {
+          "types": "./dist/index.d.ts",
+          "import": "./dist/rxt-tracker-vanilla.mjs",
+          "default": "./dist/rxt-tracker-vanilla.mjs"
+        },
+        "./rxt-tracker-vanilla.js": "./dist/rxt-tracker-vanilla.js",
+        "./rxt-tracker-vanilla.debug.js": "./dist/rxt-tracker-vanilla.debug.js",
+        "./style.css": "./dist/rxt-tracker.css",
+        "./package.json": "./package.json"
+      },
+      "metadata": {
+        "browser": "./dist/rxt-tracker-vanilla.mjs",
+        "jsdelivr": "./dist/rxt-tracker-vanilla.js",
+        "main": "./dist/rxt-tracker-vanilla.mjs",
+        "module": "./dist/rxt-tracker-vanilla.mjs",
+        "style": "./dist/rxt-tracker.css",
+        "types": "./dist/index.d.ts",
+        "unpkg": "./dist/rxt-tracker-vanilla.js"
+      },
+      "name": "@rightxt/tracker-vanilla"
+    },
+    "vue": {
+      "entrypoints": {
+        ".": {
+          "typeExports": ["TrackerHandle", "TrackerProps"],
+          "valueExports": ["Tracker", "default"]
+        }
+      },
+      "exports": {
+        ".": {
+          "types": "./dist/index.d.ts",
+          "import": "./dist/rxt-tracker-vue.mjs",
+          "default": "./dist/rxt-tracker-vue.mjs"
+        },
+        "./style.css": "./dist/rxt-tracker.css",
+        "./package.json": "./package.json"
+      },
+      "metadata": {
+        "module": "./dist/rxt-tracker-vue.mjs",
+        "types": "./dist/index.d.ts"
+      },
+      "name": "@rightxt/tracker-vue"
+    }
+  }
+}

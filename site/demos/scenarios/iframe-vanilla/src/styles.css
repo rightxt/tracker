@@ -1,0 +1,240 @@
+.iframe-demo {
+  width: min(68rem, calc(100% - 3rem));
+}
+
+.iframe-demo__eyebrow,
+.context-model__realm-label {
+  margin: 0;
+  color: var(--demo-muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.context-model,
+.context-section {
+  padding-block: 1.75rem;
+  border-bottom: 1px solid var(--demo-border);
+}
+
+.context-model > h2,
+.context-section > h2,
+.integration-note h2 {
+  margin-block: 0 0.5rem;
+}
+
+.context-model__diagram {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 1rem;
+  align-items: stretch;
+  margin-top: 1.25rem;
+}
+
+.context-model__realm {
+  padding: 1.25rem;
+  border: 1px solid var(--demo-border);
+  border-radius: 0.5rem;
+  background: var(--demo-surface-muted);
+}
+
+.context-model__realm h3 {
+  margin-block: 0.35rem 0.75rem;
+}
+
+.integration-note p {
+  margin-bottom: 0;
+}
+
+.context-model__realm p:not(.context-model__realm-label) {
+  margin-block: 0.35rem;
+}
+
+.context-model__bridge {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  align-items: center;
+  justify-content: center;
+  color: var(--demo-muted);
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.context-model__bridge b {
+  color: var(--demo-accent);
+  font-size: 1.75rem;
+}
+
+.context-model__rule {
+  margin: 1rem 0 0;
+  padding: 1rem;
+  border-inline-start: 0.3rem solid var(--demo-accent);
+  background: var(--demo-surface-muted);
+}
+
+.context-table-wrapper {
+  margin-top: 1rem;
+  overflow-x: auto;
+}
+
+.context-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.context-table th,
+.context-table td {
+  padding: 0.75rem;
+  border: 1px solid var(--demo-border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.context-table thead {
+  background: var(--demo-surface-muted);
+}
+
+.context-table output {
+  font-weight: 650;
+}
+
+.context-notes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.context-notes p,
+.integration-note {
+  margin: 0;
+  padding: 1rem;
+  border: 1px solid var(--demo-border);
+  border-radius: 0.5rem;
+}
+
+.iframe-workbench__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(18rem, 0.75fr);
+  gap: 1.5rem;
+  margin-top: 1.25rem;
+}
+
+.iframe-workbench__grid h3 {
+  margin-top: 0;
+}
+
+.iframe-workbench__note {
+  color: var(--demo-muted);
+  font-size: 0.9rem;
+}
+
+.iframe-lifecycle-log {
+  max-height: 15rem;
+  margin-bottom: 0;
+  padding: 1rem 1rem 1rem 2.5rem;
+  overflow-y: auto;
+  border: 1px solid var(--demo-border);
+  border-radius: 0.5rem;
+  background: var(--demo-surface-muted);
+}
+
+.iframe-lifecycle-log li + li {
+  margin-top: 0.5rem;
+}
+
+.iframe-controls__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.iframe-workbench .demo-status {
+  margin-bottom: 0;
+}
+
+.activation-report {
+  margin-top: 1.5rem;
+  padding: 1.25rem;
+  border: 1px solid var(--demo-border);
+  border-radius: 0.5rem;
+  background: var(--demo-surface-muted);
+}
+
+.activation-report h3,
+.activation-report p {
+  margin-top: 0;
+}
+
+.activation-report dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem 1.5rem;
+  margin-bottom: 0;
+}
+
+.activation-report dl > div {
+  min-width: 0;
+}
+
+.activation-report dt {
+  color: var(--demo-muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.activation-report dd {
+  margin: 0.15rem 0 0;
+  overflow-wrap: anywhere;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+}
+
+.iframe-demo__frame {
+  display: block;
+  width: 100%;
+  height: 38rem;
+  margin-top: 1rem;
+  border: 1px solid var(--demo-border);
+  border-radius: 0.5rem;
+  background: #fff;
+}
+
+.integration-note {
+  margin-top: 1.75rem;
+  background: var(--demo-surface-muted);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+button:disabled:hover {
+  border-color: var(--demo-border);
+  background: var(--demo-surface);
+}
+
+@media (width <= 48rem) {
+  .iframe-demo {
+    width: min(100% - 2rem, 68rem);
+  }
+
+  .context-model__diagram,
+  .context-notes,
+  .iframe-workbench__grid,
+  .activation-report dl {
+    grid-template-columns: 1fr;
+  }
+
+  .context-model__bridge b {
+    transform: rotate(90deg);
+  }
+
+  .iframe-demo__frame {
+    height: 32rem;
+  }
+}

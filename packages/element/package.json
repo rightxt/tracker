@@ -1,0 +1,76 @@
+{
+  "author": "Igor Iakovlev",
+  "browser": "./dist/rxt-tracker-element.mjs",
+  "bugs": {
+    "url": "https://github.com/rightxt/tracker/issues"
+  },
+  "dependencies": {
+    "@rightxt/tracker-core": "workspace:*"
+  },
+  "description": "Custom Element (Web Component) for RXT Tracker.",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/rxt-tracker-element.mjs",
+      "default": "./dist/rxt-tracker-element.mjs"
+    },
+    "./package.json": "./package.json",
+    "./register": {
+      "types": "./dist/register.d.ts",
+      "import": "./dist/register.mjs",
+      "default": "./dist/register.mjs"
+    },
+    "./rxt-tracker-element.debug.js": "./dist/rxt-tracker-element.debug.js",
+    "./rxt-tracker-element.js": "./dist/rxt-tracker-element.js",
+    "./style.css": "./dist/rxt-tracker.css"
+  },
+  "files": [
+    "README.md",
+    "dist"
+  ],
+  "funding": [
+    "https://ko-fi.com/igorxut",
+    "https://pay.cloudtips.ru/p/d4378494"
+  ],
+  "homepage": "https://rightxt.github.io/tracker/",
+  "jsdelivr": "./dist/rxt-tracker-element.js",
+  "keywords": [
+    "custom-element",
+    "dom",
+    "light-dom",
+    "markers",
+    "minimap",
+    "overview-ruler",
+    "scroll",
+    "scroll-marker",
+    "scroll-navigation",
+    "scrollbar",
+    "tracker",
+    "web-component"
+  ],
+  "license": "MIT",
+  "main": "./dist/rxt-tracker-element.mjs",
+  "module": "./dist/rxt-tracker-element.mjs",
+  "name": "@rightxt/tracker-element",
+  "private": false,
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "directory": "packages/element",
+    "type": "git",
+    "url": "git+https://github.com/rightxt/tracker.git"
+  },
+  "sideEffects": [
+    "./dist/register.mjs",
+    "./dist/rxt-tracker-element.debug.js",
+    "./dist/rxt-tracker-element.js",
+    "./dist/rxt-tracker.css"
+  ],
+  "style": "./dist/rxt-tracker.css",
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "unpkg": "./dist/rxt-tracker-element.js",
+  "version": "1.0.0"
+}

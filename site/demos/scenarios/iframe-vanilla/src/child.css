@@ -1,0 +1,92 @@
+:root {
+  color: #212529;
+  color-scheme: light;
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+  background: #fff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #fff;
+}
+
+.child-banner {
+  padding: 1.25rem max(1.25rem, calc((100% - 44rem) / 2));
+  border-bottom: 1px solid #d8dee6;
+  background: #f8f9fa;
+}
+
+.child-banner__eyebrow,
+.frame-target__index {
+  margin: 0;
+  color: #5d6773;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.child-banner h1 {
+  margin-block: 0.25rem;
+  font-size: clamp(1.5rem, 5vw, 2rem);
+}
+
+.child-banner p:last-child {
+  margin-bottom: 0;
+}
+
+.child-content {
+  width: min(44rem, calc(100% - 2.5rem));
+  margin-inline: auto;
+  padding-block: 2rem 7rem;
+}
+
+.child-content > h2 {
+  margin-bottom: 0.25rem;
+}
+
+.child-content__intro {
+  margin-top: 0;
+  color: #5d6773;
+}
+
+.frame-target {
+  min-height: 22rem;
+  margin-block: 4rem 8rem;
+  padding: 1.5rem;
+  border: 1px solid #d8dee6;
+  border-inline-start: 0.35rem solid #198754;
+  border-radius: 0.5rem;
+  background: #f8f9fa;
+}
+
+.frame-target h3 {
+  margin-block: 0.35rem 0.75rem;
+  font-size: 1.4rem;
+}
+
+.frame-target:last-child {
+  margin-bottom: 0;
+}
+
+:focus-visible {
+  outline: 3px solid #075bcc;
+  outline-offset: 2px;
+}
+
+@media (width <= 32rem) {
+  .child-content {
+    width: min(100% - 1.5rem, 44rem);
+  }
+
+  .frame-target {
+    min-height: 18rem;
+    margin-block: 3rem 6rem;
+    padding: 1.1rem;
+  }
+}

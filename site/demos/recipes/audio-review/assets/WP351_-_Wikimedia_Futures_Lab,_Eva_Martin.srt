@@ -1,0 +1,599 @@
+1
+00:00:00,260 --> 00:00:09,420
+Welcome to Wikipediapodden and this series of interviews from the Wikimedia Futures Lab in Frankfurt, the last weekend of January 2026.
+
+2
+00:00:09,980 --> 00:00:19,640
+My name is Jan Ainali. Here we will meet participants, panelists and organizers to give you an idea of what happened at the lab.
+
+3
+00:00:20,540 --> 00:00:26,260
+The interviews took place over three days, with the first one recorded just before the opening.
+
+4
+00:00:26,260 --> 00:00:34,520
+This chat, however, is the last of those ten interviews and was recorded just after the closing session on the third day of the lab.
+
+5
+00:00:47,780 --> 00:00:54,800
+Hi, I'm Eva. I work at Wikimedia Deutschland, Wikimedia Germany, and I am part of the core team organizing the Wikimedia Futures Lab.
+
+6
+00:00:55,040 --> 00:00:55,800
+We're just
+
+7
+00:00:56,260 --> 00:00:58,740
+after the wrap-up of day three.
+
+8
+00:00:59,200 --> 00:01:04,280
+But maybe we should take... You should take us all the way to the beginning before we started going here.
+
+9
+00:01:04,880 --> 00:01:10,900
+What was the purpose of organizing this event? Because Wikimedia Deutschland is one of the initiators of it.
+
+10
+00:01:10,900 --> 00:01:16,260
+Exactly. Wow. So the event was so intense that now going back feels like it was an eternity.
+
+11
+00:01:17,020 --> 00:01:17,260
+Yes.
+
+12
+00:01:17,780 --> 00:01:24,160
+So basically the starting point of the event was that we realized that the world is changing around us.
+
+13
+00:01:24,520 --> 00:01:25,900
+We see a lot of new trends that impact
+
+14
+00:01:26,260 --> 00:01:29,740
+not only the Internet, but also the Wikimedia projects, right?
+
+15
+00:01:30,040 --> 00:01:38,260
+We see that the way people consume knowledge has changed radically, and we think that those topics need to be discussed in the movement.
+
+16
+00:01:38,680 --> 00:01:40,960
+And this was really the thinking behind it.
+
+17
+00:01:40,960 --> 00:01:52,080
+Wikimedia Deutschland organized in 2024 a Zukunftskongress, which was basically a local event with German community members talking about the future of the German language Wikipedia.
+
+18
+00:01:52,320 --> 00:01:55,440
+And we realized that those topics are global.
+
+19
+00:01:55,440 --> 00:01:56,240
+And we cannot just
+
+20
+00:01:56,240 --> 00:02:08,300
+provide some local answers, and this is why we really wanted to organize an international event, bringing together all the building blocks of our movement to have those conversations and share perspectives across the movement.
+
+21
+00:02:08,940 --> 00:02:12,380
+There was sort of like an application process to get to be here.
+
+22
+00:02:12,800 --> 00:02:13,120
+Correct.
+
+23
+00:02:13,260 --> 00:02:17,580
+How did you think about who you would invite in the end?
+
+24
+00:02:17,880 --> 00:02:20,780
+This is always one of the trickiest parts of every event, right?
+
+25
+00:02:20,780 --> 00:02:26,080
+So the starting point of the Wikimedia Futures Lab was really the fact that we realized we need to have a space where we can invite external experts.
+
+26
+00:02:26,080 --> 00:02:38,660
+We really wanted to make sure that we have people that do not usually belong to the Wikimedia movement come and share their perspectives, right?
+
+27
+00:02:38,660 --> 00:02:44,300
+So we started by thinking about those people and making sure that we would have enough seats for them.
+
+28
+00:02:44,740 --> 00:02:53,240
+And this is why we realized that we would have a limited number of seats for Wikimedians, which was a pain point for the organizers as well as for the applicants.
+
+29
+00:02:53,360 --> 00:02:54,640
+I definitely acknowledge this.
+
+30
+00:02:55,200 --> 00:02:55,920
+We received around
+
+31
+00:02:56,080 --> 00:02:57,820
+400 applications, I think.
+
+32
+00:02:58,020 --> 00:02:58,280
+Yes.
+
+33
+00:02:58,620 --> 00:03:00,940
+And we reviewed every single application.
+
+34
+00:03:01,120 --> 00:03:03,520
+I can promise we didn't even use AI for this.
+
+35
+00:03:03,600 --> 00:03:06,060
+It was really humans, us, going through it and reading it.
+
+36
+00:03:06,060 --> 00:03:12,560
+And what we were really looking for was the individual expertise that the participants brought.
+
+37
+00:03:12,940 --> 00:03:18,340
+So those topics require sometimes a very technical expertise, right?
+
+38
+00:03:18,660 --> 00:03:23,700
+For instance, or expertise in advocacy, expertise in internet regulations, right?
+
+39
+00:03:23,760 --> 00:03:26,060
+Those are some topics that
+
+40
+00:03:26,080 --> 00:03:33,980
+not everyone in the movement know about, and everyone might feel interested, but we really wanted to emphasize on individual expertise.
+
+41
+00:03:34,300 --> 00:03:38,160
+And also, obviously, like always, we looked at diversity and we tried.
+
+42
+00:03:38,380 --> 00:03:43,440
+And I know that not every community could be represented because we only had 60 seats, right?
+
+43
+00:03:43,840 --> 00:03:51,600
+But we tried to reach a mix and a balance between affiliates and volunteers, gender representation, geographical representation.
+
+44
+00:03:51,880 --> 00:03:54,680
+And this is how we came up with the participants for this Futures Lab.
+
+45
+00:03:54,880 --> 00:03:55,920
+There has been kind of a
+
+46
+00:03:55,920 --> 00:03:58,740
+journey for the participants during these three days.
+
+47
+00:03:58,980 --> 00:04:04,340
+Would you just give the listeners, like, a brief overview of what the participants have gone through?
+
+48
+00:04:04,340 --> 00:04:04,780
+Sure.
+
+49
+00:04:05,300 --> 00:04:10,500
+So what we said during the event was learn, think, do, right?
+
+50
+00:04:10,600 --> 00:04:12,360
+So day one, we learned a lot.
+
+51
+00:04:12,720 --> 00:04:18,600
+There were many panels, many keynotes, many inputs from external experts, but also internal experts.
+
+52
+00:04:18,780 --> 00:04:24,680
+We've shared a lot of data around the topics of content and AI and also consumers and reuse.
+
+53
+00:04:24,920 --> 00:04:25,800
+This was the main focus
+
+54
+00:04:25,920 --> 00:04:26,820
+of the first day.
+
+55
+00:04:27,200 --> 00:04:32,300
+And then we started already having some sense-making to enable participants to reflect on what they've heard
+
+56
+00:04:32,300 --> 00:04:35,840
+and share perspectives around how those trends translate in their context.
+
+57
+00:04:36,460 --> 00:04:41,060
+And then on the second day, we also had some inputs on the topic of contributors,
+
+58
+00:04:41,380 --> 00:04:43,600
+which was basically the third track of the event.
+
+59
+00:04:44,040 --> 00:04:48,060
+And then we moved away from the pure sense-making and the learning aspect,
+
+60
+00:04:48,220 --> 00:04:53,500
+and we started working on our hypotheses, right, which is the core of the Futures Lab,
+
+61
+00:04:53,500 --> 00:04:55,500
+to really try to have this scientific
+
+62
+00:04:55,920 --> 00:04:57,960
+mindset of experimenting new things.
+
+63
+00:04:58,460 --> 00:05:03,420
+And so participants started developing their hypotheses individually, and then they've paired,
+
+64
+00:05:03,560 --> 00:05:06,460
+and then they shared feedback, and so on, and they could iterate on them.
+
+65
+00:05:06,860 --> 00:05:10,840
+And on the last day, which was today, this was the doing day.
+
+66
+00:05:10,960 --> 00:05:15,920
+So that's the day where all those hypotheses translated into concrete experiments.
+
+67
+00:05:16,800 --> 00:05:22,100
+And I remember yesterday, we had around 110 hypotheses, I think, coming up of day two.
+
+68
+00:05:22,100 --> 00:05:25,780
+And so I sat there with my colleague for like two and a half hours in the evening,
+
+69
+00:05:25,920 --> 00:05:30,940
+clustering all the hypotheses, trying to find some common topics and common themes.
+
+70
+00:05:31,220 --> 00:05:33,680
+And what happened today is that the people look at those clusters,
+
+71
+00:05:33,900 --> 00:05:37,000
+they decided to focus on one particular aspect, and together,
+
+72
+00:05:37,000 --> 00:05:39,760
+they basically started working on experiments.
+
+73
+00:05:40,160 --> 00:05:43,860
+And those were shared now in the closing, and they will be logged on Meta.
+
+74
+00:05:44,100 --> 00:05:48,180
+So we have, how do we call it, an experiment log, an experiment tracker.
+
+75
+00:05:48,480 --> 00:05:54,400
+And we are also working on the interface of that page to try and optimise and make sure that we can also search content.
+
+76
+00:05:54,400 --> 00:05:58,680
+So that's not just going to be a data dump, but that basically it's going to be a searchable page.
+
+77
+00:05:59,320 --> 00:06:00,920
+And now it's basically the beginning, right?
+
+78
+00:06:01,000 --> 00:06:02,020
+Now it doesn't end.
+
+79
+00:06:02,120 --> 00:06:02,820
+It's the beginning.
+
+80
+00:06:02,980 --> 00:06:08,940
+We expect that everyone is going to leave the event with the energy required to actually start working on those experiments.
+
+81
+00:06:09,480 --> 00:06:12,100
+I'm going to ask you three more questions and divide.
+
+82
+00:06:12,380 --> 00:06:14,080
+So people are leaving here.
+
+83
+00:06:14,380 --> 00:06:17,380
+What do you hope that the participants will do when they come home?
+
+84
+00:06:17,700 --> 00:06:20,680
+Well, I hope that they will start working on their experiments, right?
+
+85
+00:06:20,700 --> 00:06:23,280
+And I hope that they would do so with an open mind.
+
+86
+00:06:23,280 --> 00:06:25,480
+I actually hope it's going to be fun for them.
+
+87
+00:06:25,480 --> 00:06:27,480
+I hope it's going to be fun.
+
+88
+00:06:27,600 --> 00:06:30,600
+I hope they will be talking with their peers about it.
+
+89
+00:06:30,660 --> 00:06:34,260
+They will be sharing with other people about what they've learned during this event.
+
+90
+00:06:34,780 --> 00:06:39,860
+And potentially they will be able to collaborate with others on the experiments they are working on.
+
+91
+00:06:40,160 --> 00:06:44,140
+And most importantly, I hope that they will be sharing it with the rest of us.
+
+92
+00:06:44,220 --> 00:06:47,880
+And this is why we've created this experiment log on Meta.
+
+93
+00:06:47,880 --> 00:06:55,140
+And we hope that this is going to be the central place where everyone can come and basically track the implementation of those experiments.
+
+94
+00:06:55,480 --> 00:06:57,760
+And that leads to my second question then.
+
+95
+00:06:58,000 --> 00:07:06,560
+So what do you hope that all the Wikimedians that couldn't be here, how do you hope that they would interact now?
+
+96
+00:07:06,680 --> 00:07:06,840
+Yeah.
+
+97
+00:07:07,400 --> 00:07:12,740
+So, well, first, as I said in my closing remarks, we are taking the Futures Lab on a world tour.
+
+98
+00:07:12,840 --> 00:07:15,320
+And when I say we, it can be every single one of us, right?
+
+99
+00:07:15,360 --> 00:07:16,420
+It's not just the organizers.
+
+100
+00:07:16,600 --> 00:07:18,000
+We do not own the process.
+
+101
+00:07:18,560 --> 00:07:23,420
+So my hope is that many communities around the world can also have those conversations, right?
+
+102
+00:07:23,420 --> 00:07:25,420
+That they can go through the same process.
+
+103
+00:07:25,860 --> 00:07:33,040
+And the process is looking at the world around us, having potentially people from outside the Wikimedia movement come, share perspectives,
+
+104
+00:07:33,320 --> 00:07:39,120
+and then really trying to think about hypotheses around the future and start just implementing things, right?
+
+105
+00:07:39,200 --> 00:07:39,740
+Small things.
+
+106
+00:07:39,780 --> 00:07:40,660
+It can be small scale.
+
+107
+00:07:41,020 --> 00:07:44,420
+It's just let's try and do things and see if it works, we continue.
+
+108
+00:07:44,540 --> 00:07:45,640
+And if it doesn't, we stop.
+
+109
+00:07:46,060 --> 00:07:51,740
+So this mindset is something that I hope, you know, can just now basically flourish out of this event.
+
+110
+00:07:52,160 --> 00:07:54,040
+So, yeah, that's basically what I hope.
+
+111
+00:07:54,180 --> 00:07:55,460
+So this is for all the people
+
+112
+00:07:55,480 --> 00:07:56,980
+who couldn't attend the lab.
+
+113
+00:07:57,360 --> 00:08:03,480
+And then I also hope that the participants that will now leave are going to, you know, they're just, they can now become ambassadors, right?
+
+114
+00:08:03,580 --> 00:08:08,940
+So I'm just hoping that they will be, you know, preaching to their peers and they will be basically sharing the word.
+
+115
+00:08:09,300 --> 00:08:13,400
+And I hope that, you know, in a few months, we're going to see tons of experiments.
+
+116
+00:08:13,780 --> 00:08:22,680
+And hopefully then this is going to actually create some change that is going to help the Wikimedia projects respond to all those big trends that we've talked about.
+
+117
+00:08:22,900 --> 00:08:25,460
+And you said you're not owning the process.
+
+118
+00:08:25,460 --> 00:08:29,480
+But I'm also guessing that you won't just be leaving us hanging now.
+
+119
+00:08:29,880 --> 00:08:33,460
+What's left for you to do to support this taking off?
+
+120
+00:08:33,620 --> 00:08:33,700
+Yeah.
+
+121
+00:08:34,240 --> 00:08:37,980
+So, well, the first thing I'm thinking about is just putting everything on Meta.
+
+122
+00:08:38,620 --> 00:08:39,020
+Okay.
+
+123
+00:08:39,620 --> 00:08:42,000
+You know, it's just I know how the movement works.
+
+124
+00:08:42,080 --> 00:08:42,580
+It's important.
+
+125
+00:08:42,740 --> 00:08:44,400
+You know, there is a desire of transparency.
+
+126
+00:08:44,680 --> 00:08:45,560
+People are quite curious.
+
+127
+00:08:45,660 --> 00:08:46,860
+They want to know what happened here.
+
+128
+00:08:47,260 --> 00:08:49,120
+We've also shared lots of data.
+
+129
+00:08:49,120 --> 00:08:58,240
+And I know that even participants have been asking us to, you know, put the slides on Meta and just basically make sure that all these data, all this research is available and can be shared freely.
+
+130
+00:08:58,380 --> 00:09:02,160
+So this is something that we will be, that I will be working on next week, basically.
+
+131
+00:09:02,520 --> 00:09:04,100
+So that's the first step, really.
+
+132
+00:09:04,260 --> 00:09:12,480
+I think that our mandate is to make sure that everything that has been shared here in Frankfurt can now be shared with the rest of the world or at least with the rest of the Wikimedia movement.
+
+133
+00:09:13,060 --> 00:09:18,500
+And then thinking a bit more long term, we want to follow up on those experiments, right?
+
+134
+00:09:19,140 --> 00:09:25,360
+And obviously there isn't a single person, maybe not even a single organization that would now be in a position of
+
+135
+00:09:25,460 --> 00:09:29,400
+being able to follow up on every single experiment and making sure those happens.
+
+136
+00:09:29,760 --> 00:09:42,060
+This is why I really hope that participants leave with a sense of ownership and that they also proactively make the decision of reporting back and reaching out to us if they need any type of support.
+
+137
+00:09:42,220 --> 00:09:43,820
+Obviously, we are always happy to help.
+
+138
+00:09:44,480 --> 00:09:45,800
+So, yeah, that's what I'm having in mind.
+
+139
+00:09:45,860 --> 00:09:49,700
+And that's why I feel like I'm hoping at least that this is going to be a collective effort.
+
+140
+00:09:50,220 --> 00:09:50,820
+That's great.
+
+141
+00:09:50,980 --> 00:09:54,820
+I hope you first get a chance to take a few days off after working all the weekend.
+
+142
+00:09:54,820 --> 00:09:58,320
+Thank you, Eva, for joining the podcast and for arranging this nice conference.
+
+143
+00:09:58,440 --> 00:10:00,700
+Thank you for joining the conference and for letting me talk.
+
+144
+00:10:01,400 --> 00:10:07,940
+This chat with Eva Martin from Wikimedia Deutschland was the last of the ten interviews from the Wikimedia Futures Lab.
+
+145
+00:10:07,940 --> 00:10:15,360
+You can find them all on Wikimedia Commons in both the Wikipediapodden and Wikimedia Futures Lab categories.
+
+146
+00:10:15,800 --> 00:10:20,200
+On Meta, you can find the experiments tracker and other documentation.
+
+147
+00:10:20,940 --> 00:10:24,240
+And slides and recordings from the talks and panels will also be there.
+
+148
+00:10:24,240 --> 00:10:25,440
+And on Wikimedia Commons.
+
+149
+00:10:26,080 --> 00:10:30,740
+If you want to follow this podcast in the future, head to wikipediapodden.se.
+
+150
+00:10:31,060 --> 00:10:33,440
+There is an option to only get the episodes in English.

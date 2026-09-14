@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Compare RXT Tracker source/query scope with scoped and document-wide mutation observation." />
+    <title>Mutation observation scope · RXT Tracker</title>
+    <script type="module" src="./src/main.js"></script>
+  </head>
+  <body>
+    <main class="demo-page observation-demo">
+      <header class="demo-page__intro">
+        <h1>Mutation observation scope</h1>
+        <p>Both Trackers query the same <code>#tracked-region</code> with the same rules. Only their MutationObserver target differs: the scoped Tracker uses the <code>sourceRoot</code> default, while the broad Tracker watches <code>document.body</code>.</p>
+      </header>
+
+      <section class="observation-explanation" aria-labelledby="observation-model-title">
+        <h2 id="observation-model-title">What this scenario demonstrates</h2>
+        <p><code>sourceRoot</code> controls where rules query for marker sources and, by default, where MutationObserver listens.</p>
+        <p><code>updates.mutation.targets</code> can change the second responsibility independently. Watching <code>document.body</code> does not expand marker queries beyond <code>#tracked-region</code>.</p>
+        <p class="observation-callout">The inserted experiment nodes intentionally match no Tracker rule. They exist only to demonstrate mutation invalidation scope.</p>
+      </section>
+
+      <section class="observation-matrix" aria-labelledby="expected-results-title">
+        <h2 id="expected-results-title">Expected behavior</h2>
+        <div class="observation-table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Mutation location</th>
+                <th scope="col">Scoped observer</th>
+                <th scope="col">Broad observer</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Inside <code>sourceRoot</code></th>
+                <td>Observes</td>
+                <td>Observes</td>
+              </tr>
+              <tr>
+                <th scope="row">Outside <code>sourceRoot</code>, inside <code>document.body</code></th>
+                <td>Does not observe</td>
+                <td>Observes</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <div class="observation-comparison">
+        <section class="observation-profile observation-profile--scoped" aria-labelledby="scoped-stats-title">
+          <h2 id="scoped-stats-title">Scoped observer</h2>
+          <p><strong>Query scope:</strong> <code>#tracked-region</code></p>
+          <p><strong>Mutation scope:</strong> <code>#tracked-region</code> through the default target</p>
+          <pre><code>tracker.mount({
+  sourceRoot: trackedRegion,
+});</code></pre>
+          <dl id="scoped-stats">
+            <dt>Mutation callbacks</dt>
+            <dd>
+              <input type="text" class="observation-counter observation-counter--primary" data-field="mutation" value="0" readonly tabindex="-1" aria-label="Scoped observer mutation callbacks" />
+            </dd>
+            <dt>Render requests</dt>
+            <dd>
+              <input type="text" class="observation-counter" data-field="requested" value="0" readonly tabindex="-1" aria-label="Scoped observer render requests" />
+            </dd>
+            <dt>Tracked markers</dt>
+            <dd>
+              <input type="text" class="observation-counter" data-field="markers" value="0" readonly tabindex="-1" aria-label="Scoped observer tracked markers" />
+            </dd>
+          </dl>
+        </section>
+
+        <section class="observation-profile observation-profile--broad" aria-labelledby="broad-stats-title">
+          <h2 id="broad-stats-title">Broad observer</h2>
+          <p><strong>Query scope:</strong> <code>#tracked-region</code></p>
+          <p><strong>Mutation scope:</strong> <code>document.body</code> through a custom target</p>
+          <pre><code>updates: {
+  mutation: {
+    targets: ({ document }) =&gt; [document.body],
+  },
+}</code></pre>
+          <dl id="broad-stats">
+            <dt>Mutation callbacks</dt>
+            <dd>
+              <input type="text" class="observation-counter observation-counter--primary" data-field="mutation" value="0" readonly tabindex="-1" aria-label="Broad observer mutation callbacks" />
+            </dd>
+            <dt>Render requests</dt>
+            <dd>
+              <input type="text" class="observation-counter" data-field="requested" value="0" readonly tabindex="-1" aria-label="Broad observer render requests" />
+            </dd>
+            <dt>Tracked markers</dt>
+            <dd>
+              <input type="text" class="observation-counter" data-field="markers" value="0" readonly tabindex="-1" aria-label="Broad observer tracked markers" />
+            </dd>
+          </dl>
+        </section>
+      </div>
+
+      <p class="observation-note"><strong>Why two counters?</strong> Mutation callbacks can be debounced or coalesced before rendering, so they do not promise a one-to-one relationship with render transactions.</p>
+
+      <section class="observation-experiment" aria-labelledby="experiment-title">
+        <h2 id="experiment-title">Experiment controls</h2>
+        <div class="observation-actions">
+          <fieldset>
+            <legend>Inside <code>sourceRoot</code></legend>
+            <p>Both observers should process this mutation.</p>
+            <div>
+              <button type="button" id="add-inside" aria-label="Add non-matching node inside sourceRoot">Add non-matching node</button>
+              <button type="button" id="remove-inside" aria-label="Remove last non-matching node inside sourceRoot" disabled>Remove node</button>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Outside <code>sourceRoot</code></legend>
+            <p>Only the broad observer should process this mutation.</p>
+            <div>
+              <button type="button" id="add-outside" aria-label="Add non-matching node outside sourceRoot">Add non-matching node</button>
+              <button type="button" id="remove-outside" aria-label="Remove last non-matching node outside sourceRoot" disabled>Remove node</button>
+            </div>
+          </fieldset>
+        </div>
+      </section>
+
+      <section id="tracked-region" class="observation-region" aria-labelledby="tracked-region-title">
+        <h2 id="tracked-region-title">Tracked region</h2>
+        <p>This is the shared source/query scope for both Trackers.</p>
+        <div id="inside-list" class="observation-experiment-list" aria-label="Non-matching nodes added inside sourceRoot"></div>
+        <div id="tracked-content"></div>
+      </section>
+
+      <section id="outside-region" class="observation-outside" aria-labelledby="outside-region-title">
+        <h2 id="outside-region-title">Outside the tracked region</h2>
+        <p>This region is outside <code>sourceRoot</code> but remains inside the broad observer's <code>document.body</code> target.</p>
+        <div id="outside-list" class="observation-experiment-list" aria-label="Non-matching nodes added outside sourceRoot"></div>
+      </section>
+    </main>
+  </body>
+</html>

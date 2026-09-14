@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Customize and export the public RXT Tracker CSS custom-property theme contract." />
+    <title>Theme Builder · RXT Tracker</title>
+    <link rel="stylesheet" href="./src/styles.css" />
+    <script type="module" src="./src/main.js"></script>
+  </head>
+  <body>
+    <main class="builder-shell">
+      <header class="builder-header">
+        <div>
+          <p class="builder-header__eyebrow">RXT Tracker</p>
+          <h1>Theme Builder</h1>
+          <p class="builder-header__description">Tune the public <code>--rxtt-*</code> theme contract against a deterministic visual mock, then export only your overrides.</p>
+        </div>
+        <div class="builder-header__actions">
+          <button class="button button--secondary" type="button" data-action="reset-all">Reset all</button>
+          <button class="button button--secondary" type="button" data-action="copy">Copy CSS</button>
+          <button class="button button--primary" type="button" data-action="export">Export CSS</button>
+        </div>
+      </header>
+
+      <section class="builder-workspace" aria-label="Theme editor">
+        <section class="preview-pane" aria-labelledby="preview-title">
+          <header class="pane-header">
+            <div>
+              <p class="pane-header__eyebrow">Preview</p>
+              <h2 id="preview-title">Visual states</h2>
+            </div>
+            <div class="preview-toolbar" aria-label="Preview layout controls">
+              <label>
+                <span>Orientation</span>
+                <select data-preview-control="orientation">
+                  <option value="vertical">Vertical</option>
+                  <option value="horizontal">Horizontal</option>
+                </select>
+              </label>
+              <label>
+                <span>Placement</span>
+                <select data-preview-control="placement">
+                  <option value="right">Right</option>
+                  <option value="left">Left</option>
+                </select>
+              </label>
+              <button class="button button--compact" type="button" data-action="focus-preview">Focus rail</button>
+            </div>
+          </header>
+
+          <div class="preview-frame" data-preview-frame>
+            <div class="mock-document" aria-hidden="true">
+              <div class="mock-document__topbar">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <div class="mock-document__content">
+                <p class="mock-document__kicker">Quarterly service review</p>
+                <h3>Operational overview</h3>
+                <p class="mock-document__lead">The preview is deliberately synthetic. It exposes track, viewport, marker, cluster, hover, selected, and focus states without mounting Tracker.</p>
+
+                <div class="mock-metric-row">
+                  <div><strong>99.96%</strong><span>Availability</span></div>
+                  <div><strong>184 ms</strong><span>Median latency</span></div>
+                  <div><strong>7</strong><span>Open issues</span></div>
+                </div>
+
+                <section class="mock-section">
+                  <span class="mock-section__label">Overview</span>
+                  <span class="mock-line mock-line--wide"></span>
+                  <span class="mock-line"></span>
+                  <span class="mock-line mock-line--short"></span>
+                </section>
+
+                <section class="mock-section mock-section--warning">
+                  <span class="mock-section__label">Capacity warning</span>
+                  <span class="mock-line mock-line--wide"></span>
+                  <span class="mock-line"></span>
+                </section>
+
+                <section class="mock-section">
+                  <span class="mock-section__label">Validation cluster</span>
+                  <span class="mock-line mock-line--wide"></span>
+                  <span class="mock-line mock-line--short"></span>
+                </section>
+              </div>
+            </div>
+
+            <div class="tracker-mock" data-preview-tracker data-rxtt-orientation="vertical" data-rxtt-placement="right" tabindex="0" aria-label="Synthetic RXT Tracker theme preview">
+              <div class="tracker-mock__viewport"></div>
+              <div class="tracker-mock__markers">
+                <button class="tracker-mock__marker" type="button" style="--mock-start: 13%; --mock-size: 2.2%" aria-label="Marker at 13%"></button>
+                <button class="tracker-mock__marker" type="button" style="--mock-start: 35%; --mock-size: 1.6%" aria-label="Marker at 35%"></button>
+                <button class="tracker-mock__marker" type="button" data-rxtt-selected="true" style="--mock-start: 54%; --mock-size: 2.8%" aria-label="Selected marker at 54%"></button>
+                <button class="tracker-mock__marker" type="button" data-rxtt-kind="cluster" data-rxtt-count="3" style="--mock-start: 71%; --mock-size: 7%" aria-label="Cluster of 3 markers at 71%"></button>
+                <button class="tracker-mock__marker" type="button" style="--mock-start: 91%; --mock-size: 1.8%" aria-label="Marker at 91%"></button>
+              </div>
+            </div>
+          </div>
+
+          <div class="preview-legend" aria-label="Preview state legend">
+            <span><i class="preview-legend__swatch preview-legend__swatch--viewport"></i>Viewport</span>
+            <span><i class="preview-legend__swatch preview-legend__swatch--marker"></i>Marker</span>
+            <span><i class="preview-legend__swatch preview-legend__swatch--cluster"></i>Cluster</span>
+            <span>Hover a marker or use <strong>Focus rail</strong> to compare hover, selected, and focus styles.</span>
+          </div>
+
+          <section class="export-preview" aria-labelledby="export-preview-title">
+            <header>
+              <div>
+                <p class="pane-header__eyebrow">Generated output</p>
+                <h3 id="export-preview-title">tracker-theme.css</h3>
+              </div>
+              <span class="modified-count" data-modified-count>0 overrides</span>
+            </header>
+            <pre><code data-css-output></code></pre>
+          </section>
+        </section>
+
+        <section class="controls-pane" aria-labelledby="controls-title">
+          <header class="pane-header controls-pane__header">
+            <div>
+              <p class="pane-header__eyebrow">Public contract</p>
+              <h2 id="controls-title">CSS variables</h2>
+            </div>
+            <label class="search-field">
+              <span class="visually-hidden">Filter CSS variables</span>
+              <input type="search" placeholder="Filter variables" data-variable-filter />
+            </label>
+          </header>
+          <div class="controls" data-controls></div>
+        </section>
+      </section>
+
+      <div class="toast" role="status" aria-live="polite" data-toast></div>
+    </main>
+  </body>
+</html>

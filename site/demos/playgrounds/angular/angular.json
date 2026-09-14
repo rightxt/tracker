@@ -1,0 +1,28 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": false
+  },
+  "projects": {
+    "playground-angular": {
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "baseHref": "./",
+            "browser": "src/main.ts",
+            "conditions": ["development"],
+            "index": "src/index.html",
+            "outputPath": "dist",
+            "styles": ["src/styles.css"],
+            "tsConfig": "tsconfig.app.json"
+          }
+        }
+      },
+      "projectType": "application",
+      "root": "",
+      "sourceRoot": "src"
+    }
+  },
+  "version": 1
+}

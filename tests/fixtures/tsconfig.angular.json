@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "noEmit": true,
+    "paths": {
+      "@rightxt/tracker-angular": ["../../packages/angular/dist/public-api.d.ts"],
+      "@rightxt/tracker-core": ["../../packages/core/dist/index.d.ts"],
+      "@rightxt/tracker-core/projection": ["../../packages/core/dist/projection.d.ts"]
+    }
+  },
+  "extends": "../../tsconfig.json",
+  "include": ["./angular-consumer.ts", "./angular-style.d.ts"]
+}

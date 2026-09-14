@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "@rightxt/tracker-vanilla": "latest",
+    "wavesurfer.js": "7.12.11"
+  },
+  "devDependencies": {
+    "vite": "8.2.2"
+  },
+  "name": "@rxt-tracker-demo/recipe-audio-review",
+  "private": true,
+  "scripts": {
+    "build": "vite build --base=./"
+  },
+  "type": "module",
+  "version": "0.1.0"
+}

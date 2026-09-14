@@ -1,0 +1,863 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="A long native-validation form recipe for RXT Tracker." />
+    <title>Extended program application · RXT Tracker</title>
+    <script type="module" src="./src/main.js"></script>
+  </head>
+  <body>
+    <header class="page-header">
+      <div class="page-header__inner">
+        <p class="eyebrow">Interactive component demo</p>
+        <h1>Extended professional program application</h1>
+        <p>A deliberately long form containing common native HTML controls, browser validation, and sections that appear or disappear based on checkbox state.</p>
+      </div>
+    </header>
+
+    <main class="page-main">
+      <aside class="demo-note"><strong>Demo only.</strong> No data is transmitted. Submit the form to exercise native browser validation. Fields marked with <abbr class="required-mark" title="required">*</abbr> are required.</aside>
+
+      <form id="application-form" action="#" method="post">
+        <section class="form-section" aria-labelledby="section-account">
+          <div class="section-heading">
+            <h2 id="section-account">1. Account details</h2>
+            <p>Choose the credentials and communication settings for your application.</p>
+          </div>
+
+          <div class="field-grid">
+            <div class="field">
+              <label for="email">Email address <abbr class="required-mark" title="required">*</abbr></label>
+              <input id="email" autocomplete="section-applicant email" name="email" type="email" maxlength="120" required />
+            </div>
+
+            <div class="field">
+              <label for="username">Username <abbr class="required-mark" title="required">*</abbr></label>
+              <input id="username" autocomplete="section-applicant username" name="username" type="text" minlength="4" maxlength="24" pattern="[A-Za-z][A-Za-z0-9_-]{3,23}" required />
+              <span class="hint">4–24 characters. Start with a letter; use letters, digits, underscores, or hyphens.</span>
+            </div>
+
+            <div class="field">
+              <label for="password">Password <abbr class="required-mark" title="required">*</abbr></label>
+              <input id="password" autocomplete="section-applicant new-password" name="password" type="password" minlength="10" maxlength="72" required />
+              <span class="hint">Use at least 10 characters.</span>
+            </div>
+
+            <div class="field">
+              <label for="preferred-contact">Preferred contact method <abbr class="required-mark" title="required">*</abbr></label>
+              <select id="preferred-contact" name="preferredContact" required>
+                <option value="">Select a method</option>
+                <option value="email">Email</option>
+                <option value="phone">Phone</option>
+                <option value="video">Video call</option>
+                <option value="messenger">Secure messenger</option>
+              </select>
+            </div>
+          </div>
+        </section>
+
+        <section class="form-section" aria-labelledby="section-personal">
+          <div class="section-heading">
+            <h2 id="section-personal">2. Personal information</h2>
+            <p>Provide the primary applicant’s legal and preferred identification details.</p>
+          </div>
+
+          <div class="field-grid">
+            <div class="field">
+              <label for="given-name">Given name <abbr class="required-mark" title="required">*</abbr></label>
+              <input id="given-name" autocomplete="section-applicant given-name" name="givenName" type="text" minlength="2" maxlength="60" required />
+            </div>
+
+            <div class="field">
+              <label for="family-name">Family name <abbr class="required-mark" title="required">*</abbr></label>
+              <input id="family-name" autocomplete="section-applicant family-name" name="familyName" type="text" minlength="2" maxlength="60" required />
+            </div>
+
+            <div class="field">
+              <label for="birth-date">Date of birth <abbr class="required-mark" title="required">*</abbr></label>
+              <input id="birth-date" autocomplete="section-applicant bday" name="birthDate" type="date" required />
+            </div>
+
+            <div class="field">
+              <label for="pronouns">Pronouns</label>
+              <input id="pronouns" name="pronouns" type="text" list="pronoun-options" maxlength="40" placeholder="Select or type" />
+              <datalist id="pronoun-options">
+                <option value="she/her"></option>
+                <option value="he/him"></option>
+                <option value="they/them"></option>
+                <option value="use my name"></option>
+              </datalist>
+            </div>
+
+            <div class="field">
+              <label for="citizenship">Citizenship <abbr class="required-mark" title="required">*</abbr></label>
+              <input id="citizenship" name="citizenship" type="text" maxlength="80" required />
+            </div>
+
+            <div class="field">
+              <label for="phone">Phone number <abbr class="required-mark" title="required">*</abbr></label>
+              <input id="phone" autocomplete="section-applicant tel" name="phone" type="tel" inputmode="tel" pattern="[0-9+() .-]{7,20}" maxlength="20" required />
+              <span class="hint">Use 7–20 digits and common separators.</span>
+            </div>
+
+            <div class="field">
+              <label for="personal-site">Personal website or portfolio</label>
+              <input id="personal-site" autocomplete="section-applicant url" name="personalSite" type="url" inputmode="url" placeholder="https://example.com" />
+            </div>
+
+            <fieldset class="field choice-group">
+              <legend class="field-label">Legal gender marker <abbr class="required-mark" title="required">*</abbr></legend>
+              <div class="choice-list choice-list--columns">
+                <div class="choice">
+                  <input id="gender-f" name="genderMarker" type="radio" value="F" required />
+                  <label for="gender-f">F</label>
+                </div>
+                <div class="choice">
+                  <input id="gender-m" name="genderMarker" type="radio" value="M" required />
+                  <label for="gender-m">M</label>
+                </div>
+                <div class="choice">
+                  <input id="gender-x" name="genderMarker" type="radio" value="X" required />
+                  <label for="gender-x">X / non-binary marker</label>
+                </div>
+                <div class="choice">
+                  <input id="gender-undisclosed" name="genderMarker" type="radio" value="undisclosed" required />
+                  <label for="gender-undisclosed">Prefer not to disclose</label>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </section>
+
+        <section class="form-section" aria-labelledby="section-address">
+          <div class="section-heading">
+            <h2 id="section-address">3. Residential address</h2>
+            <p>Enter the address where you currently live.</p>
+          </div>
+
+          <div class="field-grid">
+            <div class="field">
+              <label for="address-line-1">Street address <abbr class="required-mark" title="required">*</abbr></label>
+              <input id="address-line-1" autocomplete="section-home address-line1" name="addressLine1" type="text" maxlength="120" required />
+            </div>
+
+            <div class="field">
+              <label for="address-line-2">Apartment, suite, or unit</label>
+              <input id="address-line-2" autocomplete="section-home address-line2" name="addressLine2" type="text" maxlength="80" />
+            </div>
+
+            <div class="field">
+              <label for="city">City <abbr class="required-mark" title="required">*</abbr></label>
+              <input id="city" autocomplete="section-home address-level2" name="city" type="text" maxlength="80" required />
+            </div>
+
+            <div class="field">
+              <label for="region">State, province, or region <abbr class="required-mark" title="required">*</abbr></label>
+              <input id="region" autocomplete="section-home address-level1" name="region" type="text" maxlength="80" required />
+            </div>
+
+            <div class="field">
+              <label for="postal-code">Postal code <abbr class="required-mark" title="required">*</abbr></label>
+              <input id="postal-code" autocomplete="section-home postal-code" name="postalCode" type="text" minlength="3" maxlength="12" pattern="[A-Za-z0-9][A-Za-z0-9 -]{1,10}[A-Za-z0-9]" required />
+            </div>
+
+            <div class="field">
+              <label for="country">Country <abbr class="required-mark" title="required">*</abbr></label>
+              <select id="country" autocomplete="section-home country-name" name="country" required>
+                <option value="">Select a country</option>
+                <option>Australia</option>
+                <option>Canada</option>
+                <option>France</option>
+                <option>Georgia</option>
+                <option>Germany</option>
+                <option>Japan</option>
+                <option>Netherlands</option>
+                <option>Spain</option>
+                <option>United Kingdom</option>
+                <option>United States</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <div class="toggle-row">
+                <input id="mailing-different" name="mailingDifferent" type="checkbox" aria-controls="mailing-address-section" aria-expanded="false" />
+                <label for="mailing-different">
+                  My mailing address is different
+                  <small>Show an additional address section for correspondence.</small>
+                </label>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="mailing-address-section" class="form-section" aria-labelledby="section-mailing" hidden>
+          <div class="section-heading">
+            <h2 id="section-mailing">4. Mailing address</h2>
+            <p>This section is included only when the mailing address differs from the residential address.</p>
+          </div>
+
+          <fieldset disabled>
+            <div class="field-grid">
+              <div class="field">
+                <label for="mailing-line-1">Street address <abbr class="required-mark" title="required">*</abbr></label>
+                <input id="mailing-line-1" autocomplete="section-mailing address-line1" name="mailingLine1" type="text" maxlength="120" required />
+              </div>
+
+              <div class="field">
+                <label for="mailing-city">City <abbr class="required-mark" title="required">*</abbr></label>
+                <input id="mailing-city" autocomplete="section-mailing address-level2" name="mailingCity" type="text" maxlength="80" required />
+              </div>
+
+              <div class="field">
+                <label for="mailing-region">State, province, or region <abbr class="required-mark" title="required">*</abbr></label>
+                <input id="mailing-region" autocomplete="section-mailing address-level1" name="mailingRegion" type="text" maxlength="80" required />
+              </div>
+
+              <div class="field">
+                <label for="mailing-postal">Postal code <abbr class="required-mark" title="required">*</abbr></label>
+                <input id="mailing-postal" autocomplete="section-mailing postal-code" name="mailingPostal" type="text" minlength="3" maxlength="12" required />
+              </div>
+
+              <div class="field">
+                <label for="mailing-country">Country <abbr class="required-mark" title="required">*</abbr></label>
+                <input id="mailing-country" autocomplete="section-mailing country-name" name="mailingCountry" type="text" maxlength="80" required />
+              </div>
+            </div>
+          </fieldset>
+        </section>
+
+        <section class="form-section" aria-labelledby="section-organization">
+          <div class="section-heading">
+            <h2 id="section-organization">5. Organization and employment</h2>
+            <p>Tell us whether you are applying independently or through an organization.</p>
+          </div>
+
+          <div class="field-grid">
+            <div class="field">
+              <div class="toggle-row">
+                <input id="represents-organization" name="representsOrganization" type="checkbox" aria-controls="organization-details" aria-expanded="false" />
+                <label for="represents-organization">
+                  I represent a company, nonprofit, or public institution
+                  <small>Show organization and invoicing identity fields.</small>
+                </label>
+              </div>
+            </div>
+
+            <div class="field">
+              <div class="toggle-row">
+                <input id="currently-employed" name="currentlyEmployed" type="checkbox" aria-controls="employment-details" aria-expanded="false" />
+                <label for="currently-employed">
+                  I am currently employed
+                  <small>Show current role, employer, and notice-period fields.</small>
+                </label>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="organization-details" class="form-section" aria-labelledby="section-organization-details" hidden>
+          <div class="section-heading">
+            <h2 id="section-organization-details">6. Organization details</h2>
+            <p>Enter the legal and public-facing details of the represented organization.</p>
+          </div>
+
+          <fieldset disabled>
+            <div class="field-grid">
+              <div class="field">
+                <label for="organization-name">Legal organization name <abbr class="required-mark" title="required">*</abbr></label>
+                <input id="organization-name" autocomplete="section-organization organization" name="organizationName" type="text" maxlength="120" required />
+              </div>
+
+              <div class="field">
+                <label for="organization-size">Number of employees <abbr class="required-mark" title="required">*</abbr></label>
+                <input id="organization-size" name="organizationSize" type="number" min="1" max="500000" step="1" required />
+              </div>
+
+              <div class="field">
+                <label for="organization-type">Organization type <abbr class="required-mark" title="required">*</abbr></label>
+                <select id="organization-type" name="organizationType" required>
+                  <option value="">Select a type</option>
+                  <option value="company">Private company</option>
+                  <option value="nonprofit">Nonprofit organization</option>
+                  <option value="government">Government agency</option>
+                  <option value="education">Educational institution</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="organization-url">Organization website <abbr class="required-mark" title="required">*</abbr></label>
+                <input id="organization-url" autocomplete="section-organization url" name="organizationUrl" type="url" placeholder="https://example.org" required />
+              </div>
+
+              <div class="field">
+                <label for="registration-number">Registration or tax number <abbr class="required-mark" title="required">*</abbr></label>
+                <input id="registration-number" name="registrationNumber" type="text" minlength="4" maxlength="32" pattern="[A-Za-z0-9./ -]{4,32}" required />
+              </div>
+
+              <div class="field">
+                <label for="incorporation-month">Month established</label>
+                <input id="incorporation-month" name="incorporationMonth" type="month" />
+              </div>
+            </div>
+          </fieldset>
+        </section>
+
+        <section id="employment-details" class="form-section" aria-labelledby="section-employment-details" hidden>
+          <div class="section-heading">
+            <h2 id="section-employment-details">7. Current employment</h2>
+            <p>Provide a concise overview of your present role.</p>
+          </div>
+
+          <fieldset disabled>
+            <div class="field-grid">
+              <div class="field">
+                <label for="employer-name">Employer <abbr class="required-mark" title="required">*</abbr></label>
+                <input id="employer-name" autocomplete="section-employment organization" name="employerName" type="text" maxlength="120" required />
+              </div>
+
+              <div class="field">
+                <label for="job-title">Job title <abbr class="required-mark" title="required">*</abbr></label>
+                <input id="job-title" autocomplete="section-employment organization-title" name="jobTitle" type="text" maxlength="100" required />
+              </div>
+
+              <div class="field">
+                <label for="employment-start">Employment start date <abbr class="required-mark" title="required">*</abbr></label>
+                <input id="employment-start" name="employmentStart" type="date" required />
+              </div>
+
+              <div class="field">
+                <label for="weekly-hours">Hours per week <abbr class="required-mark" title="required">*</abbr></label>
+                <input id="weekly-hours" name="weeklyHours" type="number" min="1" max="100" step="0.5" required />
+              </div>
+
+              <div class="field">
+                <label for="notice-period">Notice period (weeks) <abbr class="required-mark" title="required">*</abbr></label>
+                <input id="notice-period" name="noticePeriod" type="number" min="0" max="52" step="1" required />
+              </div>
+
+              <div class="field">
+                <label for="role-summary">Current responsibilities <abbr class="required-mark" title="required">*</abbr></label>
+                <textarea id="role-summary" name="roleSummary" minlength="80" maxlength="800" required></textarea>
+                <span class="hint">80–800 characters.</span>
+              </div>
+            </div>
+          </fieldset>
+        </section>
+
+        <section class="form-section" aria-labelledby="section-program">
+          <div class="section-heading">
+            <h2 id="section-program">8. Program preferences</h2>
+            <p>Choose a track, schedule, and participation format.</p>
+          </div>
+
+          <div class="field-grid">
+            <div class="field">
+              <label for="program-track">Program track <abbr class="required-mark" title="required">*</abbr></label>
+              <select id="program-track" name="programTrack" required>
+                <option value="">Select a track</option>
+                <optgroup label="Engineering">
+                  <option value="frontend">Frontend systems</option>
+                  <option value="backend">Backend systems</option>
+                  <option value="platform">Platform engineering</option>
+                </optgroup>
+                <optgroup label="Product">
+                  <option value="product-management">Product management</option>
+                  <option value="research">User research</option>
+                  <option value="design">Product design</option>
+                </optgroup>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="cohort-month">Preferred cohort <abbr class="required-mark" title="required">*</abbr></label>
+              <input id="cohort-month" name="cohortMonth" type="month" required />
+            </div>
+
+            <div class="field">
+              <label for="start-week">Preferred start week</label>
+              <input id="start-week" name="startWeek" type="week" />
+            </div>
+
+            <div class="field">
+              <label for="session-time">Preferred session time <abbr class="required-mark" title="required">*</abbr></label>
+              <input id="session-time" name="sessionTime" type="time" min="08:00" max="20:00" step="900" required />
+            </div>
+
+            <div class="field">
+              <label for="hours-commitment">Weekly commitment <abbr class="required-mark" title="required">*</abbr></label>
+              <select id="hours-commitment" name="hoursCommitment" required>
+                <option value="">Select hours</option>
+                <option value="5">Up to 5 hours</option>
+                <option value="10">6–10 hours</option>
+                <option value="15">11–15 hours</option>
+                <option value="20">16–20 hours</option>
+                <option value="20-plus">More than 20 hours</option>
+              </select>
+            </div>
+
+            <fieldset class="field choice-group">
+              <legend class="field-label">Participation format <abbr class="required-mark" title="required">*</abbr></legend>
+              <div class="choice-list choice-list--columns">
+                <div class="choice">
+                  <input id="format-online" name="participationFormat" type="radio" value="online" required />
+                  <label for="format-online">Online</label>
+                </div>
+                <div class="choice">
+                  <input id="format-hybrid" name="participationFormat" type="radio" value="hybrid" required />
+                  <label for="format-hybrid">Hybrid</label>
+                </div>
+                <div class="choice">
+                  <input id="format-onsite" name="participationFormat" type="radio" value="onsite" required />
+                  <label for="format-onsite">On-site</label>
+                </div>
+                <div class="choice">
+                  <input id="format-flexible" name="participationFormat" type="radio" value="flexible" required />
+                  <label for="format-flexible">No preference</label>
+                </div>
+              </div>
+            </fieldset>
+
+            <div class="field">
+              <label for="intensity">Preferred learning intensity: <output id="intensity-output" class="range-output" for="intensity">5</output>/10</label>
+              <input id="intensity" name="intensity" type="range" min="1" max="10" step="1" value="5" />
+            </div>
+
+            <div class="field">
+              <label for="badge-color">Preferred badge accent</label>
+              <input id="badge-color" name="badgeColor" type="color" value="#2457d6" />
+            </div>
+
+            <div class="field">
+              <label for="timezone">Primary time zone <abbr class="required-mark" title="required">*</abbr></label>
+              <input id="timezone" name="timezone" type="text" list="timezone-options" placeholder="Europe/Tbilisi" required />
+              <datalist id="timezone-options">
+                <option value="America/Los_Angeles"></option>
+                <option value="America/New_York"></option>
+                <option value="Europe/London"></option>
+                <option value="Europe/Berlin"></option>
+                <option value="Europe/Tbilisi"></option>
+                <option value="Asia/Tokyo"></option>
+              </datalist>
+            </div>
+          </div>
+        </section>
+
+        <section class="form-section" aria-labelledby="section-background">
+          <div class="section-heading">
+            <h2 id="section-background">9. Background and experience</h2>
+            <p>Summarize your prior experience and select the areas you already know.</p>
+          </div>
+
+          <div class="field-grid">
+            <div class="field">
+              <label for="experience-years">Relevant experience (years) <abbr class="required-mark" title="required">*</abbr></label>
+              <input id="experience-years" name="experienceYears" type="number" min="0" max="60" step="0.5" required />
+            </div>
+
+            <div class="field">
+              <label for="projects-count">Completed projects <abbr class="required-mark" title="required">*</abbr></label>
+              <input id="projects-count" name="projectsCount" type="number" min="0" max="9999" step="1" required />
+            </div>
+
+            <div class="field">
+              <label for="english-level">English proficiency <abbr class="required-mark" title="required">*</abbr></label>
+              <select id="english-level" name="englishLevel" required>
+                <option value="">Select a level</option>
+                <option value="A1">A1 — Beginner</option>
+                <option value="A2">A2 — Elementary</option>
+                <option value="B1">B1 — Intermediate</option>
+                <option value="B2">B2 — Upper intermediate</option>
+                <option value="C1">C1 — Advanced</option>
+                <option value="C2">C2 — Proficient</option>
+              </select>
+            </div>
+
+            <fieldset class="field choice-group">
+              <legend class="field-label">Existing skills</legend>
+              <div class="choice-list choice-list--columns">
+                <div class="choice">
+                  <input id="skill-html" name="skills" type="checkbox" value="html" />
+                  <label for="skill-html">HTML and accessibility</label>
+                </div>
+                <div class="choice">
+                  <input id="skill-css" name="skills" type="checkbox" value="css" />
+                  <label for="skill-css">CSS and responsive layout</label>
+                </div>
+                <div class="choice">
+                  <input id="skill-js" name="skills" type="checkbox" value="javascript" />
+                  <label for="skill-js">JavaScript</label>
+                </div>
+                <div class="choice">
+                  <input id="skill-testing" name="skills" type="checkbox" value="testing" />
+                  <label for="skill-testing">Automated testing</label>
+                </div>
+                <div class="choice">
+                  <input id="skill-design" name="skills" type="checkbox" value="design" />
+                  <label for="skill-design">Interface design</label>
+                </div>
+                <div class="choice">
+                  <input id="skill-leadership" name="skills" type="checkbox" value="leadership" />
+                  <label for="skill-leadership">Technical leadership</label>
+                </div>
+              </div>
+            </fieldset>
+
+            <div class="field">
+              <label for="motivation">Why are you applying? <abbr class="required-mark" title="required">*</abbr></label>
+              <textarea id="motivation" name="motivation" minlength="200" maxlength="1500" required></textarea>
+              <span class="hint">200–1,500 characters.</span>
+            </div>
+
+            <div class="field">
+              <label for="project-example">Describe one relevant project <abbr class="required-mark" title="required">*</abbr></label>
+              <textarea id="project-example" name="projectExample" minlength="150" maxlength="1200" required></textarea>
+              <span class="hint">Explain the goal, your role, constraints, and outcome.</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="form-section" aria-labelledby="section-logistics">
+          <div class="section-heading">
+            <h2 id="section-logistics">10. Travel and attendance logistics</h2>
+            <p>Complete these fields even if you prefer remote participation.</p>
+          </div>
+
+          <div class="field-grid">
+            <div class="field">
+              <label for="arrival-date">Earliest arrival date <abbr class="required-mark" title="required">*</abbr></label>
+              <input id="arrival-date" name="arrivalDate" type="date" required />
+            </div>
+
+            <div class="field">
+              <label for="departure-date">Latest departure date <abbr class="required-mark" title="required">*</abbr></label>
+              <input id="departure-date" name="departureDate" type="date" required />
+            </div>
+
+            <div class="field">
+              <label for="travel-budget">Maximum travel budget (USD)</label>
+              <input id="travel-budget" name="travelBudget" type="number" min="0" max="25000" step="50" inputmode="decimal" />
+            </div>
+
+            <div class="field">
+              <label for="nearest-airport">Nearest airport or rail station</label>
+              <input id="nearest-airport" name="nearestAirport" type="search" maxlength="100" placeholder="Search-style input" />
+            </div>
+
+            <div class="field">
+              <div class="toggle-row">
+                <input id="has-companion" name="hasCompanion" type="checkbox" aria-controls="companion-details" aria-expanded="false" />
+                <label for="has-companion">
+                  I may attend with a companion
+                  <small>Show companion identity and relationship fields.</small>
+                </label>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="companion-details" class="form-section" aria-labelledby="section-companion" hidden>
+          <div class="section-heading">
+            <h2 id="section-companion">11. Companion details</h2>
+            <p>Provide the details needed for venue access and travel planning.</p>
+          </div>
+
+          <fieldset disabled>
+            <div class="field-grid">
+              <div class="field">
+                <label for="companion-name">Full name <abbr class="required-mark" title="required">*</abbr></label>
+                <input id="companion-name" autocomplete="section-companion name" name="companionName" type="text" minlength="3" maxlength="120" required />
+              </div>
+
+              <div class="field">
+                <label for="companion-relation">Relationship <abbr class="required-mark" title="required">*</abbr></label>
+                <select id="companion-relation" name="companionRelation" required>
+                  <option value="">Select a relationship</option>
+                  <option value="partner">Partner or spouse</option>
+                  <option value="colleague">Colleague</option>
+                  <option value="assistant">Assistant</option>
+                  <option value="family">Family member</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="companion-email">Email address <abbr class="required-mark" title="required">*</abbr></label>
+                <input id="companion-email" autocomplete="section-companion email" name="companionEmail" type="email" required />
+              </div>
+
+              <div class="field">
+                <label for="companion-birth-date">Date of birth</label>
+                <input id="companion-birth-date" autocomplete="section-companion bday" name="companionBirthDate" type="date" />
+              </div>
+            </div>
+          </fieldset>
+        </section>
+
+        <section class="form-section" aria-labelledby="section-accessibility">
+          <div class="section-heading">
+            <h2 id="section-accessibility">12. Accessibility and dietary needs</h2>
+            <p>Optional information used to make the program and venue accessible.</p>
+          </div>
+
+          <div class="field-grid">
+            <div class="field">
+              <div class="toggle-row">
+                <input id="needs-accommodation" name="needsAccommodation" type="checkbox" aria-controls="accommodation-details" aria-expanded="false" />
+                <label for="needs-accommodation">
+                  I need accessibility accommodations
+                  <small>Show a free-text field and preferred contact time.</small>
+                </label>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="dietary-preference">Dietary preference</label>
+              <select id="dietary-preference" name="dietaryPreference">
+                <option value="">No preference</option>
+                <option value="vegetarian">Vegetarian</option>
+                <option value="vegan">Vegan</option>
+                <option value="halal">Halal</option>
+                <option value="kosher">Kosher</option>
+                <option value="gluten-free">Gluten-free</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="allergies">Food allergies</label>
+              <input id="allergies" name="allergies" type="text" maxlength="200" placeholder="List allergens or enter None" />
+            </div>
+          </div>
+        </section>
+
+        <section id="accommodation-details" class="form-section" aria-labelledby="section-accommodation-details" hidden>
+          <div class="section-heading">
+            <h2 id="section-accommodation-details">13. Accommodation details</h2>
+            <p>Describe the adjustments needed for sessions, travel, or venue access.</p>
+          </div>
+
+          <fieldset disabled>
+            <div class="field-grid">
+              <div class="field">
+                <label for="accommodation-description">Requested accommodations <abbr class="required-mark" title="required">*</abbr></label>
+                <textarea id="accommodation-description" name="accommodationDescription" minlength="30" maxlength="1000" required></textarea>
+              </div>
+
+              <div class="field">
+                <label for="accommodation-contact-time">Best time to contact you</label>
+                <input id="accommodation-contact-time" name="accommodationContactTime" type="time" min="08:00" max="20:00" step="900" />
+              </div>
+
+              <div class="field">
+                <label for="accommodation-document">Supporting document</label>
+                <input id="accommodation-document" name="accommodationDocument" type="file" accept=".pdf,.doc,.docx,image/*" />
+                <span class="hint">Accepted formats are filtered by the browser; no file is uploaded in this demo.</span>
+              </div>
+            </div>
+          </fieldset>
+        </section>
+
+        <section class="form-section" aria-labelledby="section-finance">
+          <div class="section-heading">
+            <h2 id="section-finance">14. Payment and funding</h2>
+            <p>Choose how the program fee would be covered.</p>
+          </div>
+
+          <div class="field-grid">
+            <fieldset class="field choice-group">
+              <legend class="field-label">Funding source <abbr class="required-mark" title="required">*</abbr></legend>
+              <div class="choice-list choice-list--columns">
+                <div class="choice">
+                  <input id="funding-self" name="fundingSource" type="radio" value="self" required />
+                  <label for="funding-self">Self-funded</label>
+                </div>
+                <div class="choice">
+                  <input id="funding-employer" name="fundingSource" type="radio" value="employer" required />
+                  <label for="funding-employer">Employer-funded</label>
+                </div>
+                <div class="choice">
+                  <input id="funding-scholarship" name="fundingSource" type="radio" value="scholarship" required />
+                  <label for="funding-scholarship">Scholarship requested</label>
+                </div>
+                <div class="choice">
+                  <input id="funding-other" name="fundingSource" type="radio" value="other" required />
+                  <label for="funding-other">Other source</label>
+                </div>
+              </div>
+            </fieldset>
+
+            <div class="field">
+              <label for="budget-range">Available budget (USD) <abbr class="required-mark" title="required">*</abbr></label>
+              <input id="budget-range" name="budgetRange" type="number" min="0" max="100000" step="100" required />
+            </div>
+
+            <div class="field">
+              <label for="purchase-deadline">Payment decision deadline</label>
+              <input id="purchase-deadline" name="purchaseDeadline" type="date" />
+            </div>
+
+            <div class="field">
+              <div class="toggle-row">
+                <input id="invoice-required" name="invoiceRequired" type="checkbox" aria-controls="invoice-details" aria-expanded="false" />
+                <label for="invoice-required">
+                  I require a formal invoice
+                  <small>Show billing contact, purchase order, and invoice address fields.</small>
+                </label>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="invoice-details" class="form-section" aria-labelledby="section-invoice" hidden>
+          <div class="section-heading">
+            <h2 id="section-invoice">15. Invoice details</h2>
+            <p>Enter the information that should appear on the invoice.</p>
+          </div>
+
+          <fieldset disabled>
+            <div class="field-grid">
+              <div class="field">
+                <label for="billing-contact">Billing contact name <abbr class="required-mark" title="required">*</abbr></label>
+                <input id="billing-contact" autocomplete="section-billing name" name="billingContact" type="text" maxlength="120" required />
+              </div>
+
+              <div class="field">
+                <label for="billing-email">Billing email <abbr class="required-mark" title="required">*</abbr></label>
+                <input id="billing-email" autocomplete="section-billing email" name="billingEmail" type="email" required />
+              </div>
+
+              <div class="field">
+                <label for="purchase-order">Purchase order number</label>
+                <input id="purchase-order" name="purchaseOrder" type="text" maxlength="40" pattern="[A-Za-z0-9./_-]{2,40}" />
+              </div>
+
+              <div class="field">
+                <label for="billing-tax-number">Tax or VAT number</label>
+                <input id="billing-tax-number" name="billingTaxNumber" type="text" maxlength="40" />
+              </div>
+
+              <div class="field">
+                <label for="billing-address">Invoice address <abbr class="required-mark" title="required">*</abbr></label>
+                <textarea id="billing-address" autocomplete="section-billing street-address" name="billingAddress" minlength="20" maxlength="400" required></textarea>
+              </div>
+            </div>
+          </fieldset>
+        </section>
+
+        <section class="form-section" aria-labelledby="section-emergency">
+          <div class="section-heading">
+            <h2 id="section-emergency">16. Emergency contact</h2>
+            <p>This person will be contacted only in a genuine emergency during in-person activities.</p>
+          </div>
+
+          <div class="field-grid">
+            <div class="field">
+              <label for="emergency-name">Full name <abbr class="required-mark" title="required">*</abbr></label>
+              <input id="emergency-name" autocomplete="section-emergency name" name="emergencyName" type="text" minlength="3" maxlength="120" required />
+            </div>
+
+            <div class="field">
+              <label for="emergency-relation">Relationship <abbr class="required-mark" title="required">*</abbr></label>
+              <input id="emergency-relation" name="emergencyRelation" type="text" maxlength="80" required />
+            </div>
+
+            <div class="field">
+              <label for="emergency-phone">Phone number <abbr class="required-mark" title="required">*</abbr></label>
+              <input id="emergency-phone" autocomplete="section-emergency tel" name="emergencyPhone" type="tel" pattern="[0-9+() .-]{7,20}" maxlength="20" required />
+            </div>
+
+            <div class="field">
+              <label for="emergency-email">Email address</label>
+              <input id="emergency-email" autocomplete="section-emergency email" name="emergencyEmail" type="email" />
+            </div>
+          </div>
+        </section>
+
+        <section class="form-section" aria-labelledby="section-documents">
+          <div class="section-heading">
+            <h2 id="section-documents">17. Documents and references</h2>
+            <p>Attach optional supporting material and provide one professional reference.</p>
+          </div>
+
+          <div class="field-grid">
+            <div class="field">
+              <label for="resume">Résumé or CV <abbr class="required-mark" title="required">*</abbr></label>
+              <input id="resume" name="resume" type="file" accept=".pdf,.doc,.docx" required />
+            </div>
+
+            <div class="field">
+              <label for="work-sample">Work sample</label>
+              <input id="work-sample" name="workSample" type="file" accept=".pdf,.zip,.png,.jpg,.jpeg" />
+            </div>
+
+            <div class="field">
+              <label for="reference-name">Reference name <abbr class="required-mark" title="required">*</abbr></label>
+              <input id="reference-name" autocomplete="section-reference name" name="referenceName" type="text" minlength="3" maxlength="120" required />
+            </div>
+
+            <div class="field">
+              <label for="reference-email">Reference email <abbr class="required-mark" title="required">*</abbr></label>
+              <input id="reference-email" autocomplete="section-reference email" name="referenceEmail" type="email" required />
+            </div>
+
+            <div class="field">
+              <label for="reference-context">How has this person worked with you? <abbr class="required-mark" title="required">*</abbr></label>
+              <textarea id="reference-context" name="referenceContext" minlength="50" maxlength="600" required></textarea>
+            </div>
+          </div>
+        </section>
+
+        <section class="form-section" aria-labelledby="section-consent">
+          <div class="section-heading">
+            <h2 id="section-consent">18. Review and consent</h2>
+            <p>Confirm the statements below before submitting the demo form.</p>
+          </div>
+
+          <div class="field-grid">
+            <div class="field">
+              <div class="choice">
+                <input id="truthful" name="truthful" type="checkbox" required />
+                <label for="truthful">I confirm that the information provided is complete and accurate. <abbr class="required-mark" title="required">*</abbr></label>
+              </div>
+            </div>
+
+            <div class="field">
+              <div class="choice">
+                <input id="privacy" name="privacy" type="checkbox" required />
+                <label for="privacy">I have read and accept the demo privacy notice. <abbr class="required-mark" title="required">*</abbr></label>
+              </div>
+            </div>
+
+            <div class="field">
+              <div class="choice">
+                <input id="updates" name="updates" type="checkbox" />
+                <label for="updates">Send occasional program updates by email.</label>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="signature">Typed signature <abbr class="required-mark" title="required">*</abbr></label>
+              <input id="signature" name="signature" type="text" minlength="3" maxlength="120" required />
+            </div>
+
+            <div class="field">
+              <label for="signed-date">Date signed <abbr class="required-mark" title="required">*</abbr></label>
+              <input id="signed-date" name="signedDate" type="date" required />
+            </div>
+          </div>
+        </section>
+
+        <div class="form-actions">
+          <button type="submit">Validate and submit</button>
+          <button type="reset">Reset form</button>
+          <p class="actions-note">The submit handler prevents network activity and displays a local success message.</p>
+        </div>
+
+        <p id="success-message" class="success-message" role="status" tabindex="-1" hidden>The form passed native browser validation. No data was sent.</p>
+      </form>
+    </main>
+  </body>
+</html>

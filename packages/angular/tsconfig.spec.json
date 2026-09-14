@@ -1,0 +1,13 @@
+{
+  "angularCompilerOptions": {
+    "strictTemplates": true
+  },
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "noEmit": false,
+    "useDefineForClassFields": false
+  },
+  "exclude": ["./dist", "node_modules"],
+  "extends": "../../tsconfig.json",
+  "include": ["./src/**/*.ts"]
+}

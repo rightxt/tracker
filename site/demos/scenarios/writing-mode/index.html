@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Compare RXT Tracker physical X/Y geometry across representative CSS writing modes and directions." />
+    <title>Writing modes and physical axes · RXT Tracker</title>
+    <script type="module" src="./src/main.js"></script>
+  </head>
+  <body>
+    <main class="demo-page writing-mode-demo">
+      <header class="demo-page__intro">
+        <h1>Writing modes and physical axes</h1>
+        <p>Tracker <code>orientation</code> represents a physical screen axis. It is independent from the logical flow created by CSS <code>writing-mode</code> and <code>direction</code>.</p>
+        <p>Native scroll offsets can use different signs and origins depending on writing mode, direction, axis, and browser behavior. Tracker normalizes those native coordinates into its physical X/Y track model.</p>
+      </header>
+
+      <section class="demo-panel axis-model" aria-labelledby="axis-model-heading">
+        <h2 id="axis-model-heading">Physical Tracker geometry vs logical CSS flow</h2>
+        <div class="axis-model__tables">
+          <table>
+            <caption>
+              Tracker orientation
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Setting</th>
+                <th scope="col">Physical meaning</th>
+                <th scope="col">Rail edges</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row"><code>vertical</code></th>
+                <td>Screen Y axis</td>
+                <td>left / right</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>horizontal</code></th>
+                <td>Screen X axis</td>
+                <td>top / bottom</td>
+              </tr>
+            </tbody>
+          </table>
+          <table>
+            <caption>
+              CSS and Tracker responsibilities
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Property</th>
+                <th scope="col">Controls</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row"><code>writing-mode</code></th>
+                <td>logical flow</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>direction</code></th>
+                <td>logical direction</td>
+              </tr>
+              <tr>
+                <th scope="row">Tracker <code>orientation</code></th>
+                <td>represented physical axis</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <fieldset class="demo-panel axis-control">
+        <legend>Tracker physical axis</legend>
+        <label><input type="radio" name="comparison-axis" value="vertical" checked /> Vertical — physical Y</label>
+        <label><input type="radio" name="comparison-axis" value="horizontal" /> Horizontal — physical X</label>
+        <p id="comparison-axis-status" class="demo-status" role="status">All four comparison Trackers use physical Y with a right rail.</p>
+      </fieldset>
+
+      <section class="comparison-section" aria-labelledby="comparison-heading">
+        <header class="comparison-section__intro">
+          <h2 id="comparison-heading">Representative writing modes</h2>
+          <p>These four profiles are representative, not an exhaustive matrix. The baseline and RTL pair isolate direction within horizontal writing, while the two vertical profiles exercise substantially different native physical scrolling behavior.</p>
+          <p>Drag any rail toward its opposite physical edges to see the same physical Tracker model control each native scroller.</p>
+        </header>
+        <div class="wm-grid" id="wm-grid"></div>
+      </section>
+
+      <section class="wm-runtime" aria-labelledby="wm-runtime-heading">
+        <header>
+          <h2 id="wm-runtime-heading">Runtime CSS flow changes</h2>
+          <p>This isolated fifth Tracker deliberately disables automatic update sources. The host application changes CSS flow and then explicitly calls <code>tracker.render()</code> to synchronize physical marker geometry.</p>
+        </header>
+        <div class="demo-panel wm-runtime__controls">
+          <p class="wm-runtime__control-label">Apply a profile to the fifth Tracker</p>
+          <div class="wm-toolbar" id="wm-runtime-toolbar"></div>
+          <p id="wm-runtime-status" class="demo-status" role="status" data-profile-index="0" data-render-count="0">Initial profile: horizontal-tb / ltr. Host invalidation is owned explicitly.</p>
+        </div>
+        <div class="wm-runtime__experiment">
+          <dl class="wm-state" aria-label="Runtime Tracker state">
+            <div>
+              <dt>writing-mode</dt>
+              <dd id="runtime-writing-mode">horizontal-tb</dd>
+            </div>
+            <div>
+              <dt>direction</dt>
+              <dd id="runtime-direction">ltr</dd>
+            </div>
+            <div>
+              <dt>Tracker axis</dt>
+              <dd>physical Y</dd>
+            </div>
+            <div>
+              <dt>Rail</dt>
+              <dd>right</dd>
+            </div>
+          </dl>
+          <div class="wm-host" id="wm-runtime-host">
+            <div class="wm-scroller" id="wm-runtime-scroller" aria-label="Runtime writing-mode scroller">
+              <div class="wm-content">
+                <article class="wm-target">Target 1</article>
+                <article class="wm-target">Target 2</article>
+                <article class="wm-target">Target 3</article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <template id="wm-panel-template">
+        <section class="wm-panel demo-panel">
+          <header class="wm-panel__header">
+            <h3 data-profile-label></h3>
+            <p data-profile-purpose></p>
+            <dl class="wm-state">
+              <div>
+                <dt>writing-mode</dt>
+                <dd data-writing-mode></dd>
+              </div>
+              <div>
+                <dt>direction</dt>
+                <dd data-direction></dd>
+              </div>
+              <div>
+                <dt>Tracker axis</dt>
+                <dd data-axis-state>physical Y</dd>
+              </div>
+              <div>
+                <dt>Rail</dt>
+                <dd data-placement-state>right</dd>
+              </div>
+            </dl>
+          </header>
+          <div class="wm-host">
+            <div class="wm-scroller">
+              <div class="wm-content">
+                <article class="wm-target">Target 1</article>
+                <article class="wm-target">Target 2</article>
+                <article class="wm-target">Target 3</article>
+              </div>
+            </div>
+          </div>
+        </section>
+      </template>
+    </main>
+  </body>
+</html>

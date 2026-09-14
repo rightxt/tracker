@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "@rightxt/tracker-core": "latest",
+    "@rightxt/tracker-vue": "latest",
+    "vue": "3.5.42"
+  },
+  "devDependencies": {
+    "vite": "8.2.2"
+  },
+  "name": "@rxt-tracker-demo/playground-vue",
+  "private": true,
+  "scripts": {
+    "build": "vite build --base=./"
+  },
+  "type": "module",
+  "version": "0.1.0"
+}

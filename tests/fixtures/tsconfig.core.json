@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "noEmit": true,
+    "paths": {
+      "@rightxt/tracker-core": ["../../packages/core/dist/index.d.ts"],
+      "@rightxt/tracker-core/advanced": ["../../packages/core/dist/advanced.d.ts"],
+      "@rightxt/tracker-core/projection": ["../../packages/core/dist/projection.d.ts"],
+      "@rightxt/tracker-core/renderer": ["../../packages/core/dist/renderer.d.ts"],
+      "@rightxt/tracker-element": ["../../packages/element/dist/index.d.ts"],
+      "@rightxt/tracker-vanilla": ["../../packages/vanilla/dist/index.d.ts"]
+    }
+  },
+  "extends": "../../tsconfig.json",
+  "include": ["./advanced-integration-consumer.ts", "./dom-adapter-consumer.ts"]
+}

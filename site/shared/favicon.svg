@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">Tracker favicon</title>
+  <rect width="512" height="512" fill="#075bcc"/>
+  <path fill="#ffffff" d="M108 112 H404 C420 112 432 124 432 140 V190 C432 206 420 218 404 218 H318 V404 C318 422 304 436 286 436 H226 C208 436 194 422 194 404 V218 H108 C92 218 80 206 80 190 V140 C80 124 92 112 108 112 Z" />
+  <rect x="138" y="145" width="52" height="40" rx="7" fill="#075bcc"/>
+  <rect x="322" y="145" width="52" height="40" rx="7" fill="#075bcc"/>
+  <rect x="231" y="300" width="50" height="88" rx="10" fill="#075bcc"/>
+</svg>

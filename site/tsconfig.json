@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "exactOptionalPropertyTypes": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "isolatedModules": true,
+    "lib": ["ES2022", "DOM"],
+    "module": "preserve",
+    "moduleResolution": "bundler",
+    "noEmit": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "paths": {
+      "@rightxt/tracker-angular": ["../packages/angular/src/public-api.ts"],
+      "@rightxt/tracker-core": ["../packages/core/src/index.ts"],
+      "@rightxt/tracker-core/debug": ["../packages/core/src/index.ts"],
+      "@rightxt/tracker-core/projection": ["../packages/core/src/projection.ts"]
+    },
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "ES2022"
+  },
+  "files": [
+    "demos/playgrounds/angular/src/main.ts",
+    "demos/scenarios/container/angular/src/main.ts",
+    "demos/scenarios/events/angular/src/main.ts"
+  ]
+}

@@ -1,0 +1,106 @@
+:root {
+  --site-link-accent: #075bcc;
+  --site-link-border: #b8c4d0;
+  --site-link-current-surface: #e7f1ff;
+  --site-link-hover-border: #75a7e8;
+  --site-link-hover-surface: #edf4ff;
+  --site-link-visited: #6f42c1;
+  --site-focus-indicator: #075bcc;
+}
+
+.site-bar {
+  position: relative;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 3rem;
+  padding: 0.6rem max(4rem, calc((100% - 68rem) / 2));
+  border-bottom: 1px solid #dee2e6;
+  background: #fff;
+  color: #212529;
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+}
+
+.site-navigation {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.site-navigation__identity {
+  display: inline-flex;
+  flex: none;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.45rem;
+}
+
+.site-navigation__brand {
+  color: #212529;
+  font-weight: 600;
+}
+
+.site-navigation__version {
+  color: #6c757d;
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+}
+
+.site-navigation__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.site-navigation__link {
+  display: block;
+  padding: 0.3rem 0.55rem;
+  border-radius: 0.3rem;
+  color: var(--site-link-accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.site-navigation__link:hover,
+.site-navigation__link[aria-current] {
+  background: var(--site-link-hover-surface);
+}
+
+.site-source {
+  padding: 0.25rem 0.55rem;
+  border: 1px solid var(--site-link-border);
+  border-radius: 0.3rem;
+  color: var(--site-link-accent);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.site-source:hover {
+  border-color: var(--site-link-hover-border);
+  background: var(--site-link-hover-surface);
+}
+
+.site-bar :focus-visible {
+  outline: 3px solid var(--site-focus-indicator);
+  outline-offset: 2px;
+}
+
+@media (width <= 36rem) {
+  .site-bar {
+    padding-inline: 1rem;
+  }
+
+  .site-bar,
+  .site-navigation {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,22 @@
+.idea/
+coverage/
+dist/
+node_modules/
+tests/browser/__screenshots__/
+.vitest-attachments/
+*.log
+
+# Release workflow outputs
+/.release/
+
+# Site infrastructure outputs
+/site-dist/
+/site/.cache/
+/site/.work/
+/site/**/.angular/
+/site/**/.vite/
+/site/**/out-tsc/
+
+# Benchmark outputs
+benchmarks/reports/*
+!benchmarks/reports/README.md

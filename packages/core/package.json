@@ -1,0 +1,95 @@
+{
+  "author": "Igor Iakovlev",
+  "bugs": {
+    "url": "https://github.com/rightxt/tracker/issues"
+  },
+  "description": "Shared DOM-aware runtime for RXT Tracker packages.",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "development": "./dist/debug.mjs",
+      "production": "./dist/index.mjs",
+      "default": "./dist/index.mjs"
+    },
+    "./advanced": {
+      "types": "./dist/advanced.d.ts",
+      "development": "./dist/advanced.debug.mjs",
+      "production": "./dist/advanced.mjs",
+      "default": "./dist/advanced.mjs"
+    },
+    "./advanced/debug": {
+      "types": "./dist/advanced.d.ts",
+      "import": "./dist/advanced.debug.mjs",
+      "default": "./dist/advanced.debug.mjs"
+    },
+    "./debug": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/debug.mjs",
+      "default": "./dist/debug.mjs"
+    },
+    "./package.json": "./package.json",
+    "./projection": {
+      "types": "./dist/projection.d.ts",
+      "development": "./dist/projection.debug.mjs",
+      "production": "./dist/projection.mjs",
+      "default": "./dist/projection.mjs"
+    },
+    "./projection/debug": {
+      "types": "./dist/projection.d.ts",
+      "import": "./dist/projection.debug.mjs",
+      "default": "./dist/projection.debug.mjs"
+    },
+    "./renderer": {
+      "types": "./dist/renderer.d.ts",
+      "development": "./dist/renderer.debug.mjs",
+      "production": "./dist/renderer.mjs",
+      "default": "./dist/renderer.mjs"
+    },
+    "./renderer/debug": {
+      "types": "./dist/renderer.d.ts",
+      "import": "./dist/renderer.debug.mjs",
+      "default": "./dist/renderer.debug.mjs"
+    },
+    "./style.css": "./dist/rxt-tracker.css"
+  },
+  "files": [
+    "README.md",
+    "dist"
+  ],
+  "funding": [
+    "https://ko-fi.com/igorxut",
+    "https://pay.cloudtips.ru/p/d4378494"
+  ],
+  "homepage": "https://rightxt.github.io/tracker/",
+  "keywords": [
+    "dom",
+    "markers",
+    "minimap",
+    "overview-ruler",
+    "runtime",
+    "scroll",
+    "scroll-marker",
+    "scroll-navigation",
+    "scrollbar",
+    "tracker"
+  ],
+  "license": "MIT",
+  "module": "./dist/index.mjs",
+  "name": "@rightxt/tracker-core",
+  "private": false,
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "directory": "packages/core",
+    "type": "git",
+    "url": "git+https://github.com/rightxt/tracker.git"
+  },
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "version": "1.0.0"
+}

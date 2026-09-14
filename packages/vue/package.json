@@ -1,0 +1,63 @@
+{
+  "author": "Igor Iakovlev",
+  "bugs": {
+    "url": "https://github.com/rightxt/tracker/issues"
+  },
+  "dependencies": {
+    "@rightxt/tracker-core": "workspace:*"
+  },
+  "description": "Vue integration for RXT Tracker.",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/rxt-tracker-vue.mjs",
+      "default": "./dist/rxt-tracker-vue.mjs"
+    },
+    "./package.json": "./package.json",
+    "./style.css": "./dist/rxt-tracker.css"
+  },
+  "files": [
+    "README.md",
+    "dist"
+  ],
+  "funding": [
+    "https://ko-fi.com/igorxut",
+    "https://pay.cloudtips.ru/p/d4378494"
+  ],
+  "homepage": "https://rightxt.github.io/tracker/",
+  "keywords": [
+    "dom",
+    "markers",
+    "minimap",
+    "overview-ruler",
+    "scroll",
+    "scroll-marker",
+    "scroll-navigation",
+    "scrollbar",
+    "tracker",
+    "vue",
+    "vue-component"
+  ],
+  "license": "MIT",
+  "module": "./dist/rxt-tracker-vue.mjs",
+  "name": "@rightxt/tracker-vue",
+  "peerDependencies": {
+    "vue": ">=3.5 <4"
+  },
+  "private": false,
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "directory": "packages/vue",
+    "type": "git",
+    "url": "git+https://github.com/rightxt/tracker.git"
+  },
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "version": "1.0.0"
+}

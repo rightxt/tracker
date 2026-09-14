@@ -1,0 +1,64 @@
+{
+  "author": "Igor Iakovlev",
+  "bugs": {
+    "url": "https://github.com/rightxt/tracker/issues"
+  },
+  "dependencies": {
+    "@rightxt/tracker-core": "workspace:*"
+  },
+  "description": "Angular integration for RXT Tracker.",
+  "exports": {
+    ".": {
+      "types": "./dist/public-api.d.ts",
+      "import": "./dist/rxt-tracker-angular.mjs",
+      "default": "./dist/rxt-tracker-angular.mjs"
+    },
+    "./package.json": "./package.json",
+    "./style.css": "./dist/rxt-tracker.css"
+  },
+  "files": [
+    "README.md",
+    "dist"
+  ],
+  "funding": [
+    "https://ko-fi.com/igorxut",
+    "https://pay.cloudtips.ru/p/d4378494"
+  ],
+  "homepage": "https://rightxt.github.io/tracker/",
+  "keywords": [
+    "angular",
+    "angular-component",
+    "dom",
+    "markers",
+    "minimap",
+    "overview-ruler",
+    "scroll",
+    "scroll-marker",
+    "scroll-navigation",
+    "scrollbar",
+    "tracker"
+  ],
+  "license": "MIT",
+  "module": "./dist/rxt-tracker-angular.mjs",
+  "name": "@rightxt/tracker-angular",
+  "peerDependencies": {
+    "@angular/common": ">=22 <23",
+    "@angular/core": ">=22 <23"
+  },
+  "private": false,
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "directory": "packages/angular",
+    "type": "git",
+    "url": "git+https://github.com/rightxt/tracker.git"
+  },
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "type": "module",
+  "types": "./dist/public-api.d.ts",
+  "version": "1.0.0"
+}

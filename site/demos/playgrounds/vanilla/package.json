@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "@rightxt/tracker-core": "latest",
+    "@rightxt/tracker-vanilla": "latest"
+  },
+  "devDependencies": {
+    "vite": "8.2.2"
+  },
+  "name": "@rxt-tracker-demo/playground-vanilla",
+  "private": true,
+  "scripts": {
+    "build": "vite build --base=./"
+  },
+  "type": "module",
+  "version": "0.1.0"
+}

@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="A parent-owned Vanilla Tracker mounted into successive same-origin iframe document contexts." />
+    <title>Iframe document context · RXT Tracker</title>
+    <script type="module" src="./src/parent.js"></script>
+  </head>
+  <body>
+    <main class="demo-page iframe-demo">
+      <header class="demo-page__intro">
+        <p class="iframe-demo__eyebrow">Vanilla · same-origin document boundary</p>
+        <h1>Iframe document context</h1>
+        <p>A parent-owned Vanilla Tracker can operate entirely in a loaded same-origin iframe document. The JavaScript object and its event subscription stay in this parent page; every active DOM identity belongs consistently to the current child document realm.</p>
+      </header>
+
+      <section class="context-model" aria-labelledby="context-model-heading">
+        <h2 id="context-model-heading">Parent object, child runtime</h2>
+        <div class="context-model__diagram">
+          <article class="context-model__realm">
+            <p class="context-model__realm-label">Parent realm</p>
+            <h3>Tracker instance #1</h3>
+            <p><code>new Tracker(...)</code></p>
+            <p><code>tracker.on(...)</code></p>
+          </article>
+          <div class="context-model__bridge"><span>same-origin DOM access</span><b aria-hidden="true">→</b></div>
+          <article class="context-model__realm">
+            <p class="context-model__realm-label">Current child realm</p>
+            <h3>Mounted runtime context</h3>
+            <p><code>sourceRoot</code> · <code>scrollRoot</code> · <code>renderHost</code></p>
+            <p>Queries, geometry, observers, rendered DOM, scrolling, and Tracker CSS</p>
+          </article>
+        </div>
+        <p class="context-model__rule">A mounted runtime cannot mix DOM identities from different realms. Its <code>sourceRoot</code>, <code>scrollRoot</code>, and <code>renderHost</code> all belong to the currently loaded child document.</p>
+      </section>
+
+      <section class="context-section" aria-labelledby="mount-context-heading">
+        <h2 id="mount-context-heading">Current mount context</h2>
+        <div class="context-table-wrapper">
+          <table class="context-table">
+            <thead>
+              <tr>
+                <th scope="col">Role</th>
+                <th scope="col">Current identity</th>
+                <th scope="col">Responsibility</th>
+              </tr>
+            </thead>
+            <tbody id="mount-context" data-generation="waiting">
+              <tr>
+                <th scope="row">Tracker object</th>
+                <td><output id="context-tracker">Parent application · instance #1</output></td>
+                <td>Public API and event-subscription ownership</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>sourceRoot</code></th>
+                <td><output id="context-source-root">Waiting for child document</output></td>
+                <td>Rule query and default mutation-observation scope</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>scrollRoot</code></th>
+                <td><output id="context-scroll-root">Waiting for child document</output></td>
+                <td>Window geometry and built-in navigation</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>renderHost</code></th>
+                <td><output id="context-render-host">Waiting for child document</output></td>
+                <td>Destination for Tracker-rendered DOM</td>
+              </tr>
+              <tr>
+                <th scope="row">Tracker stylesheet</th>
+                <td><output id="context-stylesheet">Waiting for child document</output></td>
+                <td>Component styling inside the iframe boundary</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="context-notes">
+          <p><strong>Same-origin requirement:</strong> parent-side access to the child <code>Document</code> and <code>Window</code> requires a loaded same-origin iframe.</p>
+          <p>Parent CSS does not cross the iframe boundary. Because the rail is rendered into the child document, the public Tracker stylesheet is imported by the child bundle.</p>
+        </div>
+      </section>
+
+      <section class="context-section iframe-workbench" aria-labelledby="workbench-heading">
+        <h2 id="workbench-heading">Document lifecycle</h2>
+        <p>Navigation unmounts the reusable Tracker before replacing the child document, then mounts the same object after the new document loads.</p>
+        <div class="iframe-workbench__grid">
+          <div>
+            <h3>Application lifecycle</h3>
+            <p class="iframe-workbench__note">These records describe application and iframe lifecycle actions, not Tracker runtime events.</p>
+            <ol id="iframe-lifecycle-log" class="iframe-lifecycle-log"></ol>
+          </div>
+          <div>
+            <h3>Actions</h3>
+            <div class="iframe-controls__actions" role="group" aria-label="Iframe controls">
+              <button type="button" id="add-frame-target" disabled>Add tracked item in iframe</button>
+              <button type="button" id="navigate-frame" disabled>Navigate iframe</button>
+            </div>
+            <p id="frame-status" class="demo-status" role="status">Waiting for Child document #1 to load.</p>
+          </div>
+        </div>
+
+        <section class="activation-report" aria-labelledby="activation-report-heading">
+          <h3 id="activation-report-heading">Last child marker activation</h3>
+          <p id="activation-summary" role="status">Activate a marker inside the child rail to inspect its parent-side reaction.</p>
+          <dl>
+            <div>
+              <dt>Activated label</dt>
+              <dd><output id="activation-label">None</output></dd>
+            </div>
+            <div>
+              <dt>Owning selector</dt>
+              <dd><output id="activation-selector">None</output></dd>
+            </div>
+            <div>
+              <dt>Child document generation</dt>
+              <dd><output id="activation-generation">None</output></dd>
+            </div>
+            <div>
+              <dt>Payload element belongs to current child document</dt>
+              <dd><output id="activation-realm">Not checked</output></dd>
+            </div>
+          </dl>
+        </section>
+      </section>
+
+      <section class="context-section" aria-labelledby="child-frame-heading">
+        <h2 id="child-frame-heading">Active child document</h2>
+        <p>Activating a lower marker changes the child Window scroll position while the parent page remains still. Adding a target mutates the same-origin child DOM and lets the child-owned observer synchronize its rail.</p>
+        <iframe id="demo-frame" class="iframe-demo__frame" title="Tracked same-origin child document" src="./child.html?generation=1"></iframe>
+      </section>
+
+      <aside class="integration-note" aria-labelledby="integration-note-heading">
+        <h2 id="integration-note-heading">Integration scope</h2>
+        <p>This parent-to-child mounting pattern is a Vanilla Tracker capability. Framework and Custom Element integrations should run inside the iframe document rather than being controlled as parent-side DOM adapters.</p>
+      </aside>
+    </main>
+  </body>
+</html>

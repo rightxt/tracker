@@ -1,0 +1,68 @@
+{
+  "author": "Igor Iakovlev",
+  "browser": "./dist/rxt-tracker-vanilla.mjs",
+  "bugs": {
+    "url": "https://github.com/rightxt/tracker/issues"
+  },
+  "dependencies": {
+    "@rightxt/tracker-core": "workspace:*"
+  },
+  "description": "Vanilla browser package for RXT Tracker.",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/rxt-tracker-vanilla.mjs",
+      "default": "./dist/rxt-tracker-vanilla.mjs"
+    },
+    "./package.json": "./package.json",
+    "./rxt-tracker-vanilla.debug.js": "./dist/rxt-tracker-vanilla.debug.js",
+    "./rxt-tracker-vanilla.js": "./dist/rxt-tracker-vanilla.js",
+    "./style.css": "./dist/rxt-tracker.css"
+  },
+  "files": [
+    "README.md",
+    "dist"
+  ],
+  "funding": [
+    "https://ko-fi.com/igorxut",
+    "https://pay.cloudtips.ru/p/d4378494"
+  ],
+  "homepage": "https://rightxt.github.io/tracker/",
+  "jsdelivr": "./dist/rxt-tracker-vanilla.js",
+  "keywords": [
+    "browser",
+    "dom",
+    "markers",
+    "minimap",
+    "overview-ruler",
+    "scroll",
+    "scroll-marker",
+    "scroll-navigation",
+    "scrollbar",
+    "tracker"
+  ],
+  "license": "MIT",
+  "main": "./dist/rxt-tracker-vanilla.mjs",
+  "module": "./dist/rxt-tracker-vanilla.mjs",
+  "name": "@rightxt/tracker-vanilla",
+  "private": false,
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "directory": "packages/vanilla",
+    "type": "git",
+    "url": "git+https://github.com/rightxt/tracker.git"
+  },
+  "sideEffects": [
+    "./dist/rxt-tracker-vanilla.debug.js",
+    "./dist/rxt-tracker-vanilla.js",
+    "./dist/rxt-tracker.css"
+  ],
+  "style": "./dist/rxt-tracker.css",
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "unpkg": "./dist/rxt-tracker-vanilla.js",
+  "version": "1.0.0"
+}

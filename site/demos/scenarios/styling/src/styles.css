@@ -1,0 +1,430 @@
+.styling-demo {
+  width: min(76rem, calc(100% - 4rem));
+}
+
+.styling-intro {
+  max-width: 58rem;
+}
+
+.styling-intro__eyebrow,
+.comparison-card__number,
+.fixture-kicker,
+.fixture-section__label {
+  margin: 0;
+  color: #475569;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.section-intro {
+  max-width: 50rem;
+  margin-block: 2.5rem 1.25rem;
+}
+
+.section-intro h2,
+.section-intro p {
+  margin-block: 0;
+}
+
+.section-intro p {
+  margin-block-start: 0.5rem;
+  color: var(--demo-muted);
+}
+
+.comparison-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem;
+}
+
+.comparison-card {
+  min-width: 0;
+  padding: 1.25rem;
+  border: 1px solid var(--demo-border);
+  border-radius: 0.75rem;
+  background: #fff;
+}
+
+.comparison-card__header {
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  gap: 0.75rem;
+  min-height: 6.75rem;
+}
+
+.comparison-card__number {
+  display: grid;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  border: 1px solid #cbd5e1;
+  border-radius: 50%;
+}
+
+.comparison-card__title {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.comparison-card__header p:last-child,
+.attribute-note {
+  margin-block: 0.35rem 0;
+  color: var(--demo-muted);
+  font-size: 0.9rem;
+}
+
+.comparison-stage {
+  position: relative;
+  height: 24rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.5rem;
+  background: #f8fafc;
+  overflow: hidden;
+}
+
+.comparison-scroller {
+  height: 100%;
+  overflow-y: auto;
+  padding-inline-end: 1.5rem;
+  scrollbar-gutter: stable;
+}
+
+.comparison-scroller:focus-visible {
+  outline-offset: -4px;
+}
+
+.fixture-content {
+  min-height: 82rem;
+  background: linear-gradient(#fff, #f8fafc);
+}
+
+.fixture-intro,
+.fixture-section {
+  padding: 1rem;
+}
+
+.fixture-intro {
+  min-height: 10rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.fixture-intro h4 {
+  margin-block: 0.4rem;
+  font-size: 1.05rem;
+}
+
+.fixture-intro p:last-child {
+  margin: 0;
+  color: #64748b;
+  font-size: 0.875rem;
+}
+
+.fixture-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.fixture-section--overview {
+  min-height: 12rem;
+}
+
+.fixture-section--warning {
+  min-height: 15rem;
+  background: #fffbeb;
+}
+
+.fixture-section--cluster {
+  min-height: 12rem;
+  gap: 0.35rem;
+}
+
+.fixture-section--follow-up {
+  min-height: 17rem;
+  background: #f1f5f9;
+}
+
+.fixture-section--final {
+  min-height: 16rem;
+}
+
+.fixture-target {
+  display: grid;
+  gap: 0.2rem;
+  padding: 0.8rem 0.9rem;
+  border: 1px solid #cbd5e1;
+  border-inline-start-width: 0.3rem;
+  border-radius: 0.35rem;
+  background: #fff;
+}
+
+.fixture-target span {
+  color: #64748b;
+  font-size: 0.82rem;
+}
+
+.fixture-target--normal {
+  border-inline-start-color: #2563eb;
+}
+
+.fixture-target--warning {
+  border-inline-start-color: #d97706;
+}
+
+.fixture-target--error {
+  border-inline-start-color: #dc2626;
+}
+
+/* Case 1: the rail inherits its public theme variables from the application card. */
+.comparison-card[data-comparison-case='cascade'] {
+  --rxtt-cluster-bg: rgb(15 23 42);
+  --rxtt-cluster-text-color: #fff;
+  --rxtt-marker-bg: rgb(37 99 235);
+  --rxtt-marker-border-radius: 999px;
+  --rxtt-marker-min-size: 7px;
+  --rxtt-marker-ring-color: rgb(255 255 255);
+  --rxtt-marker-ring-width: 2px;
+  --rxtt-track-bg: rgb(226 232 240);
+  --rxtt-track-border-color: rgb(71 85 105);
+  --rxtt-track-border-width: 1px;
+  --rxtt-track-thickness: 14px;
+  --rxtt-viewport-bg: rgb(14 116 144 / 0.24);
+}
+
+.cascade-marker--warning {
+  --rxtt-marker-bg: rgb(217 119 6);
+}
+
+.cascade-marker--error {
+  --rxtt-marker-bg: rgb(220 38 38);
+}
+
+/* Case 3: application classes carry the same theme through ordinary CSS. */
+.class-theme-track {
+  --rxtt-cluster-bg: rgb(15 23 42);
+  --rxtt-cluster-text-color: #fff;
+  --rxtt-marker-min-size: 7px;
+  --rxtt-marker-ring-color: rgb(255 255 255);
+  --rxtt-marker-ring-width: 2px;
+  --rxtt-track-thickness: 14px;
+
+  border-color: rgb(71 85 105);
+  border-width: 0 0 0 1px;
+  background-color: rgb(226 232 240);
+}
+
+.class-theme-viewport {
+  background-color: rgb(14 116 144 / 0.24);
+}
+
+.class-theme-marker {
+  border-radius: 999px;
+  background-color: rgb(37 99 235);
+}
+
+.class-theme-marker--warning {
+  background-color: rgb(217 119 6);
+}
+
+.class-theme-marker--error {
+  background-color: rgb(220 38 38);
+}
+
+.class-theme-marker[data-rxtt-kind='cluster'] {
+  background-color: rgb(15 23 42);
+  color: #fff;
+}
+
+/* Case 4: marker attributes and documented service state drive selector styling. */
+.attribute-theme-track {
+  --rxtt-cluster-bg: rgb(15 23 42);
+  --rxtt-cluster-text-color: #fff;
+  --rxtt-marker-min-size: 7px;
+  --rxtt-marker-ring-color: rgb(255 255 255);
+  --rxtt-marker-ring-width: 2px;
+  --rxtt-track-bg: rgb(226 232 240);
+  --rxtt-track-border-color: rgb(71 85 105);
+  --rxtt-track-border-width: 1px;
+  --rxtt-track-thickness: 14px;
+}
+
+.attribute-theme-viewport {
+  background-color: rgb(14 116 144 / 0.24);
+}
+
+[data-comparison-theme='equivalent'][data-tone='normal'] {
+  border-radius: 999px;
+  background-color: rgb(37 99 235);
+}
+
+[data-comparison-theme='equivalent'][data-tone='warning'] {
+  border-radius: 999px;
+  background-color: rgb(217 119 6);
+}
+
+[data-comparison-theme='equivalent'][data-tone='error'] {
+  border-radius: 999px;
+  background-color: rgb(220 38 38);
+}
+
+[data-comparison-theme='equivalent'][data-rxtt-kind='cluster'] {
+  background-color: rgb(15 23 42);
+  color: #fff;
+}
+
+/* Selected state is a shared secondary hook that a variable-only API cannot express. */
+.comparison-stage .rxtt__marker[data-rxtt-selected='true'] {
+  outline: 2px solid #fff;
+  outline-offset: -3px;
+  box-shadow: 0 0 0 1px rgb(15 23 42);
+  filter: brightness(0.9);
+}
+
+.ruler-track {
+  --rxtt-focus-outline-color: rgb(15 23 42);
+  --rxtt-focus-outline-offset: 2px;
+  --rxtt-marker-bg: rgb(51 65 85);
+  --rxtt-marker-min-size: 4px;
+  --rxtt-marker-opacity: 0.78;
+  --rxtt-track-bg: rgb(241 245 249 / 0.72);
+  --rxtt-track-border-color: rgb(100 116 139);
+  --rxtt-track-border-width: 1px;
+  --rxtt-track-offset: 0.55rem;
+  --rxtt-track-thickness: 8px;
+  --rxtt-viewport-bg: rgb(100 116 139 / 0.24);
+}
+
+.ruler-marker {
+  transition:
+    opacity 120ms ease,
+    background-color 120ms ease;
+}
+
+.ruler-marker[data-rxtt-selected='true'] {
+  --rxtt-marker-opacity: 1;
+
+  background-color: rgb(15 23 42);
+}
+
+.ruler-viewport {
+  border-block: 1px solid rgb(100 116 139 / 0.45);
+}
+
+.neon-track {
+  --rxtt-focus-outline-color: rgb(103 232 249);
+  --rxtt-focus-outline-offset: 4px;
+  --rxtt-marker-bg: rgb(34 211 238);
+  --rxtt-marker-border-radius: 999px;
+  --rxtt-marker-min-size: 5px;
+  --rxtt-marker-ring-color: rgb(240 253 250);
+  --rxtt-marker-ring-width: 2px;
+  --rxtt-track-border-width: 0;
+  --rxtt-track-contain: none;
+  --rxtt-track-offset: 0.45rem;
+  --rxtt-track-overflow: visible;
+  --rxtt-track-thickness: 20px;
+  --rxtt-viewport-bg: rgb(168 85 247 / 0.3);
+
+  background: linear-gradient(180deg, rgb(15 23 42 / 0.86), rgb(76 29 149 / 0.74));
+  box-shadow:
+    0 0 0 1px rgb(103 232 249 / 0.45),
+    0 0 18px rgb(34 211 238 / 0.75),
+    0 0 32px rgb(168 85 247 / 0.48);
+}
+
+.neon-viewport {
+  border-block: 1px solid rgb(216 180 254 / 0.72);
+  box-shadow: inset 0 0 10px rgb(168 85 247 / 0.6);
+}
+
+.neon-marker {
+  transform: scaleX(1.35);
+  transform-origin: right center;
+  box-shadow: 0 0 8px rgb(34 211 238);
+  transition:
+    box-shadow 140ms ease,
+    filter 140ms ease;
+}
+
+.neon-marker::before {
+  position: absolute;
+  inset: -2px;
+  border: 1px solid rgb(240 253 250 / 0.55);
+  border-radius: inherit;
+  content: '';
+}
+
+.neon-marker[data-rxtt-selected='true'] {
+  box-shadow:
+    0 0 12px rgb(34 211 238),
+    0 0 18px rgb(168 85 247 / 0.75);
+  filter: brightness(1.35) saturate(1.25);
+}
+
+.global-theme-notes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  min-height: 24rem;
+}
+
+.global-theme-notes article {
+  padding: 1.25rem;
+  border: 1px solid var(--demo-border);
+  border-radius: 0.75rem;
+}
+
+.global-theme-notes h3 {
+  margin-block-start: 0;
+}
+
+.global-theme-note__description {
+  color: var(--demo-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .neon-marker,
+  .ruler-marker {
+    transition: none;
+  }
+}
+
+@media (width <= 52rem) {
+  .styling-demo {
+    width: min(100% - 3rem, 40rem);
+  }
+
+  .global-theme-notes {
+    grid-template-columns: 1fr;
+  }
+
+  .comparison-card__header {
+    min-height: auto;
+  }
+}
+
+@media (width <= 32rem) {
+  .styling-demo {
+    width: calc(100% - 3.5rem);
+  }
+
+  .comparison-card {
+    padding: 0.75rem;
+  }
+
+  .comparison-card__header {
+    grid-template-columns: 1fr;
+    margin-block-end: 1rem;
+  }
+
+  .neon-track {
+    --rxtt-track-offset: 0.25rem;
+    --rxtt-track-thickness: 16px;
+  }
+
+  .ruler-track {
+    --rxtt-track-offset: 0.35rem;
+  }
+}

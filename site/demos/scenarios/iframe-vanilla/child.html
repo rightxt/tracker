@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Tracked child document for the RXT Tracker iframe scenario." />
+    <title>Tracked child document</title>
+    <script type="module" src="./src/child.js"></script>
+  </head>
+  <body>
+    <header class="child-banner">
+      <p class="child-banner__eyebrow">Same-origin child realm</p>
+      <h1>Child document #<output id="child-generation">1</output></h1>
+      <p>Tracker DOM, targets, geometry, observers, scrolling, and component CSS live in this document.</p>
+    </header>
+
+    <main id="tracked-content" class="child-content" aria-labelledby="tracked-content-heading">
+      <h2 id="tracked-content-heading">Tracked content</h2>
+      <p class="child-content__intro">This element is the source query scope. The rail is its sibling because the child body is the render host.</p>
+
+      <article class="frame-target">
+        <p class="frame-target__index">Target 1</p>
+        <h3>Identity boundary</h3>
+        <p>The source element, child Window scroll context, and body render host belong to one active realm.</p>
+      </article>
+
+      <article class="frame-target">
+        <p class="frame-target__index">Target 2</p>
+        <h3>Lifecycle boundary</h3>
+        <p>The parent unmounts its reusable Tracker before this iframe navigates to a replacement document.</p>
+      </article>
+
+      <article class="frame-target">
+        <p class="frame-target__index">Target 3</p>
+        <h3>Styling boundary</h3>
+        <p>The child bundle imports the public stylesheet because parent CSS cannot style this document's rail.</p>
+      </article>
+    </main>
+  </body>
+</html>

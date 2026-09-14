@@ -1,0 +1,210 @@
+.observation-demo {
+  width: min(52rem, calc(100% - 4rem));
+  margin-inline: auto;
+  padding-block-end: 5rem;
+}
+
+.observation-explanation,
+.observation-matrix,
+.observation-experiment {
+  margin-block: 2rem;
+}
+
+.observation-explanation h2,
+.observation-matrix h2,
+.observation-experiment h2 {
+  margin-block-end: 0.75rem;
+}
+
+.observation-callout,
+.observation-note {
+  padding: 1rem;
+  border-inline-start: 0.25rem solid #6c757d;
+  background: var(--demo-surface-muted);
+}
+
+.observation-table-wrap {
+  overflow-x: auto;
+}
+
+.observation-matrix table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+}
+
+.observation-matrix th,
+.observation-matrix td {
+  padding: 0.75rem;
+  border: 1px solid var(--demo-border);
+  text-align: start;
+  vertical-align: top;
+}
+
+.observation-matrix thead th {
+  background: var(--demo-surface-muted);
+}
+
+.observation-comparison,
+.observation-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.observation-profile {
+  padding: 1rem;
+  border: 1px solid var(--demo-border);
+  border-inline-start: 0.35rem solid #1971c2;
+  background: #fff;
+}
+
+.observation-profile--broad {
+  border-inline-start-color: #e8590c;
+}
+
+.observation-profile h2 {
+  margin-block: 0 0.75rem;
+}
+
+.observation-profile p {
+  margin-block: 0.5rem;
+}
+
+.observation-profile pre {
+  min-height: 8rem;
+  margin-block: 1rem;
+  padding: 0.75rem;
+  overflow-x: auto;
+  border: 1px solid var(--demo-border);
+  background: var(--demo-surface-muted);
+}
+
+.observation-profile dl {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.5rem 1rem;
+  align-items: center;
+  margin: 0;
+}
+
+.observation-profile dt:first-of-type {
+  font-weight: 700;
+}
+
+.observation-profile dd {
+  margin: 0;
+}
+
+.observation-counter {
+  width: 5rem;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid transparent;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+  text-align: end;
+}
+
+.observation-counter--primary {
+  border-color: var(--demo-border);
+  background: var(--demo-surface-muted);
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.observation-note {
+  margin-block: 1rem 2rem;
+}
+
+.observation-actions fieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 1rem;
+  border: 1px solid var(--demo-border);
+}
+
+.observation-actions legend {
+  padding-inline: 0.35rem;
+  font-weight: 700;
+}
+
+.observation-actions fieldset > p {
+  margin-block-start: 0;
+}
+
+.observation-actions fieldset > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.observation-actions button {
+  min-height: 2.75rem;
+}
+
+.observation-region,
+.observation-outside {
+  margin-block-start: 3rem;
+  padding-block-start: 1rem;
+  border-block-start: 2px solid var(--demo-border);
+}
+
+.observation-outside {
+  border-block-start-style: dashed;
+}
+
+.observation-experiment-list:empty {
+  display: none;
+}
+
+.observation-section {
+  min-block-size: 12rem;
+  margin-block-end: 2rem;
+  padding-block-start: 0.75rem;
+  border-block-start: 1px solid var(--demo-border);
+}
+
+.observation-section h3 {
+  margin-block: 0 0.75rem;
+}
+
+.demo-error,
+.demo-note {
+  margin-block: 1rem;
+  padding: 0.75rem 1rem;
+  border-inline-start: 0.25rem solid;
+  border-radius: 0.25rem;
+}
+
+.demo-error {
+  border-color: #dc3545;
+  background: rgb(220 53 69 / 0.08);
+}
+
+.demo-note {
+  border-color: #0d6efd;
+  background: rgb(13 110 253 / 0.08);
+}
+
+.observation-experiment-node {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--demo-border);
+  background: var(--demo-surface-muted);
+}
+
+@media (width <= 42rem) {
+  .observation-demo {
+    width: min(100% - 3rem, 52rem);
+  }
+
+  .observation-comparison,
+  .observation-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .observation-profile pre {
+    min-height: 0;
+  }
+}
