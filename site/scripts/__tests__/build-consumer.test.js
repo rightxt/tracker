@@ -1,4 +1,4 @@
-import { cp, mkdir, mkdtemp, readFile, rm } from 'node:fs/promises';
+import { cp, mkdir, mkdtemp, readFile, rm, stat } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
 import { JSDOM } from 'jsdom';
@@ -25,7 +25,12 @@ it('injects consumer and secondary pages while preserving sources in separate st
   await mkdir(WORK_ROOT, { recursive: true });
   const root = await mkdtemp(resolve(WORK_ROOT, 'consumer-output-'));
   try {
-    const entry = siteEntries.find((page) => page.route === 'scenarios/iframe-vanilla');
+    const catalogEntry = siteEntries.find((page) => page.route === 'scenarios/iframe-vanilla');
+    if (!catalogEntry) {
+      throw new Error('Missing scenarios/iframe-vanilla catalog entry.');
+    }
+    // This test covers page output and source staging, not debug package export validation.
+    const entry = { ...catalogEntry, trackerProfile: 'production' };
     const aggregateRoot = resolve(root, 'pages');
     const sourceSnapshotsRoot = resolve(root, 'snapshots');
     const output = await buildConsumer({
@@ -40,20 +45,19 @@ it('injects consumer and secondary pages while preserving sources in separate st
       try {
         expect(dom.window.document.title).toBe(page.documentTitle);
         if (page.file === 'child.html') {
-          expect(dom.window.document.querySelector('link[rel="canonical"]').href).toContain(
-            '/scenarios/iframe-vanilla/child.html',
+          expect(dom.window.document.querySelector('link[rel="canonical"]').href).toMatch(
+            /\/scenarios\/iframe-vanilla\/child\.html$/u,
           );
           expect(dom.window.document.querySelector('.site-bar')).toBeNull();
         }
       } finally {
         dom.window.close();
       }
-      expect(await readFile(resolve(sourceSnapshotsRoot, entry.route, page.file), 'utf8')).toBe(
-        await readFile(resolve(SITE_ROOT, entry.source, page.file), 'utf8'),
-      );
     }
-    await expect(readFile(resolve(aggregateRoot, 'sources', entry.route, 'index.html'))).rejects.toThrow('ENOENT');
-    await expect(readFile(resolve(sourceSnapshotsRoot, entry.route, 'dist/index.html'))).rejects.toThrow('ENOENT');
+    expect(await readFile(resolve(sourceSnapshotsRoot, entry.route, 'index.html'))).toEqual(
+      await readFile(resolve(SITE_ROOT, entry.source, 'index.html')),
+    );
+    await expect(stat(resolve(aggregateRoot, 'sources', entry.route))).rejects.toMatchObject({code: 'ENOENT'});
   } finally {
     resolveOwnedPath(WORK_ROOT, root);
     await rm(root, { recursive: true, force: true });

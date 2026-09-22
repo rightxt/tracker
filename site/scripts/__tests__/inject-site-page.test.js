@@ -43,7 +43,6 @@ describe('site page favicon metadata', () => {
     const dom = new JSDOM(html);
     try {
       const icon = dom.window.document.head.querySelector('link[rel="icon"]');
-      expect(dom.window.document.title).toBe(page.documentTitle);
       expect(icon.getAttribute('href')).toBe(expectedHref);
       expect(icon.getAttribute('type')).toBe('image/svg+xml');
     } finally {

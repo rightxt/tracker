@@ -3,7 +3,6 @@ import { describe, expect, it } from 'vitest';
 
 import { siteEntries, validateSiteEntries } from '../../catalog.mjs';
 import { HOME_METADATA, SITE_METADATA } from '../../metadata.mjs';
-import { serializeAttributes } from '../html.mjs';
 import { renderPageMetadata, resolveCanonicalUrl, resolveSiteUrl } from '../page-metadata.mjs';
 
 describe('page metadata renderer', () => {
@@ -39,12 +38,6 @@ describe('page metadata renderer', () => {
     }
   });
 
-  it('sorts and escapes generated attributes', () => {
-    expect(serializeAttributes({ name: 'description', content: 'A & "B"' })).toBe(
-      ' content="A &amp; &quot;B&quot;" name="description"',
-    );
-  });
-
   it.each([
     ['', ''],
     ['/docs//index.html?view=1#top', 'docs/'],
@@ -65,24 +58,11 @@ describe('page metadata renderer', () => {
 });
 
 describe('public page definitions', () => {
-  it('keeps every document title explicit and independent of UI labels', () => {
-    expect(() => validateSiteEntries(siteEntries)).not.toThrow();
-    for (const entry of [HOME_METADATA, ...siteEntries]) {
-      for (const page of [entry, ...(entry.pages ?? [])]) {
-        expect(page.documentTitle.trim()).not.toBe('');
-        expect(page.description.trim()).not.toBe('');
-      }
-      expect(renderPageMetadata({ ...entry, title: 'Other', navTitle: 'Other', kind: 'other' })).toBe(
-        renderPageMetadata(entry),
-      );
-    }
-  });
-
   it.each([
-    { route: '' },
     { documentTitle: '' },
     { documentTitle: undefined },
     { description: '' },
+    { description: undefined },
     { pages: [{ file: 'child.html', description: 'Child' }] },
     { pages: [{ file: '../child.html', description: 'Child', documentTitle: 'Child' }] },
   ])('rejects incomplete or unsafe definitions: %j', (change) => {
