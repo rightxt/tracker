@@ -57,7 +57,7 @@ it('injects consumer and secondary pages while preserving sources in separate st
     expect(await readFile(resolve(sourceSnapshotsRoot, entry.route, 'index.html'))).toEqual(
       await readFile(resolve(SITE_ROOT, entry.source, 'index.html')),
     );
-    await expect(stat(resolve(aggregateRoot, 'sources', entry.route))).rejects.toMatchObject({code: 'ENOENT'});
+    await expect(stat(resolve(aggregateRoot, 'sources', entry.route))).rejects.toMatchObject({ code: 'ENOENT' });
   } finally {
     resolveOwnedPath(WORK_ROOT, root);
     await rm(root, { recursive: true, force: true });
