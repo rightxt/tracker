@@ -128,7 +128,7 @@ async function verifyInstalledTrackerProfile(projectRoot, entry) {
  * @param {{
  *   aggregateRoot: string,
  *   entry: { integration: string, route: string, source: string, trackerProfile: string },
- *   includeSourceSnapshot: boolean,
+ *   sourceSnapshotsRoot?: string,
  *   sourceUrl?: string,
  *   tarballs?: Map<string, string>,
  *   trackerVersion: string,
@@ -139,7 +139,7 @@ async function verifyInstalledTrackerProfile(projectRoot, entry) {
 async function buildConsumer({
   aggregateRoot,
   entry,
-  includeSourceSnapshot,
+  sourceSnapshotsRoot,
   sourceUrl,
   tarballs = new Map(),
   trackerVersion,
@@ -148,7 +148,6 @@ async function buildConsumer({
   const sourceRoot = resolve(SITE_ROOT, entry.source);
   const projectRoot = resolveOwnedPath(workRoot, entry.route);
   const outputRoot = resolveOwnedPath(aggregateRoot, getLiveRoute(entry.route));
-  const sourceOutputRoot = resolveOwnedPath(aggregateRoot, 'sources', entry.route);
 
   await rm(projectRoot, { force: true, recursive: true });
   await mkdir(dirname(projectRoot), { recursive: true });
@@ -182,7 +181,7 @@ async function buildConsumer({
     throw new Error(`${label}: no index.html was found below ${distRoot}.`);
   }
   await injectSitePageMetadata(builtRoot, {
-    route: entry.route,
+    ...entry,
     trackerVersion,
     ...(sourceUrl === undefined ? {} : { sourceUrl }),
   });
@@ -190,7 +189,8 @@ async function buildConsumer({
   await rm(outputRoot, { force: true, recursive: true });
   await mkdir(dirname(outputRoot), { recursive: true });
   await cp(builtRoot, outputRoot, { recursive: true });
-  if (includeSourceSnapshot) {
+  if (sourceSnapshotsRoot !== undefined) {
+    const sourceOutputRoot = resolveOwnedPath(sourceSnapshotsRoot, entry.route);
     await rm(sourceOutputRoot, { force: true, recursive: true });
     await mkdir(dirname(sourceOutputRoot), { recursive: true });
     await cp(projectRoot, sourceOutputRoot, {

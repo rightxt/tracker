@@ -13,4 +13,17 @@ function escapeHtml(value) {
     .replaceAll("'", '&#39;');
 }
 
-export { escapeHtml };
+/**
+ * Serializes attributes in deterministic lexicographic order with HTML escaping.
+ *
+ * @param {Record<string, string>} attributes Attribute names and decoded values.
+ * @returns {string} Escaped attributes including their leading spaces.
+ */
+function serializeAttributes(attributes) {
+  return Object.keys(attributes)
+    .sort()
+    .map((name) => ` ${name}="${escapeHtml(attributes[name])}"`)
+    .join('');
+}
+
+export { escapeHtml, serializeAttributes };

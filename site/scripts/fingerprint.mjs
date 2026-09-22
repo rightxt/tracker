@@ -53,6 +53,7 @@ async function computeDevInputFingerprint() {
   const siteFiles = [
     resolve(SITE_ROOT, 'catalog.mjs'),
     resolve(SITE_ROOT, 'config.mjs'),
+    resolve(SITE_ROOT, 'metadata.mjs'),
     ...(await collectFiles(resolve(SITE_ROOT, 'demos'))),
     ...(await collectFiles(resolve(SITE_ROOT, 'shared'))),
     ...(await collectFiles(resolve(SITE_ROOT, 'shell'))),

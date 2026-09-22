@@ -1,4 +1,4 @@
-# Styling Tracker
+# Styling
 
 Tracker's styling contract combines a canonical stylesheet, public CSS custom properties, service classes, state attributes, and application-owned presentation. This reference covers the shared visual contract; use the [README for your package](../../README.md) for its configuration API.
 

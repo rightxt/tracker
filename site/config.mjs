@@ -2,6 +2,8 @@ import { dirname, resolve } from 'node:path';
 import process from 'node:process';
 import { fileURLToPath } from 'node:url';
 
+import rootManifest from '../package.json' with { type: 'json' };
+
 const SITE_ROOT = dirname(fileURLToPath(import.meta.url));
 const REPOSITORY_ROOT = resolve(SITE_ROOT, '..');
 const WORK_ROOT = resolve(SITE_ROOT, '.work');
@@ -15,11 +17,12 @@ const PUBLISHED_SOURCES_BRANCH = process.env.SITE_PUBLISHED_SOURCES_BRANCH ?? DE
 const PRODUCTION_ARTIFACT_ROOT = resolve(REPOSITORY_ROOT, 'site-dist');
 const PRODUCTION_BUILD_ROOT = resolve(WORK_ROOT, 'production-build');
 const PRODUCTION_CANDIDATE_ROOT = resolve(WORK_ROOT, 'production-site-candidate');
+const PRODUCTION_SOURCES_ROOT = resolve(WORK_ROOT, 'production-sources');
 const REPOSITORY_URL = 'https://github.com/rightxt/tracker';
 const SOURCE_REF = process.env.SITE_SOURCE_REF ?? DEFAULT_SOURCE_REF;
 
 /** Default public base used by npm-facing documentation destinations. */
-const DEFAULT_PUBLIC_URL = 'https://rightxt.github.io/tracker/';
+const DEFAULT_PUBLIC_URL = rootManifest.homepage;
 
 /**
  * Normalizes an HTTPS deployment base without credentials, query, or fragment.
@@ -50,6 +53,7 @@ export {
   PRODUCTION_ARTIFACT_ROOT,
   PRODUCTION_BUILD_ROOT,
   PRODUCTION_CANDIDATE_ROOT,
+  PRODUCTION_SOURCES_ROOT,
   PUBLIC_URL,
   REPOSITORY_ROOT,
   REPOSITORY_URL,

@@ -54,7 +54,7 @@ Shared application resources live under `site/shared/**`. Canonical demos refere
 
 `site:build` owns exact workspace package version availability on npm; each consumer installs and builds against those exact published packages. Source snapshots are generated from the resulting installed consumer projects, and the final snapshots are validated by `verifyPublishedProjectSource()`. Broad source-tree conventions are not independently preflighted before either build; consumer viability is proven by the real install/build itself.
 
-`pnpm site:test` owns fast deterministic source and unit contracts: catalog validation, owned-path and documentation-source containment, Markdown IDs and navigation data, link rewriting and public URL helpers, Source/navigation policy, and the Theme Builder/Core public CSS-variable relationship. It does not assemble a synthetic full-site candidate.
+`pnpm site:test` owns fast deterministic source and unit contracts: catalog validation, owned-path and documentation-source containment, Markdown IDs and navigation data, link rewriting and public URL helpers, Source/navigation policy, static metadata normalization and validation, and the Theme Builder/Core public CSS-variable relationship. Metadata tests use isolated HTML fixtures; the real consumer build remains the artifact viability check.
 
 `site:build:dev` verifies the complete real candidate after every consumer, static tool, and documentation route has been built. Artifact verification owns registered routes, local assets, internal links and fragments, non-root deployment safety, build metadata, and publication boundaries.
 
@@ -105,12 +105,12 @@ The atomic production candidate is committed to:
 site-dist/
 ```
 
-Set `SITE_PUBLISHED_SOURCES_BRANCH` to select the generated publication branch used by production demo Source links; the default is `published-sources`. The deployment workflow copies only the verified `site-dist/sources/**` snapshots to this branch and separately deploys the complete `site-dist/` artifact through GitHub Pages. `SITE_SOURCE_REF` is also retained because repository-backed tools use canonical source links in production.
+Set `SITE_PUBLISHED_SOURCES_BRANCH` to select the generated publication branch used by production demo Source links; the default is `published-sources`. The production build writes source snapshots separately to `site/.work/production-sources/`. The deployment workflow publishes that directory under `sources/` on the source branch, then uploads `site-dist` to Pages without modifying it. A publication failure prevents upload. `SITE_SOURCE_REF` is also retained because repository-backed tools use canonical source links in production.
 
 Production builds preserve independently installable demo source snapshots:
 
 ```text
-site-dist/sources/<public-demo-route>/
+site/.work/production-sources/<public-demo-route>/
 ```
 
 Each snapshot contains the exact npm dependency version, generated `package-lock.json`, and materialized shared resources. It excludes dependencies, caches, build output, repository-private paths, and aggregate site navigation. Demo Source links point to these snapshots. Site-owned tools do not receive consumer source snapshots and may opt out of a Source link when their learning contract is not code-oriented; Theme Builder intentionally does so.
@@ -122,6 +122,21 @@ Static entries are copied directly from their canonical site source into the can
 Theme Builder is available at `/tools/theme-builder/`. It exposes all current public root Tracker CSS variables through grouped, browser-validated controls, applies overrides to a deterministic synthetic preview, and exports override-only CSS. The preview intentionally remains synthetic in this stage; the tool has no runtime dependency on `@rightxt/tracker-*`.
 
 ## Generated metadata and navigation
+
+Each live-page builder passes its explicit page definition to `injectSitePageMetadata()`. The injector uses `renderPageMetadata()` to replace owned head tags while preserving unrelated HTML. Metadata is present at build time and requires no client JavaScript. Known secondary files, including the iframe child, use the same renderer through their parent entry's `pages` definitions. There is no global metadata registry, HTML discovery, or post-build metadata pass.
+
+Metadata ownership is explicit:
+
+- `metadata.mjs` owns the site name, language, locale, social image settings, document defaults, and the landing page's explicit `documentTitle` and description.
+- Root `package.json.author` supplies the public author. Root `package.json.homepage` supplies the default public base through `config.mjs`; the existing `SITE_PUBLIC_URL` override applies consistently to documentation destinations and metadata.
+- `catalog.mjs` owns public routes, explicit `documentTitle` values and descriptions, UI titles, and additional page definitions in `pages`. Every public document requires a non-empty `documentTitle`. Markdown H1 and navigation labels retain their separate content and UI roles.
+- `scripts/page-metadata.mjs` renders `documentTitle` unchanged into document, Open Graph, and Twitter titles; it does not infer titles or append suffixes. It also owns canonical resolution and the social element contract. For example, `docs/reference/styling/index.html?view=1#top` resolves to `https://rightxt.github.io/tracker/docs/reference/styling/`. Explicit files such as `scenarios/iframe-vanilla/child.html` retain their filename.
+
+The injector uses the existing JSDOM dependency to replace owned metadata by source ranges within one document, preserving unrelated head resources and body markup. This local replacement is idempotent and sets the document language. The shared `scripts/html.mjs` attribute serializer sorts generated attributes lexicographically, including metadata and generated navigation/resources. Attribute order is a generation style, not a semantic validation requirement.
+
+The home builder copies `shared/social-preview.jpg` unchanged to `site-dist/assets/social-preview.jpg`; its production URL is `https://rightxt.github.io/tracker/assets/social-preview.jpg`. The shared configuration declares the JPEG 1200×630 social metadata and descriptive image alt.
+
+Source snapshots are copied from the isolated consumer project into the separate source staging root, while injection touches only the built live HTML. Production verification checks snapshot contents independently and requires that the Pages artifact contain no `sources/` tree. Metadata code has no source-snapshot mode. A new secondary public HTML document must be declared in its entry's `pages` array with a relative `file`, explicit `documentTitle`, and `description`; it receives its own canonical URL.
 
 `build-info.json` records the artifact layout, timestamp, site mode, Tracker dependency source and version, Tracker profiles by demo kind, source revision, source ref, the development input fingerprint, and the production published-sources branch when applicable.
 

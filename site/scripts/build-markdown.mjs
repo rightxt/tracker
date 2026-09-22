@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 
 import { DOCUMENTATION_GROUPS } from '../catalog.mjs';
 import { SITE_ROOT } from '../config.mjs';
-import { escapeHtml } from './html.mjs';
+import { escapeHtml, serializeAttributes } from './html.mjs';
 import {
   applyTrackerVersionPlaceholder,
   createDocumentationContext,
@@ -44,8 +44,12 @@ function renderDocumentationTree(entry, context) {
         .filter((document) => document.navGroup === key)
         .map((document) => {
           const title = document.navTitle ?? context.pages.get(document.source).title;
-          const current = document.route === entry.route ? ' aria-current="page"' : '';
-          return `<li><a class="docs-navigation__link" href="${getRouteHref(entry.route, document.route)}"${current}>${escapeHtml(title)}</a></li>`;
+          const attributes = {
+            class: 'docs-navigation__link',
+            href: getRouteHref(entry.route, document.route),
+            ...(document.route === entry.route ? { 'aria-current': 'page' } : {}),
+          };
+          return `<li><a${serializeAttributes(attributes)}>${escapeHtml(title)}</a></li>`;
         })
         .join('');
       return `${key === 'overview' ? '' : `<p class="docs-navigation__group">${label}</p>`}<ul>${items}</ul>`;
@@ -78,7 +82,7 @@ async function buildMarkdown({ aggregateRoot, entry, sourceUrl, context, tracker
     .filter(([, document]) => document !== undefined)
     .map(([label, document]) => {
       const direction = label === 'Previous' ? 'previous' : 'next';
-      return `<a class="docs-pagination__link docs-pagination__link--${direction}" rel="${label === 'Previous' ? 'prev' : 'next'}" href="${getRouteHref(entry.route, document.route)}"><span class="docs-pagination__direction">${label}</span><span class="docs-pagination__title">${escapeHtml(document.navTitle ?? context.pages.get(document.source).title)}</span></a>`;
+      return `<a${serializeAttributes({ class: `docs-pagination__link docs-pagination__link--${direction}`, href: getRouteHref(entry.route, document.route), rel: label === 'Previous' ? 'prev' : 'next' })}><span class="docs-pagination__direction">${label}</span><span class="docs-pagination__title">${escapeHtml(document.navTitle ?? context.pages.get(document.source).title)}</span></a>`;
     })
     .join('');
   const toc = page.toc
@@ -89,15 +93,14 @@ async function buildMarkdown({ aggregateRoot, entry, sourceUrl, context, tracker
     .join('');
   const html = `<!doctype html>
 <html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${escapeHtml(page.title)} · Tracker documentation</title><link rel="stylesheet" href="./documentation.css"><script type="module" src="./documentation.js"></script></head>
+<head><link href="./documentation.css" rel="stylesheet"><script src="./documentation.js" type="module"></script></head>
 <body class="docs-page">
 <a class="docs-skip" href="#docs-main">Skip to content</a>
 <!-- SITE_NAVIGATION -->
 <div class="docs-layout">
 <div class="docs-navigation"><details open><summary>Documentation navigation</summary><nav aria-label="Documentation">${renderDocumentationTree(entry, context)}</nav></details></div>
-<main id="docs-main" tabindex="-1"><article class="docs-content">${page.html}</article><nav class="docs-pagination" aria-label="Previous and next">${neighbors}</nav></main>
-<div class="docs-toc"><details open><summary>On this page</summary><nav aria-label="On this page"><ul>${toc}<li><a class="docs-back-to-top" href="#docs-main"><svg class="docs-back-to-top__icon" aria-hidden="true" focusable="false"><use href="${iconsHref}"></use></svg><span>Back to top</span></a></li></ul></nav></details></div>
+<main id="docs-main" tabindex="-1"><article class="docs-content">${page.html}</article><nav aria-label="Previous and next" class="docs-pagination">${neighbors}</nav></main>
+<div class="docs-toc"><details open><summary>On this page</summary><nav aria-label="On this page"><ul>${toc}<li><a class="docs-back-to-top" href="#docs-main"><svg aria-hidden="true" class="docs-back-to-top__icon" focusable="false"><use href="${iconsHref}"></use></svg><span>Back to top</span></a></li></ul></nav></details></div>
 </div></body></html>`;
   const outputRoot = resolveOwnedPath(aggregateRoot, entry.route);
   await mkdir(outputRoot, { recursive: true });
@@ -107,7 +110,7 @@ async function buildMarkdown({ aggregateRoot, entry, sourceUrl, context, tracker
   if (entry.route === 'docs') {
     await cp(resolve(SITE_ROOT, 'shared/documentation-icons.svg'), resolve(outputRoot, 'documentation-icons.svg'));
   }
-  await injectSitePageMetadata(outputRoot, { route: entry.route, sourceUrl, trackerVersion });
+  await injectSitePageMetadata(outputRoot, { ...entry, sourceUrl, trackerVersion });
   return outputRoot;
 }
 

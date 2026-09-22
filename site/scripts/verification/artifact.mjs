@@ -1,6 +1,8 @@
 import { access, readFile } from 'node:fs/promises';
 import { dirname, extname, relative, resolve } from 'node:path';
 
+import { JSDOM } from 'jsdom';
+
 import { demos, siteEntries } from '../../catalog.mjs';
 import { getHomeHref } from '../../shared/navigation/model.js';
 import {
@@ -14,23 +16,40 @@ import { verifyDocumentationArtifact, verifyGlobalNavigation } from './documenta
 import { verifyPublishedProjectSource } from './source.mjs';
 
 /**
+ * Checks the favicon's semantics without imposing source attribute order.
+ *
+ * @param {string} html Built document.
+ * @param {string} route Public route.
+ */
+function verifyFavicon(html, route) {
+  const dom = new JSDOM(html);
+  try {
+    const icons = dom.window.document.head.querySelectorAll('link[rel="icon"]');
+    if (
+      icons.length !== 1 ||
+      icons[0].getAttribute('href') !== `${getHomeHref(route)}favicon.svg` ||
+      icons[0].getAttribute('type') !== 'image/svg+xml'
+    ) {
+      throw new Error(`Generated route ${route || '/'} does not contain its favicon reference.`);
+    }
+  } finally {
+    dom.window.close();
+  }
+}
+
+/**
  * Verifies local asset references in an assembled site artifact.
  *
  * JavaScript bundle contents are not inspected.
  *
  * @param {string} artifactRoot Generated site root.
- * @param {{ excludeSourceSnapshots?: boolean }} [options] Verification options.
  * @returns {Promise<void>} Resolves when references remain self-contained.
  */
-async function verifyReferences(artifactRoot, { excludeSourceSnapshots = false } = {}) {
+async function verifyReferences(artifactRoot) {
   const files = await listFiles(artifactRoot);
   const referencePattern = /(?:href|src)=["']([^"']+)["']|url\(\s*["']?([^"')]+)["']?\s*\)/gu;
 
   for (const file of files) {
-    const relativeFile = relative(artifactRoot, file);
-    if (excludeSourceSnapshots && relativeFile.split(/[\\/]/u)[0] === 'sources') {
-      continue;
-    }
     if (!['.css', '.html'].includes(extname(file))) {
       continue;
     }
@@ -99,9 +118,7 @@ async function verifyArtifact(
     if (!routeHtml.includes('rxt-site-navigation.css') || !routeHtml.includes('rxt-site-navigation.js')) {
       throw new Error(`Generated route ${entry.route} is missing live-site navigation assets.`);
     }
-    if (!routeHtml.includes(`<link rel="icon" href="${getHomeHref(entry.route)}favicon.svg" type="image/svg+xml">`)) {
-      throw new Error(`Generated route ${entry.route} does not contain its favicon reference.`);
-    }
+    verifyFavicon(routeHtml, entry.route);
   }
   const buildInfo = JSON.parse(await readFile(resolve(artifactRoot, 'build-info.json'), 'utf8'));
   if (buildInfo.artifactLayout !== ARTIFACT_LAYOUT) {
@@ -129,9 +146,7 @@ async function verifyArtifact(
   if (!landing.includes('./docs/')) {
     throw new Error('Generated landing page is missing its documentation entry.');
   }
-  if (!landing.includes(`<link rel="icon" href="${getHomeHref('')}favicon.svg" type="image/svg+xml">`)) {
-    throw new Error('Generated landing page does not contain its favicon reference.');
-  }
+  verifyFavicon(landing, '');
   for (const entry of siteEntries.filter((candidate) => candidate.kind !== 'documentation')) {
     if (!landing.includes(`./${getLiveRoute(entry.route)}/`)) {
       throw new Error(`Generated landing page does not link to ${entry.route}/.`);
@@ -140,9 +155,7 @@ async function verifyArtifact(
       throw new Error(`Generated landing page does not link to the configured source for ${entry.route}.`);
     }
   }
-  await verifyReferences(artifactRoot, {
-    excludeSourceSnapshots: siteMode === 'production',
-  });
+  await verifyReferences(artifactRoot);
   await verifyGlobalNavigation(artifactRoot, trackerVersion);
   await verifyDocumentationArtifact(artifactRoot, trackerVersion);
   return buildInfo;
@@ -181,10 +194,13 @@ async function verifyDevArtifact(artifactRoot, { sourceRef, trackerVersion }) {
  * Verifies the npm-backed production artifact and its production-only constraints.
  *
  * @param {string} artifactRoot Generated site root.
- * @param {{ publishedSourcesBranch: string, sourceRef: string, trackerVersion: string }} expected Build assertions.
+ * @param {{ sourceSnapshotsRoot: string, publishedSourcesBranch: string, sourceRef: string, trackerVersion: string }} expected Build assertions and separate source staging root.
  * @returns {Promise<void>} Resolves when the publication artifact is complete.
  */
-async function verifyProductionArtifact(artifactRoot, { publishedSourcesBranch, sourceRef, trackerVersion }) {
+async function verifyProductionArtifact(
+  artifactRoot,
+  { sourceSnapshotsRoot, publishedSourcesBranch, sourceRef, trackerVersion },
+) {
   await requirePath(resolve(artifactRoot, '.nojekyll'), 'Production site is missing .nojekyll.');
   const buildInfo = await verifyArtifact(artifactRoot, {
     trackerDependencySource: 'npm',
@@ -199,12 +215,13 @@ async function verifyProductionArtifact(artifactRoot, { publishedSourcesBranch, 
   if (buildInfo.publishedSourcesBranch !== publishedSourcesBranch) {
     throw new Error('Production build metadata does not identify its published-sources branch.');
   }
+  await requireAbsentPath(resolve(artifactRoot, 'sources'), 'GitHub Pages artifact must not contain source staging.');
   for (const demo of demos) {
-    await verifyPublishedProjectSource(artifactRoot, demo, trackerVersion);
+    await verifyPublishedProjectSource(sourceSnapshotsRoot, demo, trackerVersion);
   }
   for (const entry of siteEntries.filter((candidate) => candidate.kind !== 'demo')) {
     await requireAbsentPath(
-      resolve(artifactRoot, 'sources', entry.route),
+      resolve(sourceSnapshotsRoot, entry.route),
       `Production artifact must not publish a consumer source snapshot for ${entry.route}.`,
     );
   }

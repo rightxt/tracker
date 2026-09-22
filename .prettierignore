@@ -4,6 +4,7 @@ dist/
 node_modules/
 tests/browser/__screenshots__/
 .vitest-attachments/
+pnpm-lock.yaml
 *.log
 
 # Release workflow outputs

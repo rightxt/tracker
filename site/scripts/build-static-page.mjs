@@ -31,7 +31,7 @@ async function buildStaticPage({ aggregateRoot, entry, sourceUrl, trackerVersion
   await cp(resolveOwnedPath(sourceRoot, 'index.html'), resolveOwnedPath(outputRoot, 'index.html'));
   await cp(resolveOwnedPath(sourceRoot, 'src'), resolveOwnedPath(outputRoot, 'src'), { recursive: true });
   await injectSitePageMetadata(outputRoot, {
-    route: entry.route,
+    ...entry,
     trackerVersion,
     ...(sourceUrl === undefined ? {} : { sourceUrl }),
   });

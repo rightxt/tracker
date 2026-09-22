@@ -1,10 +1,11 @@
 import { cp, mkdir, readFile, rename, rm, writeFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { dirname, resolve } from 'node:path';
 
 import { TRACKER_PROFILE_BY_DEMO_KIND, siteEntries } from '../catalog.mjs';
 import { SITE_ROOT } from '../config.mjs';
+import { HOME_METADATA, SITE_METADATA } from '../metadata.mjs';
 import { ARTIFACT_LAYOUT, getLiveRoute } from './artifact-layout.mjs';
-import { escapeHtml } from './html.mjs';
+import { escapeHtml, serializeAttributes } from './html.mjs';
 import { injectSitePageMetadata } from './inject-site-page.mjs';
 import { resolveOwnedPath } from './paths.mjs';
 
@@ -34,7 +35,7 @@ function renderCatalogCard(entry, getSourceUrl) {
   const sourceAction =
     entry.kind !== 'demo' || entry.showSource === false
       ? ''
-      : `<a class="catalog-card__action catalog-card__action--source" href="${escapeHtml(getSourceUrl(entry))}" aria-label="Source — ${escapeHtml(entry.title)}">Source</a>`;
+      : `<a${serializeAttributes({ 'aria-label': `Source — ${entry.title}`, class: 'catalog-card__action catalog-card__action--source', href: getSourceUrl(entry) })}>Source</a>`;
   const liveRoute = getLiveRoute(entry.route);
   const liveAction = entry.actionLabel ?? (entry.kind === 'tool' ? 'Open tool' : 'Live demo');
   return `
@@ -43,7 +44,7 @@ function renderCatalogCard(entry, getSourceUrl) {
       <h3>${escapeHtml(entry.title)}</h3>
       <p>${escapeHtml(entry.description)}</p>
       <div class="catalog-card__actions">
-        <a class="catalog-card__action catalog-card__action--primary" href="./${escapeHtml(liveRoute)}/" aria-label="${liveAction} — ${escapeHtml(entry.title)}">${liveAction}</a>
+        <a${serializeAttributes({ 'aria-label': `${liveAction} — ${entry.title}`, class: 'catalog-card__action catalog-card__action--primary', href: `./${liveRoute}/` })}>${liveAction}</a>
         ${sourceAction}
       </div>
     </article>`;
@@ -57,7 +58,7 @@ function renderCatalogCard(entry, getSourceUrl) {
  */
 function renderResources(getSourceUrl) {
   const entries = [DOCUMENTATION_RESOURCE, ...siteEntries.filter((entry) => entry.kind === 'tool')];
-  return `<section class="catalog-section" aria-labelledby="resources-title">
+  return `<section aria-labelledby="resources-title" class="catalog-section">
     <h2 id="resources-title">Resources</h2>
     <div class="catalog-grid">${entries.map((entry) => renderCatalogCard(entry, getSourceUrl)).join('')}</div>
   </section>`;
@@ -76,7 +77,7 @@ function renderCatalog(getSourceUrl) {
       return '';
     }
     const cards = entries.map((entry) => renderCatalogCard(entry, getSourceUrl)).join('');
-    return `<section class="catalog-section" aria-labelledby="${key}-title">
+    return `<section aria-labelledby="${key}-title" class="catalog-section">
         <h2 id="${key}-title">${title}</h2>
         <div class="catalog-grid">${cards}</div>
       </section>`;
@@ -125,7 +126,10 @@ async function assembleSite(
   await writeFile(resolve(candidateRoot, 'index.html'), html);
   await cp(resolve(SITE_ROOT, 'shell/styles.css'), resolve(candidateRoot, 'styles.css'));
   await cp(resolve(SITE_ROOT, 'shared/favicon.svg'), resolve(candidateRoot, 'favicon.svg'));
-  await injectSitePageMetadata(candidateRoot, { route: '', trackerVersion });
+  const imagePath = resolve(candidateRoot, SITE_METADATA.image.path);
+  await mkdir(dirname(imagePath), { recursive: true });
+  await cp(resolve(SITE_ROOT, SITE_METADATA.image.source), imagePath);
+  await injectSitePageMetadata(candidateRoot, { ...HOME_METADATA, trackerVersion });
   if (siteMode === 'production') {
     await writeFile(resolve(candidateRoot, '.nojekyll'), '');
   }

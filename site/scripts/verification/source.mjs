@@ -87,15 +87,15 @@ async function verifyConsumerTrackerProfile(projectRoot, demo, label = demo.rout
  *
  * Checks package shape and dependency metadata without rebuilding the snapshot.
  *
- * @param {string} artifactRoot Generated site root.
+ * @param {string} sourceSnapshotsRoot Separate source staging root.
  * @param {{ route: string }} demo Catalog entry.
  * @param {string} trackerVersion Exact published Tracker version.
  * @returns {Promise<void>} Resolves when the source snapshot is valid.
  */
-async function verifyPublishedProjectSource(artifactRoot, demo, trackerVersion) {
+async function verifyPublishedProjectSource(sourceSnapshotsRoot, demo, trackerVersion) {
   const integrationPackageName = getPublishablePackageName(demo.integration);
   const canonicalRoot = resolve(SITE_ROOT, demo.source);
-  const publishedRoot = resolve(artifactRoot, 'sources', demo.route);
+  const publishedRoot = resolve(sourceSnapshotsRoot, demo.route);
   await requirePath(resolve(publishedRoot, 'README.md'), `Published source ${demo.route} is missing README.md.`);
   await requirePath(resolve(publishedRoot, 'src'), `Published source ${demo.route} is missing src/**.`);
   await requirePath(
@@ -131,6 +131,13 @@ async function verifyPublishedProjectSource(artifactRoot, demo, trackerVersion) 
     const relativePath = relative(publishedRoot, file).replaceAll('\\', '/');
     if (/(?:^|\/)(?:node_modules|dist|out-tsc|\.angular|\.vite|coverage)(?:\/|$)|\.tgz$/u.test(relativePath)) {
       throw new Error(`Published source ${demo.route} contains generated or private path ${relativePath}.`);
+    }
+    if (/\.html$/iu.test(relativePath)) {
+      const canonicalHtml = await readFile(resolve(canonicalRoot, relativePath), 'utf8');
+      const publishedHtml = await readFile(file, 'utf8');
+      if (publishedHtml !== canonicalHtml) {
+        throw new Error(`Published source HTML ${demo.route}/${relativePath} differs from its canonical source.`);
+      }
     }
   }
   for (const resource of getSharedResources(demo)) {

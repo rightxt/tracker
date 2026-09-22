@@ -5,7 +5,12 @@ import { tmpdir } from 'node:os';
 import process from 'node:process';
 import { promisify } from 'node:util';
 
-import { PUBLISHED_SOURCES_BRANCH, PRODUCTION_ARTIFACT_ROOT, REPOSITORY_ROOT } from '../config.mjs';
+import {
+  PUBLISHED_SOURCES_BRANCH,
+  PRODUCTION_ARTIFACT_ROOT,
+  PRODUCTION_SOURCES_ROOT,
+  REPOSITORY_ROOT,
+} from '../config.mjs';
 
 /** Promise-based git process runner. */
 const executeFile = promisify(execFile);
@@ -91,7 +96,7 @@ async function clearWorktree(worktreeRoot) {
  * @returns {Promise<void>} Resolves after the source snapshot tree is copied.
  */
 async function copyPublishedSources(worktreeRoot) {
-  const publishedSourcesRoot = resolve(PRODUCTION_ARTIFACT_ROOT, 'sources');
+  const publishedSourcesRoot = PRODUCTION_SOURCES_ROOT;
   const destinationRoot = resolve(worktreeRoot, 'sources');
   await cp(publishedSourcesRoot, destinationRoot, {
     preserveTimestamps: true,

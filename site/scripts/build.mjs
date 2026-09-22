@@ -12,6 +12,7 @@ import {
   PRODUCTION_ARTIFACT_ROOT,
   PRODUCTION_BUILD_ROOT,
   PRODUCTION_CANDIDATE_ROOT,
+  PRODUCTION_SOURCES_ROOT,
   REPOSITORY_ROOT,
   SITE_ROOT,
   SOURCE_REF,
@@ -96,6 +97,10 @@ async function main() {
     await preflightNpmPackages(['@rightxt/tracker-core', ...requiredPackages], trackerVersion);
   }
 
+  if (!isDev) {
+    await rm(PRODUCTION_SOURCES_ROOT, { force: true, recursive: true });
+    await mkdir(PRODUCTION_SOURCES_ROOT, { recursive: true });
+  }
   await rm(workRoot, { force: true, recursive: true });
   await rm(candidateRoot, { force: true, recursive: true });
   await mkdir(candidateRoot, { recursive: true });
@@ -105,7 +110,7 @@ async function main() {
       await buildConsumer({
         aggregateRoot: candidateRoot,
         entry,
-        includeSourceSnapshot: !isDev && entry.kind === 'demo',
+        sourceSnapshotsRoot: !isDev && entry.kind === 'demo' ? PRODUCTION_SOURCES_ROOT : undefined,
         sourceUrl: getVisibleSourceUrl(entry),
         tarballs,
         trackerVersion,
@@ -162,6 +167,7 @@ async function main() {
     await verifyDevArtifact(candidateRoot, { sourceRef: SOURCE_REF, trackerVersion });
   } else {
     await verifyProductionArtifact(candidateRoot, {
+      sourceSnapshotsRoot: PRODUCTION_SOURCES_ROOT,
       publishedSourcesBranch: PUBLISHED_SOURCES_BRANCH,
       sourceRef: SOURCE_REF,
       trackerVersion,
