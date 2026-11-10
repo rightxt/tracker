@@ -106,7 +106,11 @@ export default defineConfig({
         // Isolated from the "default" project so Angular compilation settings stay scoped
         // to this project's own Vite instance and never leak into core/react/vue test runs.
         extends: true,
-        oxc: true,
+        // The Angular plugin falls back to `oxc: false` when this is unset, which disables
+        // Vite's native TS transform for every non-Angular module this project imports.
+        // An empty options object (not `true`, which Vite's `OxcOptions | false` type does not
+        // accept) keeps it enabled with defaults and lets Vitest fill in its own `target`.
+        oxc: {},
         plugins: [
           angular({
             jit: false,

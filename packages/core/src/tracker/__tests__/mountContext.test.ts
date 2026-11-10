@@ -187,12 +187,12 @@ describe('mount-context normalization', () => {
       rendererTarget: { kind: 'root', root: renderRoot },
     });
 
-    expect(normalized).toMatchObject({
-      sourceRoot: frameDocument.body,
-      scrollRoot: frameWindow,
-      document: frameDocument,
-      window: frameWindow,
-      scrollMode: 'window',
-    });
+    // Identity assertions: subset matching would recurse through the whole iframe
+    // Window graph before its reference check and can take seconds per object.
+    expect(normalized.sourceRoot).toBe(frameDocument.body);
+    expect(normalized.scrollRoot).toBe(frameWindow);
+    expect(normalized.document).toBe(frameDocument);
+    expect(normalized.window).toBe(frameWindow);
+    expect(normalized.scrollMode).toBe('window');
   });
 });
