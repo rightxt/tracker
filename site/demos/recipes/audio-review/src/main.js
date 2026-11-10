@@ -25,61 +25,6 @@ const ZOOM_LEVELS = Object.freeze([
 /** Standard MediaError code used when the browser cannot decode the local fixture. */
 const MEDIA_SOURCE_NOT_SUPPORTED = 4;
 
-/**
- * Supplies the two AudioBuffer prototype methods read by WaveSurfer's
- * predecoded-peaks path when a browser has HTML media but no Web Audio API.
- *
- * @returns {() => void} Idempotent restoration callback.
- */
-function installWaveSurferAudioBufferCompatibility() {
-  if (typeof globalThis.AudioBuffer === 'function') {
-    return () => {};
-  }
-
-  class CompatibleAudioBuffer {
-    /**
-     * @param {Float32Array} destination Destination channel segment.
-     * @param {number} channelNumber Source channel index.
-     * @param {number} [startInChannel] Source offset.
-     * @returns {void}
-     */
-    copyFromChannel(destination, channelNumber, startInChannel = 0) {
-      const channel = this.getChannelData(channelNumber);
-      destination.set(channel.subarray(startInChannel, startInChannel + destination.length));
-    }
-
-    /**
-     * @param {Float32Array} source Source channel segment.
-     * @param {number} channelNumber Destination channel index.
-     * @param {number} [startInChannel] Destination offset.
-     * @returns {void}
-     */
-    copyToChannel(source, channelNumber, startInChannel = 0) {
-      this.getChannelData(channelNumber).set(source, startInChannel);
-    }
-
-    /**
-     * @param {number} channelNumber Requested channel index.
-     * @returns {Float32Array} Unsupported direct instance channel access.
-     */
-    getChannelData(channelNumber) {
-      throw new Error(`CompatibleAudioBuffer instances do not own channel ${String(channelNumber)} data.`);
-    }
-  }
-
-  Object.defineProperty(globalThis, 'AudioBuffer', {
-    configurable: true,
-    value: CompatibleAudioBuffer,
-  });
-  let installed = true;
-  return () => {
-    if (installed && globalThis.AudioBuffer === CompatibleAudioBuffer) {
-      Reflect.deleteProperty(globalThis, 'AudioBuffer');
-    }
-    installed = false;
-  };
-}
-
 /** @param {string} id Required element ID. @returns {HTMLElement} Element. */
 function requireElement(id) {
   const element = document.getElementById(id);
@@ -497,32 +442,25 @@ applyTimelineWidth(false);
 /** Application-owned media element that defers MP3 transfer until playback. */
 const audio = document.createElement('audio');
 audio.preload = 'none';
-const restoreAudioBuffer = installWaveSurferAudioBufferCompatibility();
-try {
-  wavesurfer = WaveSurfer.create({
-    container: waveform,
-    cursorColor: '#172033',
-    cursorWidth: 2,
-    dragToSeek: true,
-    duration: AUDIO_DURATION,
-    fillParent: true,
-    height: 180,
-    hideScrollbar: true,
-    interact: true,
-    media: audio,
-    normalize: true,
-    peaks: AUDIO_PEAKS,
-    plugins: [Timeline.create({ height: 24 })],
-    progressColor: '#335cff',
-    url: AUDIO_URL,
-    waveColor: '#98a2b3',
-  });
-} catch (error) {
-  restoreAudioBuffer();
-  throw error;
-}
+wavesurfer = WaveSurfer.create({
+  container: waveform,
+  cursorColor: '#172033',
+  cursorWidth: 2,
+  dragToSeek: true,
+  duration: AUDIO_DURATION,
+  fillParent: true,
+  height: 180,
+  hideScrollbar: true,
+  interact: true,
+  media: audio,
+  normalize: true,
+  peaks: AUDIO_PEAKS,
+  plugins: [Timeline.create({ height: 24 })],
+  progressColor: '#335cff',
+  url: AUDIO_URL,
+  waveColor: '#98a2b3',
+});
 wavesurfer.on('ready', (duration) => {
-  restoreAudioBuffer();
   state.duration = duration;
   state.audioReady = true;
   state.audioUnavailable = false;
@@ -546,7 +484,6 @@ wavesurfer.on('finish', () => {
   playButton.textContent = 'Play';
 });
 wavesurfer.on('error', (error) => {
-  restoreAudioBuffer();
   if (error instanceof MediaError && error.code === MEDIA_SOURCE_NOT_SUPPORTED) {
     state.audioUnavailable = true;
     applyTimelineWidth(false);
@@ -564,7 +501,6 @@ window.addEventListener(
     if (state.zoomFrame !== null) {
       cancelAnimationFrame(state.zoomFrame);
     }
-    restoreAudioBuffer();
     state.tracker?.destroy();
     audio.pause();
     wavesurfer?.destroy();
