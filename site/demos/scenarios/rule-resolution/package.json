@@ -3,7 +3,7 @@
     "@rightxt/tracker-vanilla": "latest"
   },
   "devDependencies": {
-    "vite": "8.2.2"
+    "vite": "8.3.5"
   },
   "name": "@rxt-tracker-demo/scenario-rule-resolution",
   "private": true,
