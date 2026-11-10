@@ -296,7 +296,7 @@ describe('ElementScrollContext', () => {
       }
 
       return new Proxy(style, {
-        get(styleTarget, property, receiver) {
+        get(styleTarget, property) {
           if (property === 'getPropertyValue') {
             return (name: string) => {
               if (name === 'scroll-padding-top') {
@@ -307,7 +307,8 @@ describe('ElementScrollContext', () => {
             };
           }
 
-          return Reflect.get(styleTarget, property, receiver);
+          // Platform getters brand-check `this`, so forward with the real style object as the receiver.
+          return Reflect.get(styleTarget, property);
         },
       });
     });
@@ -349,12 +350,13 @@ describe('ElementScrollContext', () => {
       }
 
       return new Proxy(style, {
-        get(styleTarget, property, receiver) {
+        get(styleTarget, property) {
           if (property === 'getPropertyValue') {
             return (name: string) => (name === 'scroll-padding-top' ? '1em' : styleTarget.getPropertyValue(name));
           }
 
-          return Reflect.get(styleTarget, property, receiver);
+          // Platform getters brand-check `this`, so forward with the real style object as the receiver.
+          return Reflect.get(styleTarget, property);
         },
       });
     });
@@ -388,7 +390,7 @@ describe('ElementScrollContext', () => {
       }
 
       return new Proxy(style, {
-        get(styleTarget, property, receiver) {
+        get(styleTarget, property) {
           if (property === 'getPropertyValue') {
             return (name: string) => {
               if (name === 'scroll-margin-top') {
@@ -399,7 +401,8 @@ describe('ElementScrollContext', () => {
             };
           }
 
-          return Reflect.get(styleTarget, property, receiver);
+          // Platform getters brand-check `this`, so forward with the real style object as the receiver.
+          return Reflect.get(styleTarget, property);
         },
       });
     });

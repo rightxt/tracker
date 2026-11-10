@@ -150,12 +150,13 @@ describe('validateElementScrollProfile', () => {
       const style = realComputedStyle(element as Element);
 
       return new Proxy(style, {
-        get(target, property, receiver) {
+        get(target, property) {
           if (property === 'getPropertyValue') {
             return (name: string) => (name === 'scroll-snap-type' ? 'y mandatory' : target.getPropertyValue(name));
           }
 
-          return Reflect.get(target, property, receiver);
+          // Platform getters brand-check `this`, so forward with the real style object as the receiver.
+          return Reflect.get(target, property);
         },
       });
     });

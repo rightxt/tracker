@@ -7,3 +7,6 @@ allowBuilds:
   lmdb: true
   msgpackr-extract: true
   unrs-resolver: true
+
+minimumReleaseAge: 10080
+minimumReleaseAgeStrict: true
