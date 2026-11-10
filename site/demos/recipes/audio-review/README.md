@@ -37,7 +37,7 @@ Clustering uses the explicit `1.8` percentage-point threshold: nearby candidates
 
 ## Licensing and fixtures
 
-WaveSurfer.js 7.12.12 is bundled as an npm ESM dependency under BSD-3-Clause; its notice is in `public/THIRD_PARTY_NOTICES.txt`. The MP3 recording “WP351 – Wikimedia Futures Lab, Eva Martin” is by [Ainali](https://commons.wikimedia.org/wiki/User:Ainali) on Wikimedia Commons and is licensed CC BY-SA 4.0. The English SRT is separately attributed to [Ainali](https://commons.wikimedia.org/wiki/User:Ainali) on [Wikimedia Commons TimedText](https://commons.wikimedia.org/wiki/TimedText:WP351_-_Wikimedia_Futures_Lab,_Eva_Martin.mp3.en.srt), also under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). These fixture licenses do not relicense unrelated RXT Tracker recipe source code.
+WaveSurfer.js 8.0.5 is bundled as an npm ESM dependency under BSD-3-Clause; its notice is in `public/THIRD_PARTY_NOTICES.txt`. The MP3 recording “WP351 – Wikimedia Futures Lab, Eva Martin” is by [Ainali](https://commons.wikimedia.org/wiki/User:Ainali) on Wikimedia Commons and is licensed CC BY-SA 4.0. The English SRT is separately attributed to [Ainali](https://commons.wikimedia.org/wiki/User:Ainali) on [Wikimedia Commons TimedText](https://commons.wikimedia.org/wiki/TimedText:WP351_-_Wikimedia_Futures_Lab,_Eva_Martin.mp3.en.srt), also under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). These fixture licenses do not relicense unrelated RXT Tracker recipe source code.
 
 ## Project structure
 
