@@ -4,7 +4,7 @@
     "@rightxt/tracker-element": "1.0.0"
   },
   "devDependencies": {
-    "vite": "8.2.2"
+    "vite": "8.3.5"
   },
   "name": "@rxt-tracker-demo/playground-element",
   "private": true,
